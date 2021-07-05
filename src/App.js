@@ -1,128 +1,75 @@
-import React, { useState } from 'react';
-import FacebookLogin from 'react-facebook-login';
-import { Card, Image, Alert, Button, Form, Row, Col} from 'react-bootstrap';
-import { Text } from 'react-native-web'
-import { ApiUtils } from './ApiUtils'
+import React, {useState} from 'react';
+import {Alert, Card, Image} from "react-bootstrap";
+import AuthenticateUser from './Components/Authentication/AuthenticateUser';
+import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
+import EditProfile from "./Components/Profile/EditProfile";
+import NewProject from "./Components/Projects/NewProject";
 import './App.css';
 
-
 function App() {
+    const [login, setLogin] = useState(false);
+    const [pageState, setPageState] = useState('');
+    const [apiToken, setApiToken] = useState('');
+    const [fbData, setFbData] = useState('');
+    const [fbPicture, setFbPicture] = useState('');
 
-  const [login, setLogin] = useState(false);
-  const [data, setData] = useState({});
-  const [picture, setPicture] = useState('');
-  const [apiToken, setApiToken] = useState('');
-
-  const [text1, setText1] = useState('');
-
-  const responseFacebook = (response) => {
-    console.log(response);
-    setData(response);
-    setPicture(response.picture.data.url);
-    const apiU = new ApiUtils();
-    //apiU.trialFunction();
-    const statement = apiU.trialFunction()
-    console.log("statement: " + statement)
-    if (response.accessToken) {
-      //console.log(response.accessToken)
-      const requestOptions = {
-        method: 'POST',
-        mode: "cors",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ "identity_token": response.accessToken })
-      };
-      try {
-        fetch('https://my-react.local:3000/v1/authorize', requestOptions)
-            .then(response => response.json())
-            .then(data => setApiToken(data.api_token));
+    const setApiSession = (apiTokenId) => {
+        console.log(apiTokenId.api_token);
+        setApiToken(apiTokenId.api_token);
+        // TODO
+        //do i have projects already if userHasProjects setPageState=something
+        setPageState('welcome_message');
         setLogin(true);
-      } catch (e) {
-        console.log("Exception found: :" + e);
-        setLogin(false);
-        return;
-      }
-    } else {
-      setLogin(false);
     }
-  }
 
-  const logout = () => {
-    const requestOptions = {
-      headers: { 'Content-Type': 'application/json' }
-    };
+    const setFbInfo = (dataReturned, pictureReturned) => {
+        setFbData(dataReturned);
+        setFbPicture(pictureReturned);
+    }
 
-    fetch('https://my-react.local:3000/v1/logout/?apiToken=' + apiToken, requestOptions)
-        .then(response => response.json())
-        .then(data => console.log("DATER: " + JSON.stringify(data)));
+    const changePageState = (desiredState) => {
+        setPageState(desiredState);
+    }
 
-    setLogin(false)
-  }
+    const editProfileClickHandler = (event) => {
+        changePageState("edit_profile");
+    }
 
-  const mySubmit = () => {
-    console.log("start mySubmit()")
-    console.log("text 1 is " + text1)
-  }
-//               callback={responseFacebook}
-
-  return (
-      <div className="container">
-        <Card style={{ width: '600px' }}>
-          <Card.Header>
-            { !login &&
-            <FacebookLogin
-                appId="1004027110356208"
-                autoLoad={true}
-                fields="name,email,picture"
-                scope="public_profile email"
-                callback={responseFacebook}
-                icon="fa-facebook" />
+    return (
+        <Card style={{width: 'auto'}}>
+            {!login &&
+            <Card.Header>
+                <AuthenticateUser
+                    setApiSession={setApiSession}
+                    setFbInfo={setFbInfo}/>
+            </Card.Header>
             }
-            { login &&
-            <Alert key="4" variant="dark">
-              <Image src={picture} roundedCircle /> <Text style={{ fontSize : 35 }}>{data.name}</Text>
-            </Alert>
+            {login &&
+            <div>
+                <Card.Body>
+                    <Card.Title>
+                        <Alert key="5" variant="dark">
+                                <Image src={fbPicture} roundedCircle/> {fbData.name}
+                            <a href="#" onClick={editProfileClickHandler}> (edit profile)</a>
+                        </Alert>
+                    </Card.Title>
+                    <Card.Text>
+                        {pageState === 'welcome_message' &&
+                        <WelcomeMessage changePageState={changePageState}/>
+                        }
+                        {pageState === 'new_project' &&
+                        <NewProject changePageState={changePageState}/>
+                        }
+                        {pageState === 'edit_profile' &&
+                        <EditProfile changePageState={changePageState}/>
+                        }
+                    </Card.Text>
+                </Card.Body>
+                <Card.Footer><p className="small">API Token ID: {apiToken}, Page State: {pageState}</p></Card.Footer>
+            </div>
+                }
+                </Card>
+                );
             }
-          </Card.Header>
-          { login &&
-          <>
-            <Card.Body>
-              <Card.Title><Alert key="5" variant="dark">Display Name: {data.name}</Alert></Card.Title>
-              <Card.Text>
-                Email Address:{data.email} <br/><br/>
-                Access Token:{data.accessToken} <br/><br/>
-                Signed Request:{data.signedRequest}
-              </Card.Text>
-            </Card.Body>
-
-            <Form>
-              <Form.Group as={Row}>
-                <Form.Label column sm="2">
-                  Lable One
-                </Form.Label>
-                <Col sm="10">
-                  <Form.Control type="text" placeholder="Normal text"
-                                value={text1.value}
-                                onChange={e => setText1(e.target.value)}/>
-                </Col>
-              </Form.Group>
-              <Button variant="primary" type="button" onClick={mySubmit} size="sm">
-                Submit
-              </Button>
-
-            </Form>
-          </>
-
-          }
-        </Card>
-        { login &&
-        <div>
-          <Button variant="primary" type="button" onClick={logout} size="sm">
-            logout
-          </Button>
-        </div>
-        }
-      </div>
-  );
-}
 
 export default App;
