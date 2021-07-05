@@ -49,7 +49,7 @@ function App() {
                 <Card.Body>
                     <Card.Title>
                         <Alert key="5" variant="dark">
-                                <Image src={fbPicture} roundedCircle/> {fbData.name}
+                            <Image src={fbPicture} roundedCircle/> {fbData.name}
                             <a href="#" onClick={editProfileClickHandler}> (edit profile)</a>
                         </Alert>
                     </Card.Title>
@@ -67,9 +67,9 @@ function App() {
                 </Card.Body>
                 <Card.Footer><p className="small">API Token ID: {apiToken}, Page State: {pageState}</p></Card.Footer>
             </div>
-                }
-                </Card>
-                );
             }
+        </Card>
+    );
+}
 
 export default App;
