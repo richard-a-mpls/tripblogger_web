@@ -34,12 +34,7 @@ function App() {
       try {
         fetch('https://my-react.local:3000/v1/authorize', requestOptions)
             .then(response => response.json())
-            //.then(data => setApiToken(response.api_token))
-            //.then(data => console.log("DATER: " + JSON.stringify(data)));
             .then(data => setApiToken(data.api_token));
-        //.then(data => this.setState({ postId: data.id }));
-        //console.log ("respon: " + response);
-        //console.log ("respjson: " + JSON.stringify(response));
         setLogin(true);
       } catch (e) {
         console.log("Exception found: :" + e);
