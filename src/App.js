@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Alert, Card, Image} from "react-bootstrap";
 import AuthenticateUser from './Components/Authentication/AuthenticateUser';
+import LogoutUser from "./Components/Authentication/LogoutUser";
 import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
 import EditProfile from "./Components/Profile/EditProfile";
 import NewProject from "./Components/Projects/NewProject";
@@ -20,20 +21,26 @@ function App() {
         //do i have projects already if userHasProjects setPageState=something
         setPageState('welcome_message');
         setLogin(true);
-    }
+    };
+
+    const logoutHandler = () => {
+        setApiToken('');
+        setPageState('');
+        setLogin(false);
+    };
 
     const setFbInfo = (dataReturned, pictureReturned) => {
         setFbData(dataReturned);
         setFbPicture(pictureReturned);
-    }
+    };
 
     const changePageState = (desiredState) => {
         setPageState(desiredState);
-    }
+    };
 
     const editProfileClickHandler = (event) => {
         changePageState("edit_profile");
-    }
+    };
 
     return (
         <Card style={{width: 'auto'}}>
@@ -49,7 +56,7 @@ function App() {
                 <Card.Body>
                     <Card.Title>
                         <Alert key="5" variant="dark">
-                                <Image src={fbPicture} roundedCircle/> {fbData.name}
+                            <Image src={fbPicture} roundedCircle/> {fbData.name}
                             <a href="#" onClick={editProfileClickHandler}> (edit profile)</a>
                         </Alert>
                     </Card.Title>
@@ -65,11 +72,16 @@ function App() {
                         }
                     </Card.Text>
                 </Card.Body>
-                <Card.Footer><p className="small">API Token ID: {apiToken}, Page State: {pageState}</p></Card.Footer>
+                <Card.Footer>
+                    <p className="small">API Token ID: {apiToken}, Page State: {pageState}</p>
+                    {login &&
+                        <LogoutUser apiToken={apiToken} logoutHandler={logoutHandler}/>
+                    }
+                </Card.Footer>
             </div>
-                }
-                </Card>
-                );
             }
+        </Card>
+    );
+}
 
 export default App;

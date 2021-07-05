@@ -34,7 +34,7 @@ const AuthenticateUser = (props) => {
     return (
         <FacebookLogin
             appId="1004027110356208"
-            autoLoad={false}
+            autoLoad={true}
             fields="name,email,picture"
             scope="public_profile email"
             callback={responseFacebook}
