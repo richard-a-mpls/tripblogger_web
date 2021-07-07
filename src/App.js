@@ -13,6 +13,7 @@ function App() {
     const [apiToken, setApiToken] = useState('');
     const [fbData, setFbData] = useState('');
     const [fbPicture, setFbPicture] = useState('');
+    const [userProfile, setUserProfile] = useState('');
 
     const setApiSession = (apiTokenId) => {
         console.log(apiTokenId.api_token);
@@ -21,7 +22,22 @@ function App() {
         //do i have projects already if userHasProjects setPageState=something
         setPageState('welcome_message');
         setLogin(true);
+
+        fetch('https://my-react.local:3000/v1/profile', {
+            method: 'get',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + apiTokenId.api_token
+            })
+        })
+            .then(response => response.json())
+            .then(data => setUserProfile(data));
     };
+
+    const refreshUserProfile = (newUserProfile) => {
+        console.log(newUserProfile)
+        setUserProfile(newUserProfile)
+    }
 
     const logoutHandler = () => {
         setApiToken('');
@@ -56,7 +72,7 @@ function App() {
                 <Card.Body>
                     <Card.Title>
                         <Alert key="5" variant="dark">
-                            <Image src={fbPicture} roundedCircle/> {fbData.name}
+                            <Image src={fbPicture} roundedCircle/> {userProfile.profile_name}
                             <a href="#" onClick={editProfileClickHandler}> (edit profile)</a>
                         </Alert>
                     </Card.Title>
@@ -68,7 +84,7 @@ function App() {
                         <NewProject changePageState={changePageState}/>
                         }
                         {pageState === 'edit_profile' &&
-                        <EditProfile changePageState={changePageState}/>
+                        <EditProfile userProfile={userProfile} apiToken={apiToken} refreshUserProfile={refreshUserProfile} changePageState={changePageState}/>
                         }
                     </Card.Text>
                 </Card.Body>
