@@ -2,16 +2,12 @@ import FacebookLogin from 'react-facebook-login';
 
 import './AuthenticateUser.css'
 import React, {useState} from "react";
-import {ApiUtils} from "../../ApiUtils/ApiUtils";
 
 const AuthenticateUser = (props) => {
 
     const responseFacebook = (response) => {
         console.log(response);
         props.setFbInfo(response, response.picture.data.url);
-        const apiU = new ApiUtils();
-        const statement = apiU.trialFunction()
-        console.log("statement: " + statement)
         if (response.accessToken) {
             const requestOptions = {
                 method: 'POST',
