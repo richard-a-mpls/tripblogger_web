@@ -4,7 +4,7 @@ const Project = props => {
 
     const deleteHandler = (event) => {
         event.preventDefault();
-        fetch('https://my-react.local:3000/v1/projects/' + props.id, {
+        fetch('https://my-react.local:3000/v1/me/projects/' + props.id, {
             method: 'delete',
             headers: new Headers({
                 'Content-Type': 'application/json',
