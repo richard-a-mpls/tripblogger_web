@@ -6,9 +6,9 @@ const ProjectParent = props => {
         <div>
             <div>{
                 <NewProject addToProjectList={props.addToProjectList} changePageState={props.changePageState} apiToken={props.apiToken}/>}
-            </div>
+            </div><br/>
             <div>{
-                <ProjectList projectList={props.projectList} apiToken={props.apiToken}/>
+                <ProjectList removeProject={props.removeProject} projectList={props.projectList} changePageState={props.changePageState} apiToken={props.apiToken}/>
             }</div>
         </div>
     );

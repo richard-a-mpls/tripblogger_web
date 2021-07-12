@@ -20,8 +20,6 @@ const NewProject = (props) => {
             'description': description,
             'location': location
         }
-        console.log(JSON.stringify(updateValue));
-        console.log(props.apiToken);
         fetch('http://localhost:8080/v1/me/projects', {
             method: 'post',
             body: JSON.stringify(updateValue),

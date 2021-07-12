@@ -12,6 +12,8 @@ const ProjectList = props => {
                 published={prj.published}
                 share_with={prj.share_with}
                 summary={prj.summary}
+                removeProject={props.removeProject}
+                apiToken={props.apiToken}
             />)}
         </div>
     );

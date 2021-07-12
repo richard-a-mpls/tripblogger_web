@@ -39,6 +39,12 @@ function App() {
             .then(data => setUserProfile(data));
     };
 
+    const removeProject = (idToRemove) => {
+        setProjectList(projectList.filter((prj => {
+            return prj._id != idToRemove;
+        })));
+    }
+
     const loadProjectList = (event) => {
         event.preventDefault();
         fetch('http://localhost:8080/v1/me/projects', {
@@ -104,7 +110,7 @@ function App() {
                         <WelcomeMessage changePageState={loadProjectList}/>
                         }
                         {pageState === 'project_view' &&
-                        <ProjectParent addToProjectList={addToProjectList} projectList={projectList} apiToken={apiToken} changePageState={loadProjectList}/>
+                        <ProjectParent removeProject={removeProject} addToProjectList={addToProjectList} projectList={projectList} apiToken={apiToken} changePageState={loadProjectList}/>
                         }
                         {pageState === 'edit_profile' &&
                         <EditProfile userProfile={userProfile} apiToken={apiToken} refreshUserProfile={refreshUserProfile} changePageState={changePageState}/>

@@ -1,6 +1,21 @@
 import {Card} from "react-bootstrap";
 
 const Project = props => {
+
+    const deleteHandler = (event) => {
+        event.preventDefault();
+        fetch('https://my-react.local:3000/v1/projects/' + props.id, {
+            method: 'delete',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + props.apiToken
+            })
+        })
+            .then(response => response.json())
+            .then(data => console.log(data));
+        props.removeProject(props.id)
+    }
+
     return (
         <Card style={{width: 'auto'}}>
             <Card.Header>
@@ -16,7 +31,11 @@ const Project = props => {
 
             </Card.Body>
             <Card.Footer>
-                ID: {props.id} <br/> Profile ID: {props.profile_id}
+                ID: {props.id} <br/>
+                Profile ID: {props.profile_id}<br/>
+                <form onSubmit={deleteHandler}>
+                    <button type="submit">Delete</button>
+                </form>
             </Card.Footer>
         </Card>
     );
