@@ -1,7 +1,6 @@
 import FacebookLogin from 'react-facebook-login';
 
 import './AuthenticateUser.css'
-import React, {useState} from "react";
 
 const AuthenticateUser = (props) => {
 
