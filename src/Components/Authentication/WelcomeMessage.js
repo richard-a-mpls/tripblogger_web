@@ -1,13 +1,6 @@
 import React from "react";
-import {Image} from "react-bootstrap";
 
 const WelcomeMessage = (props) => {
-
-    const getStartedHandler = (event) => {
-        event.preventDefault();
-        console.log("preventing default");
-        props.changePageState("new_project");
-    };
 
     return (
         <div>
@@ -19,7 +12,7 @@ const WelcomeMessage = (props) => {
             <p>
                 To get started, simply click the get started button below.
             </p>
-            <form onSubmit={getStartedHandler}>
+            <form onSubmit={props.changePageState}>
                 <button type="submit">Get Started</button>
             </form>
         </div>
