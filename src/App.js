@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Alert, Card, Image} from "react-bootstrap";
+import {Card, Image} from "react-bootstrap";
 import AuthenticateUser from './Components/Authentication/AuthenticateUser';
 import LogoutUser from "./Components/Authentication/LogoutUser";
 import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
 import EditProfile from "./Components/Profile/EditProfile";
 import ProjectParent from "./Components/Projects/ProjectParent"
+import './Components/UI/Global.css'
 import './App.css';
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
 
     const removeProject = (idToRemove) => {
         setProjectList(projectList.filter((prj => {
-            return prj._id != idToRemove;
+            return prj._id !== idToRemove;
         })));
     }
 
@@ -56,7 +57,7 @@ function App() {
         })
             .then(async response => await response.json())
             .then(data => {
-                console.log("set with " );
+                console.log("set with ");
                 console.log(data);
                 setProjectList(data);
             });
@@ -88,7 +89,7 @@ function App() {
     };
 
     return (
-        <Card style={{width: 'auto'}}>
+        <Card style={{width: 'auto', align: 'center'}}>
             {!login &&
             <Card.Header>
                 <AuthenticateUser
@@ -98,30 +99,31 @@ function App() {
             }
             {login &&
             <div>
+                <Card.Header style={{backgroundColor: '#26567b', verticalAlign: 'center'}}>
+                    <div className="bform-control">
+                        <button className="button-profile" onClick={editProfileClickHandler}>
+                            <Image src={fbPicture} roundedCircle/>&nbsp;{userProfile.profile_name}
+                        </button>
+                        <LogoutUser apiToken={apiToken} logoutHandler={logoutHandler}/>
+                    </div>
+                </Card.Header>
                 <Card.Body>
-                    <Card.Title>
-                        <Alert key="5" variant="dark">
-                            <Image src={fbPicture} roundedCircle/> {userProfile.profile_name}
-                            <a href="#" onClick={editProfileClickHandler}> (edit profile)</a>
-                        </Alert>
-                    </Card.Title>
                     <Card.Text>
                         {pageState === 'welcome_message' &&
                         <WelcomeMessage changePageState={loadProjectList}/>
                         }
                         {pageState === 'project_view' &&
-                        <ProjectParent removeProject={removeProject} addToProjectList={addToProjectList} projectList={projectList} apiToken={apiToken} changePageState={loadProjectList}/>
+                        <ProjectParent removeProject={removeProject} addToProjectList={addToProjectList}
+                                       projectList={projectList} apiToken={apiToken} changePageState={loadProjectList}/>
                         }
                         {pageState === 'edit_profile' &&
-                        <EditProfile userProfile={userProfile} apiToken={apiToken} refreshUserProfile={refreshUserProfile} changePageState={changePageState}/>
+                        <EditProfile userProfile={userProfile} apiToken={apiToken}
+                                     refreshUserProfile={refreshUserProfile} changePageState={changePageState}/>
                         }
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <p className="small">API Token ID: {apiToken}, Page State: {pageState}</p>
-                    {login &&
-                        <LogoutUser apiToken={apiToken} logoutHandler={logoutHandler}/>
-                    }
+                    <p className="small">API Token ID: {apiToken}<br/>Page State: {pageState}</p>
                 </Card.Footer>
             </div>
             }

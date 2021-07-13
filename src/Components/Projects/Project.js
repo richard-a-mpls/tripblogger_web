@@ -1,4 +1,7 @@
 import {Card} from "react-bootstrap";
+import DeleteButton from "./DeleteButton";
+import '../UI/Global.css'
+import './Project.css'
 
 const Project = props => {
 
@@ -17,9 +20,12 @@ const Project = props => {
     }
 
     return (
-        <Card style={{width: 'auto'}}>
+        <Card style={{width: 'auto', marginBottom: '15px'}}>
             <Card.Header>
-                <h2>{props.summary}</h2>
+                <div className="bform-control project-control">
+                    <h2>{props.summary}</h2>
+                    <DeleteButton deleteHandler={deleteHandler}/>
+                </div>
             </Card.Header>
             <Card.Body>
                 <Card.Text>
@@ -33,9 +39,6 @@ const Project = props => {
             <Card.Footer>
                 ID: {props.id} <br/>
                 Profile ID: {props.profile_id}<br/>
-                <form onSubmit={deleteHandler}>
-                    <button type="submit">Delete</button>
-                </form>
             </Card.Footer>
         </Card>
     );
