@@ -1,9 +1,9 @@
-import React from "react";
+import '../UI/Global.css'
 
 const WelcomeMessage = (props) => {
 
     return (
-        <div>
+        <div className="bform-control">
             <h2>Welcome to TripBlogger</h2>
             <p>
                 Tripblogger is an interactive project builder allowing organization of trip experiences and
@@ -13,7 +13,7 @@ const WelcomeMessage = (props) => {
                 To get started, simply click the get started button below.
             </p>
             <form onSubmit={props.changePageState}>
-                <button type="submit">Get Started</button>
+                <button type="submit" className="button">Get Started</button>
             </form>
         </div>
     );

@@ -1,0 +1,70 @@
+.bform-control label {
+    color: #f3b8b8;
+    font-weight: bold;
+    color: black;
+    padding-bottom: 0px;
+}
+
+.bform-control input {
+    width: 100%;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.bform-control button {
+    background-color: #26567b;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border: 2px solid #26567b;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-left: 5px;
+}
+
+.bform-control.cancel-button {
+    background-color: white;
+    color: black;
+    border: 2px solid #26567b;
+}
+
+.bform-control.confirm-button {
+    background-color: #f33e3e;
+    border: 2px solid #26567b;
+}
+
+.button-profile {
+    background-color: #26567b; /* Green */
+    border: 1px solid #26567b;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 32px;
+    border-radius: 8px;
+}
+
+.breadcrumb-text {
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+
+}
+
+.breadcrumb-actions {
+    display: inline-block;
+    float: right;
+    vertical-align: center;
+}
+
+.global-actions {
+    display: inline-block;
+    float: right;
+    vertical-align: bottom;
+    height: 300px;
+}

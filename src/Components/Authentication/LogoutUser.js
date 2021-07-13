@@ -1,3 +1,5 @@
+import '../UI/Global.css'
+
 const LogoutUser = (props) => {
 
     const endSessionHandler = (event) => {
@@ -15,7 +17,7 @@ const LogoutUser = (props) => {
     }
 
     return (
-        <div>
+        <div className='global-actions'>
             <form onSubmit={endSessionHandler}>
                 <button type="submit">Log Out</button>
             </form>
