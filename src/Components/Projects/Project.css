@@ -10,6 +10,11 @@
     display: inline-block;
     float: left;
 }
+.project-control h3 {
+    font-weight: bold;
+    display: inline-block;
+    float: left;
+}
 
 .action-button-group {
     display: inline-block;

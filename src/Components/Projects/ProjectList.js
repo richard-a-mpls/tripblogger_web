@@ -16,6 +16,7 @@ const ProjectList = props => {
                 removeProject={props.removeProject}
                 apiToken={props.apiToken}
             />)}
+            {(props.projectList.length === 0) && <p>create a new project</p>}
         </div>
     );
 }

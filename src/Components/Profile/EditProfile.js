@@ -38,9 +38,7 @@ const EditProfile = (props) => {
                 <Card.Header>
                     <h2 className="breadcrumb-text">Edit Profile</h2>
                     <form className="breadcrumb-actions">
-                        <button className="bform-control cancel-button" type="button"
-                                onClick={cancelEditProfileHandler}>Cancel Edit Profile
-                        </button>
+                        <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
                     </form>
                 </Card.Header>
                 <Card.Body>

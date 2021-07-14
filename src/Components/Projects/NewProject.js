@@ -6,7 +6,7 @@ const NewProject = (props) => {
     const [summary, setSummary] = useState('');
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
-    const [date, setDate] = useState('');
+    const [date, setDate] = useState(new Date());
 
     const submitProjectHandler = (event) => {
         event.preventDefault();

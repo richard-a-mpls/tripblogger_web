@@ -21,6 +21,9 @@ function App() {
         setProjectList([addProject, ...projectList]);
     }
 
+    const showWelcomePage = () => {
+        setPageState('welcome_message');
+    }
     const setApiSession = (apiTokenId) => {
         console.log(apiTokenId.api_token);
         setApiToken(apiTokenId.api_token);
@@ -114,11 +117,13 @@ function App() {
                         }
                         {pageState === 'project_view' &&
                         <ProjectParent removeProject={removeProject} addToProjectList={addToProjectList}
-                                       projectList={projectList} apiToken={apiToken} changePageState={loadProjectList}/>
+                                       projectList={projectList} apiToken={apiToken} changePageState={loadProjectList}
+                                       showWelcomePage={showWelcomePage}/>
                         }
                         {pageState === 'edit_profile' &&
                         <EditProfile userProfile={userProfile} apiToken={apiToken}
-                                     refreshUserProfile={refreshUserProfile} changePageState={changePageState}/>
+                                     refreshUserProfile={refreshUserProfile} changePageState={changePageState}
+                                     showWelcomePage={showWelcomePage}/>
                         }
                     </Card.Text>
                 </Card.Body>

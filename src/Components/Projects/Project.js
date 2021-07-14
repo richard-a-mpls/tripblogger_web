@@ -24,7 +24,7 @@ const Project = props => {
             <Card style={{width: 'auto', marginBottom: '15px'}}>
                 <Card.Header>
                     <div className="bform-control project-control">
-                        <h2>{props.summary}</h2>
+                        <h3>{props.summary}</h3>
                         <ProjectActionButtons deleteHandler={deleteHandler}/>
                     </div>
                 </Card.Header>
