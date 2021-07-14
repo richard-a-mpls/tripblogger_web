@@ -1,19 +1,26 @@
 import React, {useState} from "react";
 import {Card} from "react-bootstrap";
-import "../UI/Global.css"
+import "../UI/Global.css";
 
 const NewProject = (props) => {
     const [summary, setSummary] = useState('');
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
+    const [date, setDate] = useState('');
 
     const submitProjectHandler = (event) => {
         event.preventDefault();
         console.log("submit new project");
+        const projectDays = [
+            {
+                'datestmp': date
+            }
+        ]
         const updateValue = {
             'summary': summary,
             'description': description,
-            'location': location
+            'location': location,
+            'project_days': projectDays
         }
         fetch('http://localhost:8080/v1/me/projects', {
             method: 'post',
@@ -41,6 +48,9 @@ const NewProject = (props) => {
     const locationChangeHandler = (event) => {
         setLocation(event.target.value);
     }
+    const dateChangeHandler = (event) => {
+        setDate(event.target.value);
+    }
 
     return (
         <Card style={{width: 'auto'}}>
@@ -64,6 +74,10 @@ const NewProject = (props) => {
                                 <label>Location: </label><input type="text" onChange={locationChangeHandler}
                                                                 value={location}
                                                                 placeholder="The location associated with your project"/><br/>
+                                <label>Date: </label>
+                                <input type="date" onChange={dateChangeHandler}
+                                       value={date}
+                                       placeholder="The day/first day of your project contents"/><br/>
                                 <button className="bform-control cancel-button" type="button"
                                         onClick={props.viewProjectsHandler}>Cancel
                                 </button>
