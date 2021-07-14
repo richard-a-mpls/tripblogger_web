@@ -2,7 +2,7 @@ import '../UI/Global.css'
 import './Project.css'
 import {useState} from "react";
 
-const DeleteButton = (props) => {
+const ProjectActionButtons = (props) => {
 
     const [confirmDelete, setConfirmDelete] = useState(false);
     const initiateDeleteHandler = (event) => {
@@ -31,4 +31,4 @@ const DeleteButton = (props) => {
     );
 };
 
-export default DeleteButton;
+export default ProjectActionButtons;
