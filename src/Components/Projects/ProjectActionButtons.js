@@ -16,7 +16,12 @@ const ProjectActionButtons = (props) => {
         <div className="bform-control">
             <form onSubmit={props.deleteHandler}>
                 {!confirmDelete &&
-                <button className="action-button-group" type="button" onClick={initiateDeleteHandler}>Delete</button>
+                <div>
+                    <button className="action-button-group" type="button" onClick={initiateDeleteHandler}>Delete
+                    </button>
+                    <button className="action-button-group" type="button"
+                            onClick={initiateDeleteHandler}>View</button>
+                </div>
                 }
                 {confirmDelete &&
                 <div>
