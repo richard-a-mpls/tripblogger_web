@@ -2,42 +2,56 @@ import React, {useState} from "react";
 import {Card} from "react-bootstrap";
 import "../UI/Global.css";
 
+import axios from 'axios'
+
 const NewProject = (props) => {
     const [summary, setSummary] = useState('');
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
     const [date, setDate] = useState(new Date());
+    const [photoData, setPhotoData] = useState('');
+    const [photoSelected, setPhotoSelected] = useState(false);
 
     const submitProjectHandler = (event) => {
         event.preventDefault();
         console.log("submit new project");
-        const projectDays = [
-            {
-                'datestmp': date
-            }
-        ]
-        const updateValue = {
-            'summary': summary,
-            'description': description,
-            'location': location,
-            'project_days': projectDays
-        }
-        fetch('http://localhost:8080/v1/me/projects', {
-            method: 'post',
-            body: JSON.stringify(updateValue),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + props.apiToken
-            })
+        const formData = new FormData();
+        formData.append('file', photoData);
+        axios.post("http://localhost:8080/v1/photos", formData, { // receive two parameter endpoint url ,form data
+            headers: { Authorization: `Bearer ${props.apiToken}` }
         })
-            .then(response => response.json())
-            .then(data => props.addToProjectList(data));
+            .then(response => {
+                const imgData = response.data;
+                console.log(imgData.id);
+                const projectDays = [
+                    {
+                        'datestmp': date
+                    }
+                ]
+                const updateValue = {
+                    'summary': summary,
+                    'description': description,
+                    'location': location,
+                    'project_days': projectDays,
+                    'showcase_photo_id': imgData.id
+                }
 
-        setSummary('');
-        setDescription('');
-        setLocation('');
-        props.viewProjectsHandler();
-    };
+                fetch('http://localhost:8080/v1/me/projects', {
+                    method: 'post',
+                    body: JSON.stringify(updateValue),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + props.apiToken
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => props.addToProjectList(data));
+
+                setSummary('');
+                setDescription('');
+                setLocation('');
+                props.viewProjectsHandler();
+            })};
 
     const summaryChangeHandler = (event) => {
         setSummary(event.target.value);
@@ -50,6 +64,11 @@ const NewProject = (props) => {
     }
     const dateChangeHandler = (event) => {
         setDate(event.target.value);
+    }
+
+    const setPhotoDataHandler = (event) => {
+        setPhotoData(event.target.files[0])
+        setPhotoSelected(true);
     }
 
     return (
@@ -78,6 +97,9 @@ const NewProject = (props) => {
                                 <input type="date" onChange={dateChangeHandler}
                                        value={date}
                                        placeholder="The day/first day of your project contents"/><br/>
+                                <label>Photo: </label>
+                                <label for="file" className="inputfile">Choose a file</label>
+                                <input id="file" className="inputfile" type="file" onChange={setPhotoDataHandler}/><br/><br/>
                                 <button className="bform-control cancel-button" type="button"
                                         onClick={props.viewProjectsHandler}>Cancel
                                 </button>

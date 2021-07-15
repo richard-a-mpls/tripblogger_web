@@ -31,7 +31,7 @@ const ProjectParent = props => {
                     </form>
                 </div>
             </Card.Header>
-            <Card.Body>
+            <Card.Body style={{backgroundColor: "#fcfcfc"}}>
                 <Card.Text>
                     {pageState === "creating" &&
                     <NewProject addToProjectList={props.addToProjectList} viewProjectsHandler={viewProjectsHandler}
