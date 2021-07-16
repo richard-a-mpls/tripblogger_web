@@ -21,3 +21,20 @@
     float: right;
     vertical-align: center;
 }
+
+.details-img {
+    display: inline-block;
+    float: left;
+    height: 150px;
+    width: 150px;
+    object-fit:cover;
+    border-radius: 16px;
+    overflow: hidden
+}
+
+.details-right {
+    display: inline-block;
+    float: left;
+    padding-left: 50px;
+    width: 80%;
+}
