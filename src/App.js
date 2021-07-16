@@ -127,8 +127,12 @@ function App() {
                         }
                     </Card.Text>
                 </Card.Body>
-                <Card.Footer>
-                    <p className="small">API Token ID: {apiToken}<br/>Page State: {pageState}</p>
+                <Card.Footer style={{backgroundColor: '#26567b'}}>
+                    <br/>
+                    <center>
+                        <p style={{color: 'white'}} className="small"><strong>API Token: {apiToken}<br/>Page
+                            State: {pageState}</strong></p>
+                    </center>
                 </Card.Footer>
             </div>
             }
