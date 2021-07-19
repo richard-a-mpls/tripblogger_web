@@ -45,6 +45,8 @@ const ProjectParent = props => {
     }
 
     const resetEditingProject = (prj) => {
+        console.log("reset editing project");
+        console.log(prj);
         setEditingProject(prj);
         setPageState('viewing_project');
     }
@@ -70,6 +72,7 @@ const ProjectParent = props => {
                     {pageState === "creating" &&
                     <NewProject addToProjectList={props.addToProjectList} viewProjectsHandler={viewProjectsHandler}
                                 changePageState={props.changePageState}
+                                viewProject={resetEditingProject}
                                 apiToken={props.apiToken}/>}
                     {pageState === "viewing" &&
                     <ProjectList removeProject={props.removeProject} projectList={props.projectList}

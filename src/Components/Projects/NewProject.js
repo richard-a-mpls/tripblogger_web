@@ -45,12 +45,13 @@ const NewProject = (props) => {
                     })
                 })
                     .then(response => response.json())
-                    .then(data => props.addToProjectList(data));
+                    .then(data => {
+                        props.viewProject(data);
+                    });
 
                 setSummary('');
                 setDescription('');
                 setLocation('');
-                props.viewProjectsHandler();
             })};
 
     const summaryChangeHandler = (event) => {
