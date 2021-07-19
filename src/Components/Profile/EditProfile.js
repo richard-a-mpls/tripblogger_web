@@ -6,7 +6,6 @@ import {Card} from "react-bootstrap";
 const EditProfile = (props) => {
 
     const [profileName, setProfileName] = useState(props.userProfile.profile_name);
-    //const [connections, setConnections] = useState();
 
     const cancelEditProfileHandler = () => {
         props.changePageState("welcome_message");
