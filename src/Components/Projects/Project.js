@@ -4,6 +4,10 @@ import '../UI/Global.css'
 import './Project.css'
 
 const Project = props => {
+    const date = new Date(props.days[0].datestmp.split("-"));
+    const month = date.toLocaleString('en-US', {month: 'long'});
+    const day = date.toLocaleString('en-US', {day: '2-digit'});
+    const year = date.getFullYear();
 
     const deleteHandler = (event) => {
         event.preventDefault();
@@ -18,12 +22,6 @@ const Project = props => {
             .then(data => console.log(data));
         props.removeProject(props.id)
     }
-
-    const date = new Date(props.days[0].datestmp.split("-"));
-    const month = date.toLocaleString('en-US', {month: 'long'});
-    const day = date.toLocaleString('en-US', {day: '2-digit'});
-    const year = date.getFullYear();
-
 
     return (
         <div className="bform-control">

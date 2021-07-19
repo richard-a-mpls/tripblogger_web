@@ -1,7 +1,6 @@
 import '../UI/Global.css'
 
 const LogoutUser = (props) => {
-
     const endSessionHandler = (event) => {
         event.preventDefault();
 
@@ -12,7 +11,6 @@ const LogoutUser = (props) => {
         fetch('https://my-react.local:3000/v1/logout/?apiToken=' + props.apiToken, requestOptions)
             .then(response => response.json())
             .then(data => console.log("DATER: " + JSON.stringify(data)));
-
         props.logoutHandler();
     }
 

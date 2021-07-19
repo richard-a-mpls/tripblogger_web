@@ -111,7 +111,6 @@ const EditProject = (props) => {
                             </button>
                             <button type="submit" onClick={submitEditHandler}>Submit</button>
                         </div>
-
                     </Card.Text>
                 </Card.Body>
             </Card>
