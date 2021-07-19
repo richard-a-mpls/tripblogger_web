@@ -7,9 +7,8 @@ const ProjectDay = (props) => {
     const [expanded, setExpanded] = useState(false);
 
     let date = new Date();
-
     if (props.projectDay !== undefined) {
-        //date = new Date(props.projectDay.datestmp.split("-"));
+        date = new Date(props.projectDay.datestmp.split("-"));
     }
     const month = date.toLocaleString('en-US', {month: 'long'});
     const day = date.toLocaleString('en-US', {day: '2-digit'});
