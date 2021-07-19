@@ -3,7 +3,6 @@ import FacebookLogin from 'react-facebook-login';
 import './AuthenticateUser.css'
 
 const AuthenticateUser = (props) => {
-
     const responseFacebook = (response) => {
         console.log(response);
         props.setFbInfo(response, response.picture.data.url);
@@ -18,7 +17,6 @@ const AuthenticateUser = (props) => {
                 fetch('https://my-react.local:3000/v1/authorize', requestOptions)
                     .then(response => response.json())
                     .then(dataResp => props.setApiSession(dataResp));
-
             } catch (e) {
                 console.log("Exception found: :" + e);
             }
