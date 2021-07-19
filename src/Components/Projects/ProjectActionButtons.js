@@ -11,6 +11,10 @@ const ProjectActionButtons = (props) => {
     const cancelDeleteHandler = (event) => {
         setConfirmDelete(false);
     }
+    const initiateEditHandler = (event) => {
+        console.log(props.projectId);
+        props.editProjectHandler(props.projectId);
+    }
 
     return (
         <div className="bform-control">
@@ -20,7 +24,7 @@ const ProjectActionButtons = (props) => {
                     <button className="action-button-group" type="button" onClick={initiateDeleteHandler}>Delete
                     </button>
                     <button className="action-button-group" type="button"
-                            onClick={initiateDeleteHandler}>View</button>
+                            onClick={initiateEditHandler}>View</button>
                 </div>
                 }
                 {confirmDelete &&

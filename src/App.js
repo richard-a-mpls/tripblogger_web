@@ -50,7 +50,6 @@ function App() {
     }
 
     const loadProjectList = (event) => {
-        event.preventDefault();
         fetch('http://localhost:8080/v1/me/projects', {
             method: 'get',
             headers: new Headers({
@@ -118,7 +117,7 @@ function App() {
                         {pageState === 'project_view' &&
                         <ProjectParent removeProject={removeProject} addToProjectList={addToProjectList}
                                        projectList={projectList} apiToken={apiToken} changePageState={loadProjectList}
-                                       showWelcomePage={showWelcomePage}/>
+                                       reloadProjectList={loadProjectList} showWelcomePage={showWelcomePage}/>
                         }
                         {pageState === 'edit_profile' &&
                         <EditProfile userProfile={userProfile} apiToken={apiToken}

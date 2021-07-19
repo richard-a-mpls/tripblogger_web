@@ -24,8 +24,8 @@ const WelcomeMessage = (props) => {
                         <Card style={{width: 'auto', marginBottom: '15px'}}>
                             <Card.Header>
                                 <h3 className="breadcrumb-text">Connections: Recent Projects</h3>
-                                <form className='breadcrumb-actions' onSubmit={props.changePageState}>
-                                    <button type="submit" className="button">&gt;&gt;</button>
+                                <form className='breadcrumb-actions'>
+                                    <button type="button" onClick={props.changePageState} className="button">&gt;&gt;</button>
                                 </form>
                             </Card.Header>
                             <Card.Body>

@@ -31,13 +31,13 @@ const Project = props => {
                 <Card.Header>
                     <div className="bform-control project-control">
                         <h3>{props.summary}</h3>
-                        <ProjectActionButtons deleteHandler={deleteHandler}/>
+                        <ProjectActionButtons projectId={props.id} editProjectHandler={props.editProjectHandler} deleteHandler={deleteHandler}/>
                     </div>
                 </Card.Header>
                 <Card.Body>
                     <Card.Text>
 
-                        <img alt="showcase photo" className="details-img" src={"https://my-react.local:3000/v1/photos/" + props.photo_id}/>
+                        <img alt="showcase" className="details-img" src={"https://my-react.local:3000/v1/photos/" + props.photo_id}/>
                         <div className="details-right">
                             <b>{props.location} - {month} {day} {year}</b><br/>
                             {props.description}<br/><br/>

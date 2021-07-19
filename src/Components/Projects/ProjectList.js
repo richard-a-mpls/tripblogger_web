@@ -16,6 +16,7 @@ const ProjectList = props => {
                 days={prj.project_days}
                 removeProject={props.removeProject}
                 apiToken={props.apiToken}
+                editProjectHandler={props.editProjectHandler}
             />)}
             {(props.projectList.length === 0) && <p>create a new project</p>}
         </div>

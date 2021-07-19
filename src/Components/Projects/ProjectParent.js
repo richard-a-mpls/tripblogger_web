@@ -3,10 +3,14 @@ import ProjectList from "./ProjectList";
 import {Card} from "react-bootstrap";
 import '../UI/Global.css'
 import React, {useState} from "react";
+import EditProject from "./EditProject";
+import axios from 'axios'
+import ViewProject from "./ViewProject";
 
 const ProjectParent = props => {
 
     const [pageState, setPageState] = useState('viewing');
+    const [editingProject, setEditingProject] = useState('');
 
     const initNewProjectHandler = (event) => {
         event.preventDefault();
@@ -14,7 +18,35 @@ const ProjectParent = props => {
     }
 
     const viewProjectsHandler = (event) => {
+        props.changePageState();
         setPageState('viewing');
+    }
+
+    const editProjectHandler = (projectId) => {
+        loadEditingProject(projectId);
+        setPageState('editing');
+    }
+
+    const viewProjectHandler = (projectId) => {
+        loadEditingProject(projectId);
+        setPageState('viewing_project');
+    }
+
+    const loadEditingProject = (projectId) => {
+        console.log('load project id' + projectId)
+        axios.get('http://localhost:8080/v1/projects/' + projectId, {
+            headers: {Authorization: `Bearer ${props.apiToken}`}
+        })
+            .then(response => {
+                console.log("set editing project");
+                console.log(response.data);
+                setEditingProject(response.data);
+            });
+    }
+
+    const resetEditingProject = (prj) => {
+        setEditingProject(prj);
+        setPageState('viewing_project');
     }
 
     return (
@@ -28,6 +60,8 @@ const ProjectParent = props => {
                         {pageState === "creating" && <button className="bform-control cancel-button" type="button"
                                                              onClick={viewProjectsHandler}>Cancel Create a New Project
                         </button>}
+                        {(pageState === "editing" || pageState === "viewing_project") &&
+                        <button type="button" onClick={viewProjectsHandler}>All Projects</button>}
                     </form>
                 </div>
             </Card.Header>
@@ -39,7 +73,21 @@ const ProjectParent = props => {
                                 apiToken={props.apiToken}/>}
                     {pageState === "viewing" &&
                     <ProjectList removeProject={props.removeProject} projectList={props.projectList}
-                                 changePageState={props.changePageState} apiToken={props.apiToken}/>}
+                                 changePageState={props.changePageState} apiToken={props.apiToken}
+                                 editProjectHandler={viewProjectHandler}/>}
+                    {pageState === "editing" &&
+                    <EditProject
+                        editingProject={editingProject}
+                        viewProjectHandler={viewProjectHandler}
+                        resetProject={resetEditingProject}
+                        apiToken={props.apiToken}/>}
+                    {pageState === "viewing_project" &&
+                    <ViewProject
+                        editProjectHandler={editProjectHandler}
+                        editingProject={editingProject}
+                    />}
+
+
                 </Card.Text>
             </Card.Body>
         </Card>
