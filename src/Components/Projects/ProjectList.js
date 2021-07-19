@@ -2,7 +2,7 @@ import Project from "./Project";
 
 const ProjectList = props => {
     return (
-        <div>
+        <>
             {props.projectList.map((prj) => <Project
                 key={prj._id}
                 id={prj._id}
@@ -19,7 +19,7 @@ const ProjectList = props => {
                 editProjectHandler={props.editProjectHandler}
             />)}
             {(props.projectList.length === 0) && <p>create a new project</p>}
-        </div>
+        </>
     );
 }
 
