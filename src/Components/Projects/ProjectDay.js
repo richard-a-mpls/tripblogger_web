@@ -7,9 +7,8 @@ const ProjectDay = (props) => {
     const [expanded, setExpanded] = useState(false);
 
     let date = new Date();
-
     if (props.projectDay !== undefined) {
-        //date = new Date(props.projectDay.datestmp.split("-"));
+        date = new Date(props.projectDay.datestmp.split("-"));
     }
     const month = date.toLocaleString('en-US', {month: 'long'});
     const day = date.toLocaleString('en-US', {day: '2-digit'});
@@ -26,7 +25,7 @@ const ProjectDay = (props) => {
 
     return (
         <div className="bform-control">
-            <Card style={{marginBottom: '5px'}}>
+            <Card style={{marginBottom: '1px'}}>
                 <Card.Header>
                     <h6 className="breadcrumb-text">
                         {month} {day} {year} - {props.projectDay.summary}

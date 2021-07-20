@@ -33,20 +33,15 @@ const ProjectParent = props => {
     }
 
     const loadEditingProject = (projectId) => {
-        console.log('load project id' + projectId)
         axios.get('http://localhost:8080/v1/projects/' + projectId, {
             headers: {Authorization: `Bearer ${props.apiToken}`}
         })
             .then(response => {
-                console.log("set editing project");
-                console.log(response.data);
                 setEditingProject(response.data);
             });
     }
 
     const resetEditingProject = (prj) => {
-        console.log("reset editing project");
-        console.log(prj);
         setEditingProject(prj);
         setPageState('viewing_project');
     }
@@ -89,8 +84,6 @@ const ProjectParent = props => {
                         editProjectHandler={editProjectHandler}
                         editingProject={editingProject}
                     />}
-
-
                 </Card.Text>
             </Card.Body>
         </Card>

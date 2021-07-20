@@ -2,28 +2,22 @@ import {Card} from "react-bootstrap";
 import ProjectActionButtons from "./ProjectActionButtons";
 import '../UI/Global.css'
 import './Project.css'
+import axios from "axios";
 
 const Project = props => {
-
-    const deleteHandler = (event) => {
-        event.preventDefault();
-        fetch('https://my-react.local:3000/v1/me/projects/' + props.id, {
-            method: 'delete',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + props.apiToken
-            })
-        })
-            .then(response => response.json())
-            .then(data => console.log(data));
-        props.removeProject(props.id)
-    }
-
     const date = new Date(props.days[0].datestmp.split("-"));
     const month = date.toLocaleString('en-US', {month: 'long'});
     const day = date.toLocaleString('en-US', {day: '2-digit'});
     const year = date.getFullYear();
 
+    const deleteHandler = (event) => {
+        event.preventDefault();
+        axios.delete('https://my-react.local:3000/v1/me/projects/' + props.id,
+            {headers: {'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + props.apiToken}})
+            .then(response => console.log(response.data));
+        props.removeProject(props.id);
+    }
 
     return (
         <div className="bform-control">

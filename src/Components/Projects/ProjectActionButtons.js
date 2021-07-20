@@ -3,8 +3,8 @@ import './Project.css'
 import {useState} from "react";
 
 const ProjectActionButtons = (props) => {
-
     const [confirmDelete, setConfirmDelete] = useState(false);
+
     const initiateDeleteHandler = (event) => {
         setConfirmDelete(true);
     }
@@ -24,7 +24,8 @@ const ProjectActionButtons = (props) => {
                     <button className="action-button-group" type="button" onClick={initiateDeleteHandler}>Delete
                     </button>
                     <button className="action-button-group" type="button"
-                            onClick={initiateEditHandler}>View</button>
+                            onClick={initiateEditHandler}>View
+                    </button>
                 </div>
                 }
                 {confirmDelete &&
