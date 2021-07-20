@@ -60,38 +60,37 @@ const NewProject = (props) => {
 
     return (
         <Card style={{width: 'auto'}}>
-            <div>
-                <Card.Header>
-                    <h2>Creating a new Project</h2>
-                </Card.Header>
-                <Card.Body>
-                    <Card.Title>
-                        Fill in the below info to create your new project.
-                    </Card.Title>
-                    <div className="bform-control">
-                        <form onSubmit={submitProjectHandler}>
-                            <Card.Text>
-                                <label>Summary: </label><input type="text" ref={summary}
-                                                               placeholder="A brief summary of your project"/><br/>
-                                <label>Description: </label><input type="text" ref={description}
-                                                                   placeholder="A description of your project"/><br/>
-                                <label>Location: </label><input type="text" ref={location}
-                                                                placeholder="The location associated with your project"/><br/>
-                                <label>Date: </label>
-                                <input type="date" ref={date}
-                                       placeholder="The day/first day of your project contents"/><br/>
-                                <label>Photo: </label>
-                                <label for="file" className="inputfile">Choose a file</label>
-                                <input id="file" className="inputfile" type="file" onChange={setPhotoDataHandler}/><br/><br/>
-                                <button className="bform-control cancel-button" type="button"
-                                        onClick={props.viewProjectsHandler}>Cancel
-                                </button>
-                                <button type="submit" onClick={submitProjectHandler}>Submit</button>
-                            </Card.Text>
-                        </form>
-                    </div>
-                </Card.Body>
-            </div>
+            <Card.Header>
+                <h2>Creating a new Project</h2>
+            </Card.Header>
+            <Card.Body>
+                <Card.Title>
+                    Fill in the below info to create your new project.
+                </Card.Title>
+                <div className="bform-control">
+                    <form onSubmit={submitProjectHandler}>
+                        <Card.Text>
+                            <label>Summary: </label><input type="text" ref={summary}
+                                                           placeholder="A brief summary of your project"/><br/>
+                            <label>Description: </label><input type="text" ref={description}
+                                                               placeholder="A description of your project"/><br/>
+                            <label>Location: </label><input type="text" ref={location}
+                                                            placeholder="The location associated with your project"/><br/>
+                            <label>Date: </label>
+                            <input type="date" ref={date}
+                                   placeholder="The day/first day of your project contents"/><br/>
+                            <label>Photo: </label>
+                            <label for="file" className="inputfile">Choose a file</label>
+                            <input id="file" className="inputfile" type="file"
+                                   onChange={setPhotoDataHandler}/><br/><br/>
+                            <button className="bform-control cancel-button" type="button"
+                                    onClick={props.viewProjectsHandler}>Cancel
+                            </button>
+                            <button type="submit" onClick={submitProjectHandler}>Submit</button>
+                        </Card.Text>
+                    </form>
+                </div>
+            </Card.Body>
         </Card>
     )
 };
