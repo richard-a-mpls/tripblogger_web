@@ -40,7 +40,10 @@ const NewProject = (props) => {
 
                 axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateValue),
                     {headers: {'Authorization': 'Bearer ' + props.apiToken, 'Content-Type': 'application/json'}})
-                    .then(response => props.viewProject(response.data));
+                    .then(response => {
+                        props.addToProjectList(response.data);
+                        props.viewProject(response.data);
+                    });
             });
     };
 

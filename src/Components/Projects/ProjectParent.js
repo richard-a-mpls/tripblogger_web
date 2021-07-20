@@ -2,7 +2,7 @@ import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import {Card} from "react-bootstrap";
 import '../UI/Global.css'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import EditProject from "./EditProject";
 import axios from 'axios'
 import ViewProject from "./ViewProject";
@@ -11,6 +11,36 @@ const ProjectParent = props => {
 
     const [pageState, setPageState] = useState('viewing');
     const [editingProject, setEditingProject] = useState('');
+    const [projectList, setProjectList] = useState([]);
+
+    // project list functions
+    useEffect(() => {
+        axios.get('https://my-react.local:3000/v1/me/projects', {
+            headers: {Authorization: `Bearer ${props.apiToken}`}
+        })
+            .then(response => {
+                setProjectList(response.data);
+                console.log("got project list");
+            });
+    }, []);
+
+    const addToProjectList = (addProject) => {
+        setProjectList([addProject, ...projectList]);
+    }
+
+    const updateProjectList = (updatedProject) => {
+        const newProjects = [];
+        projectList.forEach(prj => {
+            newProjects.push(prj._id === updatedProject._id ? updatedProject : prj);
+        })
+        setProjectList(newProjects);
+    }
+
+    const removeProject = (idToRemove) => {
+        setProjectList(projectList.filter((prj => {
+            return prj._id !== idToRemove;
+        })));
+    }
 
     const initNewProjectHandler = (event) => {
         event.preventDefault();
@@ -18,7 +48,6 @@ const ProjectParent = props => {
     }
 
     const viewProjectsHandler = (event) => {
-        props.changePageState();
         setPageState('viewing');
     }
 
@@ -65,19 +94,20 @@ const ProjectParent = props => {
             <Card.Body style={{backgroundColor: "#fcfcfc"}}>
                 <Card.Text>
                     {pageState === "creating" &&
-                    <NewProject addToProjectList={props.addToProjectList} viewProjectsHandler={viewProjectsHandler}
-                                changePageState={props.changePageState}
+                    <NewProject addToProjectList={addToProjectList} viewProjectsHandler={viewProjectsHandler}
+                                changePageState={viewProjectsHandler}
                                 viewProject={resetEditingProject}
                                 apiToken={props.apiToken}/>}
                     {pageState === "viewing" &&
-                    <ProjectList removeProject={props.removeProject} projectList={props.projectList}
-                                 changePageState={props.changePageState} apiToken={props.apiToken}
+                    <ProjectList removeProject={removeProject} projectList={projectList}
+                                 changePageState={viewProjectsHandler} apiToken={props.apiToken}
                                  editProjectHandler={viewProjectHandler}/>}
                     {pageState === "editing" &&
                     <EditProject
                         editingProject={editingProject}
                         viewProjectHandler={viewProjectHandler}
                         resetProject={resetEditingProject}
+                        updateProjectList={updateProjectList}
                         apiToken={props.apiToken}/>}
                     {pageState === "viewing_project" &&
                     <ViewProject
