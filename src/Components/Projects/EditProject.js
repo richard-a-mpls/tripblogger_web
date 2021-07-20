@@ -23,7 +23,10 @@ const EditProject = (props) => {
         axios.patch('http://localhost:8080/v1/me/projects/' + props.editingProject._id, formData, { // receive two parameter endpoint url ,form data
             headers: {Authorization: `Bearer ${props.apiToken}`}
         })
-            .then(response => props.resetProject(response.data));
+            .then(response => {
+                props.resetProject(response.data);
+                props.updateProjectList(response.data);
+            });
     }
 
     const cancelEditHandler = (event) => {

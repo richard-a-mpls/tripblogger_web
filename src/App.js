@@ -16,15 +16,15 @@ function App() {
     const [fbData, setFbData] = useState('');
     const [fbPicture, setFbPicture] = useState('');
     const [userProfile, setUserProfile] = useState('');
-    const [projectList, setProjectList] = useState([]);
-
-    const addToProjectList = (addProject) => {
-        setProjectList([addProject, ...projectList]);
-    }
 
     const showWelcomePage = () => {
         setPageState('welcome_message');
     }
+
+    const showProjectView = (event) => {
+        changePageState("project_view");
+    }
+
     const setApiSession = (apiTokenId) => {
         console.log(apiTokenId.api_token);
         setApiToken(apiTokenId.api_token);
@@ -38,21 +38,6 @@ function App() {
         })
             .then(response => setUserProfile(response.data));
     };
-
-    const removeProject = (idToRemove) => {
-        setProjectList(projectList.filter((prj => {
-            return prj._id !== idToRemove;
-        })));
-    }
-
-    const loadProjectList = (event) => {
-
-        axios.get('https://my-react.local:3000/v1/me/projects', {
-            headers: {Authorization: `Bearer ${apiToken}`}
-        })
-            .then(response => setProjectList(response.data));
-        changePageState("project_view");
-    }
 
     const refreshUserProfile = (newUserProfile) => {
         console.log(newUserProfile)
@@ -100,12 +85,10 @@ function App() {
                 <Card.Body>
                     <Card.Text>
                         {pageState === 'welcome_message' &&
-                        <WelcomeMessage changePageState={loadProjectList}/>
+                        <WelcomeMessage changePageState={showProjectView}/>
                         }
                         {pageState === 'project_view' &&
-                        <ProjectParent removeProject={removeProject} addToProjectList={addToProjectList}
-                                       projectList={projectList} apiToken={apiToken} changePageState={loadProjectList}
-                                       reloadProjectList={loadProjectList} showWelcomePage={showWelcomePage}/>
+                        <ProjectParent showWelcomePage={showWelcomePage} apiToken={apiToken}/>
                         }
                         {pageState === 'edit_profile' &&
                         <EditProfile userProfile={userProfile} apiToken={apiToken}
