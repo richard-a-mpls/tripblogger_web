@@ -25,7 +25,7 @@ const ProjectDay = (props) => {
 
     return (
         <div className="bform-control">
-            <Card style={{marginBottom: '5px'}}>
+            <Card style={{marginBottom: '1px'}}>
                 <Card.Header>
                     <h6 className="breadcrumb-text">
                         {month} {day} {year} - {props.projectDay.summary}
