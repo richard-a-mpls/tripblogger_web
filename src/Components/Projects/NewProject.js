@@ -38,18 +38,9 @@ const NewProject = (props) => {
                 }
                 console.log(updateValue);
 
-                fetch('http://localhost:8080/v1/me/projects', {
-                    method: 'post',
-                    body: JSON.stringify(updateValue),
-                    headers: new Headers({
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + props.apiToken
-                    })
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        props.viewProject(data);
-                    });
+                axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateValue),
+                    {headers: {'Authorization': 'Bearer ' + props.apiToken, 'Content-Type': 'application/json'}})
+                    .then(response => props.viewProject(response.data));
             });
     };
 

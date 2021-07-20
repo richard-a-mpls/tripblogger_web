@@ -1,25 +1,18 @@
 import FacebookLogin from 'react-facebook-login';
 
 import './AuthenticateUser.css'
+import axios from "axios";
 
 const AuthenticateUser = (props) => {
     const responseFacebook = (response) => {
         console.log(response);
         props.setFbInfo(response, response.picture.data.url);
         if (response.accessToken) {
-            const requestOptions = {
-                method: 'POST',
-                mode: "cors",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({"identity_token": response.accessToken})
-            };
-            try {
-                fetch('https://my-react.local:3000/v1/authorize', requestOptions)
-                    .then(response => response.json())
-                    .then(dataResp => props.setApiSession(dataResp));
-            } catch (e) {
-                console.log("Exception found: :" + e);
-            }
+            axios.post(
+                "http://localhost:8080/v1/authorize",
+                JSON.stringify({"identity_token": response.accessToken}),
+                {headers: {'Content-Type': 'application/json'}})
+                .then(response => props.setApiSession(response.data));
         } else {
         }
     }

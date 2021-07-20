@@ -7,6 +7,7 @@ import EditProfile from "./Components/Profile/EditProfile";
 import ProjectParent from "./Components/Projects/ProjectParent"
 import './Components/UI/Global.css'
 import './App.css';
+import axios from "axios";
 
 function App() {
     const [login, setLogin] = useState(false);
@@ -32,15 +33,10 @@ function App() {
         setPageState('welcome_message');
         setLogin(true);
 
-        fetch('https://my-react.local:3000/v1/profile', {
-            method: 'get',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + apiTokenId.api_token
-            })
+        axios.get('https://my-react.local:3000/v1/profile', {
+            headers: {Authorization: `Bearer ${apiTokenId.api_token}`}
         })
-            .then(response => response.json())
-            .then(data => setUserProfile(data));
+            .then(response => setUserProfile(response.data));
     };
 
     const removeProject = (idToRemove) => {
@@ -50,19 +46,11 @@ function App() {
     }
 
     const loadProjectList = (event) => {
-        fetch('http://localhost:8080/v1/me/projects', {
-            method: 'get',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + apiToken
-            })
+
+        axios.get('https://my-react.local:3000/v1/me/projects', {
+            headers: {Authorization: `Bearer ${apiToken}`}
         })
-            .then(async response => await response.json())
-            .then(data => {
-                console.log("set with ");
-                console.log(data);
-                setProjectList(data);
-            });
+            .then(response => setProjectList(response.data));
         changePageState("project_view");
     }
 
