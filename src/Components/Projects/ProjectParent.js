@@ -22,7 +22,7 @@ const ProjectParent = props => {
                 setProjectList(response.data);
                 console.log("got project list");
             });
-    }, []);
+    }, [props.apiToken]);
 
     const addToProjectList = (addProject) => {
         setProjectList([addProject, ...projectList]);
