@@ -23,6 +23,12 @@
     border: 2px solid #26567b;
 }
 
+.wb-form-control button.confirm {
+    background-color: #f33e3e;
+    border: 2px solid #26567b;
+}
+
+
 .wb-form-control button.inactive {
     padding: 5px;
     background-color: #96989a;
@@ -134,6 +140,7 @@
     border-bottom-right-radius: 5px;
     border-width: thin;
     padding-left: 5px;
+    overflow: auto;
 }
 
 .project-details {

@@ -17,27 +17,25 @@ const ProjectActionButtons = (props) => {
     }
 
     return (
-        <div className="bform-control">
-            <form onSubmit={props.deleteHandler}>
-                {!confirmDelete &&
-                <div>
-                    <button className="action-button-group" type="button" onClick={initiateDeleteHandler}>Delete
-                    </button>
-                    <button className="action-button-group" type="button"
-                            onClick={initiateEditHandler}>View
-                    </button>
-                </div>
-                }
-                {confirmDelete &&
-                <div>
-                    <button className="bform-control action-button-group cancel-button" type="button"
-                            onClick={cancelDeleteHandler}>Cancel
-                    </button>
-                    <button className="bform-control action-button-group confirm-button" type="submit">Confirm</button>
-                </div>
-                }
-            </form>
-        </div>
+        <form onSubmit={props.deleteHandler}>
+            {!confirmDelete &&
+            <div>
+                <button className="action-button-group" type="button" onClick={initiateDeleteHandler}>Delete
+                </button>
+                <button className="action-button-group" type="button"
+                        onClick={initiateEditHandler}>View
+                </button>
+            </div>
+            }
+            {confirmDelete &&
+            <div>
+                <button className="cancel" type="button"
+                        onClick={cancelDeleteHandler}>Cancel
+                </button>
+                <button className="confirm" type="submit">Confirm</button>
+            </div>
+            }
+        </form>
     );
 };
 
