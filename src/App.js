@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Card, Image} from "react-bootstrap";
+import {Image} from "react-bootstrap";
 import AuthenticateUser from './Components/Authentication/AuthenticateUser';
 import LogoutUser from "./Components/Authentication/LogoutUser";
 import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
@@ -13,7 +13,7 @@ import BloggerCard from "./Components/UI/BloggerCard";
 
 function App() {
     const [login, setLogin] = useState(false);
-    const [pageState, setPageState] = useState('test');
+    const [pageState, setPageState] = useState('welcome_message');
     const [apiToken, setApiToken] = useState('');
     const [fbData, setFbData] = useState('');
     const [fbPicture, setFbPicture] = useState('');
@@ -97,13 +97,13 @@ function App() {
                                  refreshUserProfile={refreshUserProfile} changePageState={changePageState}
                                  showWelcomePage={showWelcomePage}/>
                     }
-                    <Card.Footer style={{backgroundColor: '#26567b'}}>
+                    <div className="footer">
                         <br/>
                         <center>
-                            <p style={{color: 'white'}} className="small"><strong>API Token: {apiToken}<br/>Page
-                                State: {pageState}</strong></p>
+                            <p>API Token: {apiToken}<br/>Page
+                                State: {pageState}</p>
                         </center>
-                    </Card.Footer>
+                    </div>
                 </>
                 }
             </>}

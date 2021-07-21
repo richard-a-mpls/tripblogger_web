@@ -1,4 +1,3 @@
-import {Card} from "react-bootstrap";
 import React, {useState} from "react";
 import '../UI/Global.css'
 

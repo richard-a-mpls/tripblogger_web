@@ -1,5 +1,4 @@
 import React, {useRef, useState} from "react";
-import {Card} from "react-bootstrap";
 import "../UI/Global.css";
 
 import axios from 'axios'

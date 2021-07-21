@@ -1,5 +1,4 @@
 import '../UI/Global.css'
-import {Card} from "react-bootstrap";
 
 const WelcomeMessage = (props) => {
 

@@ -1,4 +1,3 @@
-import {Card} from "react-bootstrap";
 import ProjectActionButtons from "./ProjectActionButtons";
 import '../UI/Global.css'
 import './Project.css'

@@ -64,9 +64,9 @@
 
 .header {
     background-color: #26567b;
-    height: 65px;
     width: 100%;
     vertical-align: middle;
+    overflow: auto;
 }
 .header h6 {
     display: inline-block;
@@ -83,11 +83,11 @@
 .footer {
     margin-top: 15px;
     background-color: #26567b;
-    height: 65px;
     width: 100%;
     margin-bottom: 15px;
     text-align: center;
     color: white;
+    overflow: auto;
 }
 
 .footer h6 {
@@ -218,13 +218,12 @@
 
 .right-item {
     display: inline-block;
-    padding-right: 20px;
     width: 66%;
     float: right;
     color: white;
     text-align: right;
     position: relative;
-    top: 20%;
+    top: 10px;
 }
 
 /* The switch - the box around the slider */

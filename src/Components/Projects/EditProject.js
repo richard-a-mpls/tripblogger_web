@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {Card} from "react-bootstrap";
 import '../UI/Global.css'
 import './Project.css'
 import axios from "axios";
@@ -13,6 +12,7 @@ const EditProject = (props) => {
     const [shareWith, setShareWith] = useState(props.editingProject.share_with);
 
     const submitEditHandler = (event) => {
+        event.preventDefault();
         const formData = {
             "summary": summary,
             "description": description,

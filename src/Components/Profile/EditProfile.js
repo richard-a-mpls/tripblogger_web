@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import '../UI/Global.css'
 
-import {Card} from "react-bootstrap";
-
 const EditProfile = (props) => {
 
     const [profileName, setProfileName] = useState(props.userProfile.profile_name);

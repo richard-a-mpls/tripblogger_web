@@ -1,6 +1,5 @@
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
-import {Card} from "react-bootstrap";
 import '../UI/Global.css'
 import React, {useEffect, useState} from "react";
 import EditProject from "./EditProject";
