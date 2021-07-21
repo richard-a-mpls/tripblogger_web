@@ -51,6 +51,11 @@
     display: inline-block;
 }
 
+.wb-form-control p.note {
+    font-size: small;
+    color: #888b8b;
+}
+
 .header {
     background-color: #26567b;
     height: 65px;
