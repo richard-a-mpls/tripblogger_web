@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import '../UI/Global.css'
 
-import {Card} from "react-bootstrap";
-
 const EditProfile = (props) => {
 
     const [profileName, setProfileName] = useState(props.userProfile.profile_name);
@@ -32,33 +30,26 @@ const EditProfile = (props) => {
     };
 
     return (
-        <div className="bform-control">
-            <Card>
-                <Card.Header>
-                    <h2 className="breadcrumb-text">Edit Profile</h2>
-                    <form className="breadcrumb-actions">
-                        <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
+        <div className="main-body">
+            <div className="main-body-header">
+                <h3>Edit Profile</h3>
+                <form className="wb-form-control">
+                    <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
+                </form>
+            </div>
+            <div className="main-body-text">
+                    <form className="wb-form-control" onSubmit={submitEditProfileHandler}>
+                        <label>Name:</label>
+                        <input type="text" value={profileName} onChange={profileNameChangeHandler}/>
+                        <p className="note">This is the name that is publicly visible on your projects.</p>
+                        <button className="cancel" type="button"
+                                onClick={cancelEditProfileHandler}>Cancel
+                        </button>
+                        <button type="submit">Submit</button>
                     </form>
-                </Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                        <form onSubmit={submitEditProfileHandler}>
-                            <label>Name:</label>
-                            <input type="text" value={profileName} onChange={profileNameChangeHandler}/>
-                            <p className="small">This is the name that is publicly visible on your projects.</p>
-                            <div>
-                                <label>Connections:</label>
-                            </div>
-                            <button className="bform-control cancel-button" type="button"
-                                    onClick={cancelEditProfileHandler}>Cancel
-                            </button>
-                            <button type="submit">Submit</button>
-                        </form>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+            </div>
         </div>
-    );
+);
 
 };
 

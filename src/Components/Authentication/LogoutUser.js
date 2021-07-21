@@ -5,7 +5,7 @@ const LogoutUser = (props) => {
         event.preventDefault();
 
         const requestOptions = {
-            headers: { 'Content-Type': 'application/json' }
+            headers: {'Content-Type': 'application/json'}
         };
 
         fetch('https://my-react.local:3000/v1/logout/?apiToken=' + props.apiToken, requestOptions)
@@ -15,11 +15,9 @@ const LogoutUser = (props) => {
     }
 
     return (
-        <div className='global-actions'>
-            <form onSubmit={endSessionHandler}>
-                <button type="submit">Log Out</button>
-            </form>
-        </div>
+        <form onSubmit={endSessionHandler}>
+            <button type="submit">Log Out</button>
+        </form>
     );
 };
 

@@ -1,6 +1,5 @@
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
-import {Card} from "react-bootstrap";
 import '../UI/Global.css'
 import React, {useEffect, useState} from "react";
 import EditProject from "./EditProject";
@@ -22,7 +21,7 @@ const ProjectParent = props => {
                 setProjectList(response.data);
                 console.log("got project list");
             });
-    }, []);
+    }, [props.apiToken]);
 
     const addToProjectList = (addProject) => {
         setProjectList([addProject, ...projectList]);
@@ -76,47 +75,43 @@ const ProjectParent = props => {
     }
 
     return (
-        <Card>
-            <Card.Header>
-                <div className="bform-control">
-                    <h2 className="breadcrumb-text">My Projects</h2>
-                    <form className="breadcrumb-actions" onSubmit={initNewProjectHandler}>
-                        <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
-                        {pageState === "viewing" && <button type="submit">Create a New Project</button>}
-                        {pageState === "creating" && <button className="bform-control cancel-button" type="button"
-                                                             onClick={viewProjectsHandler}>Cancel Create a New Project
-                        </button>}
-                        {(pageState === "editing" || pageState === "viewing_project") &&
-                        <button type="button" onClick={viewProjectsHandler}>All Projects</button>}
-                    </form>
-                </div>
-            </Card.Header>
-            <Card.Body style={{backgroundColor: "#fcfcfc"}}>
-                <Card.Text>
-                    {pageState === "creating" &&
-                    <NewProject addToProjectList={addToProjectList} viewProjectsHandler={viewProjectsHandler}
-                                changePageState={viewProjectsHandler}
-                                viewProject={resetEditingProject}
-                                apiToken={props.apiToken}/>}
-                    {pageState === "viewing" &&
-                    <ProjectList removeProject={removeProject} projectList={projectList}
-                                 changePageState={viewProjectsHandler} apiToken={props.apiToken}
-                                 editProjectHandler={viewProjectHandler}/>}
-                    {pageState === "editing" &&
-                    <EditProject
-                        editingProject={editingProject}
-                        viewProjectHandler={viewProjectHandler}
-                        resetProject={resetEditingProject}
-                        updateProjectList={updateProjectList}
-                        apiToken={props.apiToken}/>}
-                    {pageState === "viewing_project" &&
-                    <ViewProject
-                        editProjectHandler={editProjectHandler}
-                        editingProject={editingProject}
-                    />}
-                </Card.Text>
-            </Card.Body>
-        </Card>
+        <div className="main-body">
+            <div className="main-body-header wb-form-control">
+                <h3>My Projects</h3>
+                <form onSubmit={initNewProjectHandler}>
+                    <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
+                    {pageState === "viewing" && <button type="submit">Create a New Project</button>}
+                    {pageState === "creating" && <button className="cancel" type="button"
+                                                         onClick={viewProjectsHandler}>Cancel Create a New Project
+                    </button>}
+                    {(pageState === "editing" || pageState === "viewing_project") &&
+                    <button type="button" onClick={viewProjectsHandler}>All Projects</button>}
+                </form>
+            </div>
+            <div className="main-body-text">
+                {pageState === "creating" &&
+                <NewProject addToProjectList={addToProjectList} viewProjectsHandler={viewProjectsHandler}
+                            changePageState={viewProjectsHandler}
+                            viewProject={resetEditingProject}
+                            apiToken={props.apiToken}/>}
+                {pageState === "viewing" &&
+                <ProjectList removeProject={removeProject} projectList={projectList}
+                             changePageState={viewProjectsHandler} apiToken={props.apiToken}
+                             editProjectHandler={viewProjectHandler}/>}
+                {pageState === "editing" &&
+                <EditProject
+                    editingProject={editingProject}
+                    viewProjectHandler={viewProjectHandler}
+                    resetProject={resetEditingProject}
+                    updateProjectList={updateProjectList}
+                    apiToken={props.apiToken}/>}
+                {pageState === "viewing_project" &&
+                <ViewProject
+                    editProjectHandler={editProjectHandler}
+                    editingProject={editingProject}
+                />}
+            </div>
+        </div>
     );
 }
 
