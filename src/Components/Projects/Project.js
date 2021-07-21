@@ -30,7 +30,6 @@ const Project = props => {
                 </Card.Header>
                 <Card.Body>
                     <Card.Text>
-
                         <img alt="showcase" className="details-img" src={"https://my-react.local:3000/v1/photos/" + props.photo_id}/>
                         <div className="details-right">
                             <b>{props.location} - {month} {day} {year}</b><br/>

@@ -5,13 +5,15 @@ import LogoutUser from "./Components/Authentication/LogoutUser";
 import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
 import EditProfile from "./Components/Profile/EditProfile";
 import ProjectParent from "./Components/Projects/ProjectParent"
+import Test from "./Components/UI/Test"
 import './Components/UI/Global.css'
 import './App.css';
 import axios from "axios";
+import BloggerCard from "./Components/UI/BloggerCard";
 
 function App() {
     const [login, setLogin] = useState(false);
-    const [pageState, setPageState] = useState('');
+    const [pageState, setPageState] = useState('test');
     const [apiToken, setApiToken] = useState('');
     const [fbData, setFbData] = useState('');
     const [fbPicture, setFbPicture] = useState('');
@@ -64,49 +66,51 @@ function App() {
     };
 
     return (
-        <Card style={{width: 'auto', align: 'center'}}>
-            {!login &&
-            <Card.Header>
+        <BloggerCard>
+            {pageState != 'test' && <>
+                {!login &&
                 <AuthenticateUser
                     setApiSession={setApiSession}
                     setFbInfo={setFbInfo}/>
-            </Card.Header>
-            }
-            {login &&
-            <div>
-                <Card.Header style={{backgroundColor: '#26567b', verticalAlign: 'center'}}>
-                    <div className="bform-control">
-                        <button className="button-profile" onClick={editProfileClickHandler}>
-                            <Image src={fbPicture} roundedCircle/>&nbsp;{userProfile.profile_name}
-                        </button>
-                        <LogoutUser apiToken={apiToken} logoutHandler={logoutHandler}/>
+                }
+                {login &&
+                <>
+
+                    <div className="header wb-form-control">
+                        <div className="left-item">
+                            <button className="button-profile" onClick={editProfileClickHandler}>
+                                <Image src={fbPicture} className="profile-pic"/>&nbsp;{userProfile.profile_name}
+                            </button>
+                        </div>
+                        <div className="right-item">
+                            <LogoutUser apiToken={apiToken} logoutHandler={logoutHandler}/>
+                        </div>
                     </div>
-                </Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                        {pageState === 'welcome_message' &&
-                        <WelcomeMessage changePageState={showProjectView}/>
-                        }
-                        {pageState === 'project_view' &&
-                        <ProjectParent showWelcomePage={showWelcomePage} apiToken={apiToken}/>
-                        }
-                        {pageState === 'edit_profile' &&
-                        <EditProfile userProfile={userProfile} apiToken={apiToken}
-                                     refreshUserProfile={refreshUserProfile} changePageState={changePageState}
-                                     showWelcomePage={showWelcomePage}/>
-                        }
-                    </Card.Text>
-                </Card.Body>
-                <Card.Footer style={{backgroundColor: '#26567b'}}>
-                    <br/>
-                    <center>
-                        <p style={{color: 'white'}} className="small"><strong>API Token: {apiToken}<br/>Page
-                            State: {pageState}</strong></p>
-                    </center>
-                </Card.Footer>
-            </div>
+                    {pageState === 'welcome_message' &&
+                    <WelcomeMessage changePageState={showProjectView}/>
+                    }
+                    {pageState === 'project_view' &&
+                    <ProjectParent showWelcomePage={showWelcomePage} apiToken={apiToken}/>
+                    }
+                    {pageState === 'edit_profile' &&
+                    <EditProfile userProfile={userProfile} apiToken={apiToken}
+                                 refreshUserProfile={refreshUserProfile} changePageState={changePageState}
+                                 showWelcomePage={showWelcomePage}/>
+                    }
+                    <Card.Footer style={{backgroundColor: '#26567b'}}>
+                        <br/>
+                        <center>
+                            <p style={{color: 'white'}} className="small"><strong>API Token: {apiToken}<br/>Page
+                                State: {pageState}</strong></p>
+                        </center>
+                    </Card.Footer>
+                </>
+                }
+            </>}
+            {pageState === 'test' &&
+            <Test showWelcome={showWelcomePage}></Test>
             }
-        </Card>
+        </BloggerCard>
     );
 }
 

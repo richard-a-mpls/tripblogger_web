@@ -37,7 +37,7 @@
     margin-bottom: 8px;
 }
 
-.wb-form-control label {
+.wb-form-control label.narrow {
     margin-bottom: 1px;
     width: 15%;
 }
@@ -156,13 +156,31 @@
     font-weight: bold;
 }
 
+.main-body-text label.active {
+    padding: 5px;
+    background-color: #26567b;
+    color: white;
+    margin-right: 4px;
+    border-radius: 8px;
+}
+.main-body-text label.inactive {
+    padding: 5px;
+    background-color: #96989a;
+    color: #d4d2d2;
+    margin-right: 4px;
+    border-radius: 8px;
+}
+
+
 .main-body-text img {
     margin-top: 10px;
-    height: 150px;
-    width: 150px;
-    overflow: hidden;
-    border-radius: 12px;
     display: inline-block;
+    float: left;
+    height: 125px;
+    width: 125px;
+    object-fit:cover;
+    border-radius: 16px;
+    overflow: hidden
 }
 
 .header img.profile-pic {
@@ -188,7 +206,7 @@
     float: left;
     color: white;
     position: relative;
-    top: 25%;
+    top: 10%;
 }
 
 .right-item {
@@ -199,5 +217,86 @@
     color: white;
     text-align: right;
     position: relative;
-    top: 33%;
+    top: 20%;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 21px;
+    padding-top: 15px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #26567b;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #26567b;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(15px);
+    -ms-transform: translateX(15px);
+    transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 20px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.wb-form-control input[type="file"] {
+    display: none;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
 }

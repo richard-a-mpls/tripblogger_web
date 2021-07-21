@@ -24,39 +24,34 @@ const ProjectDay = (props) => {
     }
 
     return (
-        <div className="bform-control">
-            <Card style={{marginBottom: '1px'}}>
-                <Card.Header>
-                    <h6 className="breadcrumb-text">
-                        {month} {day} {year} - {props.projectDay.summary}
-                    </h6>
-                    <form className="breadcrumb-actions" onSubmit={switchExpandedHandler}>
-                        {expanded && <div>
-                            <button className="bform-control action-button-group" type="submit">Collapse</button>
-                            <button className="bform-control action-button-group" type="button">Edit</button>
-                        </div>}
-                        {!expanded && <div>
-                            <button className="bform-control action-button-group" type="submit">Expand</button>
-                        </div>}
-                    </form>
+        <div className="main-body">
+            <div className="main-body-header">
+                <h6>
+                    {month} {day} {year} - {props.projectDay.summary}
+                </h6>
+                <form className="wb-form-control" onSubmit={switchExpandedHandler}>
+                    {expanded && <>
+                        <button type="submit">Collapse</button>
+                        <button type="button">Edit</button>
+                    </>}
+                    {!expanded && <>
+                        <button type="submit">Expand</button>
+                    </>}
+                </form>
 
-                </Card.Header>
-                {expanded &&
-                <div>
-                    <Card.Body>
-                        <Card.Text>
-                            <b>{props.projectDay.location}</b><br/>
-                            {props.projectDay.description}<br/>
-                            {props.projectDay.photos && props.projectDay.photos.map((photoId) =>
-                                <img style={{display: "block", marginLeft: "5px", marginRight: "5px", marginBottom: "5px"}} key={photoId}
-                                     alt="showcase" className="details-img"
-                                     src={"https://my-react.local:3000/v1/photos/" + photoId}/>
-                            )}
-                        </Card.Text>
-                    </Card.Body>
-                </div>
-                }
-            </Card>
+            </div>
+            {expanded &&
+            <div className="main-body-text">
+                <b>{props.projectDay.location}</b><br/>
+                {props.projectDay.description}<br/>
+                {props.projectDay.photos && props.projectDay.photos.map((photoId) =>
+                    <img
+                        key={photoId}
+                        alt="showcase"
+                        src={"https://my-react.local:3000/v1/photos/" + photoId}/>
+                )}
+            </div>
+            }
         </div>
     );
 }

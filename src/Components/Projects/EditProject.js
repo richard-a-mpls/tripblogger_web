@@ -56,69 +56,61 @@ const EditProject = (props) => {
     }
 
     return (
-        <div className="bform-control">
-            <Card style={{width: 'auto', marginBottom: '15px'}}>
-                <Card.Header>
-                    <div className="bform-control project-control">
-                        <form style={{width: '80%'}} className="breadcrumb-text">
-                            <input type="text" onChange={summaryChangeHandler} value={summary}/>
-                        </form>
-                        <form className="breadcrumb-actions">
-                            <button className="bform-control cancel-button" type="button"
-                                    onClick={cancelEditHandler}>Cancel Edit
-                            </button>
-                        </form>
-                    </div>
-                </Card.Header>
-                <Card.Body>
-                    <Card.Text>
-                        <div style={{display: "block"}}>
-                            <img alt="showcase" className="details-img"
-                                 src={"https://my-react.local:3000/v1/photos/" + props.editingProject.showcase_photo_id}/>
-                            <div className="details-right">
-                                <form>
-                                    <label>Location:</label><input type="text" onChange={locationChangeHandler}
-                                                                   value={location}/><br/>
-                                    <label>Description:</label><input type="text" onChange={descriptionChangeHandler}
-                                                                      value={description}/><br/>
-                                    <div style={{width: "150px", display: "inline-block"}}>
-                                        <label>Published:</label>
-                                    </div>
-                                    <div style={{display: "inline-block"}}>
-                                        <label className="switch">
-                                            <input type="checkbox" defaultChecked={published}
-                                                   onChange={publishedChangeHandler}/>
-                                            <span className="slider round"></span>
-                                        </label>
-                                    </div>
-
-                                    {published && <div>
-                                        <div style={{width: "150px", display: "inline-block"}}>
-                                            <label>Available To:</label>
-                                        </div>
-                                        <div style={{display: "inline-block"}}>
-                                            <label onClick={sharePrivateHandler}
-                                                   className={shareWith === "private" ? "active" : "inactive"}>Only
-                                                Me</label>
-                                            <label onClick={shareConnectionsHandler}
-                                                   className={shareWith === "connections" ? "active" : "inactive"}>My
-                                                Connections</label>
-                                            <label onClick={sharePublicHandler}
-                                                   className={shareWith === "public" ? "active" : "inactive"}>Everyone</label>
-                                        </div>
-                                    </div>}
-                                </form>
+        <div className="main-body">
+            <form className="wb-form-control">
+                <div className="main-body-header">
+                    <input type="text" className="summary" onChange={summaryChangeHandler} value={summary}/>
+                    <form>
+                        <button className="cancel" type="button"
+                                onClick={cancelEditHandler}>Cancel Edit
+                        </button>
+                    </form>
+                </div>
+                <div className="main-body-text">
+                    <div>
+                        <img alt="showcase"
+                             src={"https://my-react.local:3000/v1/photos/" + props.editingProject.showcase_photo_id}/>
+                        <div className="project-details">
+                            <label>Location:</label>
+                            <input type="text" onChange={locationChangeHandler} value={location}/>
+                            <label>Description:</label>
+                            <input type="text" onChange={descriptionChangeHandler} value={description}/>
+                            <div style={{width: "150px", display: "inline-block"}}>
+                                <label>Published:</label>
                             </div>
+                            <div style={{display: "inline-block"}}>
+                                <label className="switch">
+                                    <input type="checkbox" defaultChecked={published}
+                                           onChange={publishedChangeHandler}/>
+                                    <span className="slider round"></span>
+                                </label>
+                            </div>
+
+                            {published && <div>
+                                <div style={{width: "150px", display: "inline-block"}}>
+                                    <label>Available To:</label>
+                                </div>
+                                <div style={{display: "inline-block"}}>
+                                    <label onClick={sharePrivateHandler}
+                                           className={shareWith === "private" ? "active" : "inactive"}>Only
+                                        Me</label>
+                                    <label onClick={shareConnectionsHandler}
+                                           className={shareWith === "connections" ? "active" : "inactive"}>My
+                                        Connections</label>
+                                    <label onClick={sharePublicHandler}
+                                           className={shareWith === "public" ? "active" : "inactive"}>Everyone</label>
+                                </div>
+                            </div>}
                         </div>
-                        <div style={{display: "inline-block", marginTop: "25px"}}>
-                            <button className="bform-control cancel-button" type="button"
-                                    onClick={cancelEditHandler}>Cancel
-                            </button>
-                            <button type="submit" onClick={submitEditHandler}>Submit</button>
-                        </div>
-                    </Card.Text>
-                </Card.Body>
-            </Card>
+                    </div>
+                    <div style={{display: "inline-block", marginTop: "25px"}}>
+                        <button className="cancel" type="button"
+                                onClick={cancelEditHandler}>Cancel
+                        </button>
+                        <button type="submit" onClick={submitEditHandler}>Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     );
 }
