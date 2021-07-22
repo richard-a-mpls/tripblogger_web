@@ -6,7 +6,6 @@ import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
 import EditProfile from "./Components/Profile/EditProfile";
 import ProjectParent from "./Components/Projects/ProjectParent"
 import Test from "./Components/UI/Test"
-import './Components/UI/Global.css'
 import './App.css';
 import axios from "axios";
 import BloggerCard from "./Components/UI/BloggerCard";

@@ -1,4 +1,3 @@
-import '../UI/Global.css'
 import ProjectDay from "./ProjectDay";
 
 const ViewProject = (props) => {

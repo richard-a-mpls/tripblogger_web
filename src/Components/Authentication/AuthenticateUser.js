@@ -1,6 +1,5 @@
 import FacebookLogin from 'react-facebook-login';
 
-import './AuthenticateUser.css'
 import axios from "axios";
 
 const AuthenticateUser = (props) => {

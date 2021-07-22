@@ -1,6 +1,4 @@
 import ProjectActionButtons from "./ProjectActionButtons";
-import '../UI/Global.css'
-import './Project.css'
 import axios from "axios";
 
 const Project = props => {

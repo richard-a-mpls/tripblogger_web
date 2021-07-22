@@ -1,4 +1,3 @@
-import '../UI/Global.css'
 
 const LogoutUser = (props) => {
     const endSessionHandler = (event) => {

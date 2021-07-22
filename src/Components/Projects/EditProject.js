@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import '../UI/Global.css'
-import './Project.css'
 import axios from "axios";
 
 const EditProject = (props) => {

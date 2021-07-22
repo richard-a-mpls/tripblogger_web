@@ -1,5 +1,3 @@
-import '../UI/Global.css'
-import './Project.css'
 import {useState} from "react";
 
 const ProjectActionButtons = (props) => {

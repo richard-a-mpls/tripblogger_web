@@ -1,4 +1,3 @@
-import '../UI/Global.css'
 
 const WelcomeMessage = (props) => {
 
