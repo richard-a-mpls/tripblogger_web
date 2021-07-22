@@ -66,7 +66,7 @@ function App() {
 
     return (
         <BloggerCard>
-            {pageState != 'test' && <>
+            {pageState !== 'test' && <>
                 {!login &&
                 <AuthenticateUser
                     setApiSession={setApiSession}
@@ -75,7 +75,7 @@ function App() {
                 {login &&
                 <>
 
-                    <div className="header wb-form-control">
+                    <header className="wb-form-control">
                         <div className="left-item">
                             <button className="button-profile" onClick={editProfileClickHandler}>
                                 <Image src={fbPicture} className="profile-pic"/>&nbsp;{userProfile.profile_name}
@@ -84,7 +84,7 @@ function App() {
                         <div className="right-item">
                             <LogoutUser apiToken={apiToken} logoutHandler={logoutHandler}/>
                         </div>
-                    </div>
+                    </header>
                     {pageState === 'welcome_message' &&
                     <WelcomeMessage changePageState={showProjectView}/>
                     }
@@ -96,13 +96,13 @@ function App() {
                                  refreshUserProfile={refreshUserProfile} changePageState={changePageState}
                                  showWelcomePage={showWelcomePage}/>
                     }
-                    <div className="footer">
+                    <footer>
                         <br/>
                         <center>
                             <p>API Token: {apiToken}<br/>Page
                                 State: {pageState}</p>
                         </center>
-                    </div>
+                    </footer>
                 </>
                 }
             </>}

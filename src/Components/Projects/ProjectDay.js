@@ -22,8 +22,8 @@ const ProjectDay = (props) => {
     }
 
     return (
-        <div className="main-body">
-            <div className="main-body-header">
+        <main>
+            <header>
                 <h6>
                     {month} {day} {year} - {props.projectDay.summary}
                 </h6>
@@ -32,14 +32,14 @@ const ProjectDay = (props) => {
                         <button type="submit">Collapse</button>
                         <button type="button">Edit</button>
                     </>}
-                    {!expanded && <>
+                    {!expanded &&
                         <button type="submit">Expand</button>
-                    </>}
+                    }
                 </form>
 
-            </div>
+            </header>
             {expanded &&
-            <div className="main-body-text">
+            <div className="content">
                 <b>{props.projectDay.location}</b><br/>
                 {props.projectDay.description}<br/>
                 {props.projectDay.photos && props.projectDay.photos.map((photoId) =>
@@ -50,7 +50,7 @@ const ProjectDay = (props) => {
                 )}
             </div>
             }
-        </div>
+        </main>
     );
 }
 

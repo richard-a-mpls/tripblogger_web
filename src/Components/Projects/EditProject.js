@@ -54,17 +54,17 @@ const EditProject = (props) => {
     }
 
     return (
-        <div className="main-body">
+        <main>
             <form className="wb-form-control">
-                <div className="main-body-header">
+                <header>
                     <input type="text" className="summary" onChange={summaryChangeHandler} value={summary}/>
                     <form>
                         <button className="cancel" type="button"
                                 onClick={cancelEditHandler}>Cancel Edit
                         </button>
                     </form>
-                </div>
-                <div className="main-body-text">
+                </header>
+                <div className="content">
                     <div>
                         <img alt="showcase"
                              src={"https://my-react.local:3000/v1/photos/" + props.editingProject.showcase_photo_id}/>
@@ -109,7 +109,7 @@ const EditProject = (props) => {
                     </div>
                 </div>
             </form>
-        </div>
+        </main>
     );
 }
 

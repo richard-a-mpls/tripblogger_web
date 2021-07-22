@@ -21,15 +21,15 @@ const Project = props => {
     }
 
     return (
-        <div className="main-body">
-            <div className="main-body-header wb-form-control">
+        <main>
+            <header>
                 <div>
                     <h4>{props.summary}</h4>
                     <ProjectActionButtons projectId={props.id} editProjectHandler={props.editProjectHandler}
                                           deleteHandler={deleteHandler}/>
                 </div>
-            </div>
-            <div className="main-body-text">
+            </header>
+            <div className="content">
                 <div>
                     <img alt="showcase"
                          src={"https://my-react.local:3000/v1/photos/" + props.photo_id}/>
@@ -46,7 +46,7 @@ const Project = props => {
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
 };
 

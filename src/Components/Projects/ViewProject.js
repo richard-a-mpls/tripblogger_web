@@ -9,14 +9,14 @@ const ViewProject = (props) => {
 
     return (
         <>
-            <div className="main-body">
-                <div className="main-body-header">
+            <main>
+                <header>
                     <h5>{props.editingProject.summary}</h5>
                     <form className="wb-form-control" onSubmit={switchEditHandler}>
                         <button type="submit">Edit</button>
                     </form>
-                </div>
-                <div className="main-body-text">
+                </header>
+                <div className="content">
                     <img alt="showcase"
                          src={"https://my-react.local:3000/v1/photos/" + props.editingProject.showcase_photo_id}/>
                     <div className="project-details">
@@ -31,7 +31,7 @@ const ViewProject = (props) => {
                         </i></p>
                     </div>
                 </div>
-            </div>
+            </main>
 
             {props.editingProject.project_days !== undefined && props.editingProject.project_days.map((projectDay) => (
                 <ProjectDay projectDay={projectDay}/>

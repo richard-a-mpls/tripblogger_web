@@ -51,11 +51,11 @@ const NewProject = (props) => {
     }
 
     return (
-        <div className="main-body">
-            <div className="main-body-header">
+        <main>
+            <header>
                 <h3>Creating a new Project</h3>
-            </div>
-            <div className="main-body-text">
+            </header>
+            <div className="content">
                 <h6>Fill in the below info to create your new project.</h6>
                 <div className="wb-form-control">
                     <form onSubmit={submitProjectHandler}>
@@ -80,7 +80,7 @@ const NewProject = (props) => {
                     </form>
                 </div>
             </div>
-        </div>
+        </main>
     )
 };
 

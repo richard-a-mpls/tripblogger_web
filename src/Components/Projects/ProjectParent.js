@@ -74,10 +74,10 @@ const ProjectParent = props => {
     }
 
     return (
-        <div className="main-body">
-            <div className="main-body-header wb-form-control">
+        <main>
+            <header>
                 <h3>My Projects</h3>
-                <form onSubmit={initNewProjectHandler}>
+                <form onSubmit={initNewProjectHandler} className="wb-form-control">
                     <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
                     {pageState === "viewing" && <button type="submit">Create a New Project</button>}
                     {pageState === "creating" && <button className="cancel" type="button"
@@ -86,8 +86,8 @@ const ProjectParent = props => {
                     {(pageState === "editing" || pageState === "viewing_project") &&
                     <button type="button" onClick={viewProjectsHandler}>All Projects</button>}
                 </form>
-            </div>
-            <div className="main-body-text">
+            </header>
+            <div className="content">
                 {pageState === "creating" &&
                 <NewProject addToProjectList={addToProjectList} viewProjectsHandler={viewProjectsHandler}
                             changePageState={viewProjectsHandler}
@@ -110,7 +110,7 @@ const ProjectParent = props => {
                     editingProject={editingProject}
                 />}
             </div>
-        </div>
+        </main>
     );
 }
 

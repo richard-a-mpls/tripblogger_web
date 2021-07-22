@@ -29,14 +29,14 @@ const EditProfile = (props) => {
     };
 
     return (
-        <div className="main-body">
-            <div className="main-body-header">
+        <main>
+            <header>
                 <h3>Edit Profile</h3>
                 <form className="wb-form-control">
                     <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
                 </form>
-            </div>
-            <div className="main-body-text">
+            </header>
+            <div className="content">
                     <form className="wb-form-control" onSubmit={submitEditProfileHandler}>
                         <label>Name:</label>
                         <input type="text" value={profileName} onChange={profileNameChangeHandler}/>
@@ -47,7 +47,7 @@ const EditProfile = (props) => {
                         <button type="submit">Submit</button>
                     </form>
             </div>
-        </div>
+        </main>
 );
 
 };
