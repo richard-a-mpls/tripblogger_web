@@ -1,12 +1,14 @@
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import EditProject from "./EditProject";
 import axios from 'axios'
 import ViewProject from "./ViewProject";
+import AuthorizationContext from "../../Context/authorization_context";
 
 const ProjectParent = props => {
 
+    const authCtx = useContext(AuthorizationContext);
     const [pageState, setPageState] = useState('viewing');
     const [editingProject, setEditingProject] = useState('');
     const [projectList, setProjectList] = useState([]);
@@ -14,13 +16,13 @@ const ProjectParent = props => {
     // project list functions
     useEffect(() => {
         axios.get('https://my-react.local:3000/v1/me/projects', {
-            headers: {Authorization: `Bearer ${props.apiToken}`}
+            headers: {Authorization: `Bearer ${authCtx.apiToken}`}
         })
             .then(response => {
                 setProjectList(response.data);
                 console.log("got project list");
             });
-    }, [props.apiToken]);
+    }, [authCtx.apiToken]);
 
     const addToProjectList = (addProject) => {
         setProjectList([addProject, ...projectList]);
@@ -61,7 +63,7 @@ const ProjectParent = props => {
 
     const loadEditingProject = (projectId) => {
         axios.get('http://localhost:8080/v1/projects/' + projectId, {
-            headers: {Authorization: `Bearer ${props.apiToken}`}
+            headers: {Authorization: `Bearer ${authCtx.apiToken}`}
         })
             .then(response => {
                 setEditingProject(response.data);
@@ -91,19 +93,17 @@ const ProjectParent = props => {
                 {pageState === "creating" &&
                 <NewProject addToProjectList={addToProjectList} viewProjectsHandler={viewProjectsHandler}
                             changePageState={viewProjectsHandler}
-                            viewProject={resetEditingProject}
-                            apiToken={props.apiToken}/>}
+                            viewProject={resetEditingProject}/>}
                 {pageState === "viewing" &&
                 <ProjectList removeProject={removeProject} projectList={projectList}
-                             changePageState={viewProjectsHandler} apiToken={props.apiToken}
+                             changePageState={viewProjectsHandler}
                              editProjectHandler={viewProjectHandler}/>}
                 {pageState === "editing" &&
                 <EditProject
                     editingProject={editingProject}
                     viewProjectHandler={viewProjectHandler}
                     resetProject={resetEditingProject}
-                    updateProjectList={updateProjectList}
-                    apiToken={props.apiToken}/>}
+                    updateProjectList={updateProjectList}/>}
                 {pageState === "viewing_project" &&
                 <ViewProject
                     editProjectHandler={editProjectHandler}

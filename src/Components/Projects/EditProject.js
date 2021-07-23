@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import axios from "axios";
+import AuthorizationContext from "../../Context/authorization_context";
 
 const EditProject = (props) => {
-
+    const authCtx = useContext(AuthorizationContext);
     const [summary, setSummary] = useState(props.editingProject.summary);
     const [description, setDescription] = useState(props.editingProject.description);
     const [location, setLocation] = useState(props.editingProject.location);
@@ -19,7 +20,7 @@ const EditProject = (props) => {
             "share_with": shareWith
         };
         axios.patch('http://localhost:8080/v1/me/projects/' + props.editingProject._id, formData, { // receive two parameter endpoint url ,form data
-            headers: {Authorization: `Bearer ${props.apiToken}`}
+            headers: {Authorization: `Bearer ${authCtx.apiToken}`}
         })
             .then(response => {
                 props.resetProject(response.data);

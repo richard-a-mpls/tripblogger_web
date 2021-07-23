@@ -1,9 +1,11 @@
-import React, {useRef, useState} from "react";
+import React, {useContext, useRef, useState} from "react";
 
 import axios from 'axios'
+import AuthorizationContext from "../../Context/authorization_context";
 
 const NewProject = (props) => {
 
+    const authCtx = useContext(AuthorizationContext);
     const summary = useRef();
     const description = useRef();
     const location = useRef();
@@ -17,7 +19,7 @@ const NewProject = (props) => {
         const formData = new FormData();
         formData.append('file', photoData);
         axios.post("http://localhost:8080/v1/photos", formData, { // receive two parameter endpoint url ,form data
-            headers: {Authorization: `Bearer ${props.apiToken}`}
+            headers: {Authorization: `Bearer ${authCtx.apiToken}`}
         })
             .then(response => {
                 const imgData = response.data;
@@ -37,7 +39,7 @@ const NewProject = (props) => {
                 console.log(updateValue);
 
                 axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateValue),
-                    {headers: {'Authorization': 'Bearer ' + props.apiToken, 'Content-Type': 'application/json'}})
+                    {headers: {'Authorization': 'Bearer ' + authCtx.apiToken, 'Content-Type': 'application/json'}})
                     .then(response => {
                         props.addToProjectList(response.data);
                         props.viewProject(response.data);

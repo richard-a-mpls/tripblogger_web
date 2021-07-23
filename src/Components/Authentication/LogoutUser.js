@@ -1,5 +1,9 @@
+import {useContext} from "react";
+import AuthorizationContext from "../../Context/authorization_context";
 
-const LogoutUser = (props) => {
+const LogoutUser = () => {
+
+    const authCtx = useContext(AuthorizationContext);
     const endSessionHandler = (event) => {
         event.preventDefault();
 
@@ -7,10 +11,10 @@ const LogoutUser = (props) => {
             headers: {'Content-Type': 'application/json'}
         };
 
-        fetch('https://my-react.local:3000/v1/logout/?apiToken=' + props.apiToken, requestOptions)
+        fetch('https://my-react.local:3000/v1/logout/?apiToken=' + authCtx.apiToken, requestOptions)
             .then(response => response.json())
             .then(data => console.log("DATER: " + JSON.stringify(data)));
-        props.logoutHandler();
+        authCtx.logoutHandler();
     }
 
     return (
