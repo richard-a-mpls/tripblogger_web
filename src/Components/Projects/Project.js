@@ -1,7 +1,10 @@
 import ProjectActionButtons from "./ProjectActionButtons";
 import axios from "axios";
+import {useContext} from "react";
+import AuthorizationContext from "../../Context/authorization_context";
 
 const Project = props => {
+    const authCtx = useContext(AuthorizationContext);
     const date = new Date(props.days[0].datestmp.split("-"));
     const month = date.toLocaleString('en-US', {month: 'long'});
     const day = date.toLocaleString('en-US', {day: '2-digit'});
@@ -13,7 +16,7 @@ const Project = props => {
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + props.apiToken
+                    'Authorization': 'Bearer ' + authCtx.apiToken
                 }
             })
             .then(response => console.log(response.data));
