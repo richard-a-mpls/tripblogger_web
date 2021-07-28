@@ -1,4 +1,5 @@
 import React, {useContext, useState} from "react";
+import {Image} from "react-bootstrap";
 import axios from "axios";
 import AuthorizationContext from "../../Context/authorization_context";
 
@@ -42,6 +43,7 @@ const EditProject = (props) => {
         setDescription(event.target.value);
     }
     const publishedChangeHandler = (event) => {
+        console.log (props.editingProject)
         setPublished(published ? false : true);
     }
     const sharePrivateHandler = (event) => {
@@ -53,7 +55,10 @@ const EditProject = (props) => {
     const sharePublicHandler = (event) => {
         setShareWith("public");
     }
-
+    const bt = btoa(props.editingProject.showcase_photo.data);
+    const blob = new Blob([bt], {type: "image/jpeg"});
+    const imageUrl = URL.createObjectURL(blob);
+    console.log(imageUrl);
     return (
         <main>
             <form className="wb-form-control">
@@ -67,8 +72,10 @@ const EditProject = (props) => {
                 </header>
                 <div className="content">
                     <div>
+                        {props.editingProject.showcase_photo.type}
+                        <Image src={imageUrl}/>
                         <img alt="showcase"
-                             src={"https://my-react.local:3000/v1/photos/" + props.editingProject.showcase_photo_id}/>
+                             src={imageUrl}/>
                         <div className="project-details">
                             <label>Location:</label>
                             <input type="text" onChange={locationChangeHandler} value={location}/>

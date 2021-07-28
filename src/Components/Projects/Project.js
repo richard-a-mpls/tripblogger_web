@@ -5,7 +5,11 @@ import AuthorizationContext from "../../Context/authorization_context";
 
 const Project = props => {
     const authCtx = useContext(AuthorizationContext);
-    const date = new Date(props.days[0].datestmp.split("-"));
+
+    let date = new Date();
+    if (props.days !== undefined) {
+        date = new Date(props.days[0].datestmp.split("-"));
+    }
     const month = date.toLocaleString('en-US', {month: 'long'});
     const day = date.toLocaleString('en-US', {day: '2-digit'});
     const year = date.getFullYear();

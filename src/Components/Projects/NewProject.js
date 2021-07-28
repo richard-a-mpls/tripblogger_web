@@ -3,64 +3,71 @@ import React, {useContext, useRef, useState} from "react";
 import axios from 'axios'
 import AuthorizationContext from "../../Context/authorization_context";
 
+const FormData = require('form-data');
+
 const NewProject = (props) => {
 
-    const authCtx = useContext(AuthorizationContext);
-    const summary = useRef();
-    const description = useRef();
-    const location = useRef();
-    const date = useRef();
-    const [photoData, setPhotoData] = useState('');
-    const [photoSelected, setPhotoSelected] = useState(false);
+        const authCtx = useContext(AuthorizationContext);
+        const summary = useRef();
+        const description = useRef();
+        const location = useRef();
+        const date = useRef();
+        const [photoData, setPhotoData] = useState('');
+        const [photoSelected, setPhotoSelected] = useState(false);
 
-    const submitProjectHandler = (event) => {
-        event.preventDefault();
-        console.log("submit new project");
-        const formData = new FormData();
-        formData.append('file', photoData);
-        axios.post("http://localhost:8080/v1/photos", formData, { // receive two parameter endpoint url ,form data
-            headers: {Authorization: `Bearer ${authCtx.apiToken}`}
-        })
-            .then(response => {
-                const imgData = response.data;
-                console.log(imgData.id);
+        const submitProjectHandler = (event) => {
+                event.preventDefault();
+                console.log("submit new project");
                 const projectDays = [
                     {
                         'datestmp': date.current.value
                     }
                 ]
-                const updateValue = {
-                    'summary': summary.current.value,
-                    'description': description.current.value,
-                    'location': location.current.value,
-                    'project_days': projectDays,
-                    'showcase_photo_id': imgData.id
-                }
-                console.log(updateValue);
 
-                axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateValue),
-                    {headers: {'Authorization': 'Bearer ' + authCtx.apiToken, 'Content-Type': 'application/json'}})
+                const formData = new FormData();
+
+                formData.set('summary', summary.current.value);
+                formData.set('description', description.current.value);
+                formData.set('location', location.current.value);
+                formData.set('summary', "asdfdsadfasdfds");
+                //formData.set('project_days', JSON.stringify(projectDays));
+                formData.append('file', photoData);
+                // formData.append('project_days', projectDays);
+                // const updateValue = {
+                //     'summary': summary.current.value,
+                //     'description': description.current.value,
+                //     'location': location.current.value,
+                //     'project_days': projectDays,
+                //     'showcase_photo': {
+                //         "data": photoData
+                //     }
+                // }
+                // console.log(updateValue);
+
+                axios.post('http://localhost:8080/v1/me/projects', formData,
+                    {headers: {'Content-Type': "multipart/form-data; boundary=--------------------------a string of numbers that is never the same", 'Authorization': 'Bearer ' + authCtx.apiToken}})
                     .then(response => {
                         props.addToProjectList(response.data);
+                        console.log(response.data.showcase_photo)
                         props.viewProject(response.data);
                     });
-            });
-    };
+            }
+        ;
 
-    const setPhotoDataHandler = (event) => {
-        setPhotoData(event.target.files[0])
-        setPhotoSelected(true);
-    }
+        const setPhotoDataHandler = (event) => {
+            setPhotoData(event.target.files[0])
+            setPhotoSelected(true);
+        }
 
-    return (
-        <main>
-            <header>
-                <h3>Creating a new Project</h3>
-            </header>
-            <div className="content">
-                <h6>Fill in the below info to create your new project.</h6>
-                <div className="wb-form-control">
-                    <form onSubmit={submitProjectHandler}>
+        return (
+            <main>
+                <header>
+                    <h3>Creating a new Project</h3>
+                </header>
+                <div className="content">
+                    <h6>Fill in the below info to create your new project.</h6>
+                    <div className="wb-form-control">
+                        <form onSubmit={submitProjectHandler}>
 
                             <label>Summary: </label><input type="text" ref={summary}
                                                            placeholder="A brief summary of your project"/>
@@ -79,11 +86,12 @@ const NewProject = (props) => {
                                     onClick={props.viewProjectsHandler}>Cancel
                             </button>
                             <button type="submit" onClick={submitProjectHandler}>Submit</button>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </main>
-    )
-};
+            </main>
+        )
+    }
+;
 
 export default NewProject;
