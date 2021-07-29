@@ -66,7 +66,6 @@ const ProjectParent = props => {
             headers: {Authorization: `Bearer ${authCtx.apiToken}`}
         })
             .then(response => {
-                console.log("asdf " + response.data.showcase_photo.type);
                 setEditingProject(response.data);
             });
     }

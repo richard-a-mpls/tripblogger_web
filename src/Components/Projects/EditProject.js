@@ -68,7 +68,7 @@ const EditProject = (props) => {
                 <div className="content">
                     <div>
                         <img alt="showcase"
-                             src=""/>
+                             src={"https://my-react.local:3000/v1/photos/" + props.editingProject.showcase_photo_id}/>
                         <div className="project-details">
                             <label>Location:</label>
                             <input type="text" onChange={locationChangeHandler} value={location}/>
