@@ -3,8 +3,9 @@ import React, {useContext, useRef, useState} from "react";
 import axios from 'axios'
 import AuthorizationContext from "../../Context/authorization_context";
 
-const NewProject = (props) => {
+const FormData = require('form-data');
 
+const NewProject = (props) => {
     const authCtx = useContext(AuthorizationContext);
     const summary = useRef();
     const description = useRef();
@@ -16,34 +17,30 @@ const NewProject = (props) => {
     const submitProjectHandler = (event) => {
         event.preventDefault();
         console.log("submit new project");
-        const formData = new FormData();
-        formData.append('file', photoData);
-        axios.post("http://localhost:8080/v1/photos", formData, { // receive two parameter endpoint url ,form data
-            headers: {Authorization: `Bearer ${authCtx.apiToken}`}
-        })
-            .then(response => {
-                const imgData = response.data;
-                console.log(imgData.id);
-                const projectDays = [
-                    {
-                        'datestmp': date.current.value
-                    }
-                ]
-                const updateValue = {
-                    'summary': summary.current.value,
-                    'description': description.current.value,
-                    'location': location.current.value,
-                    'project_days': projectDays,
-                    'showcase_photo_id': imgData.id
-                }
-                console.log(updateValue);
+        const projectDays = [
+            {
+                'datestmp': date.current.value
+            }
+        ]
 
-                axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateValue),
-                    {headers: {'Authorization': 'Bearer ' + authCtx.apiToken, 'Content-Type': 'application/json'}})
-                    .then(response => {
-                        props.addToProjectList(response.data);
-                        props.viewProject(response.data);
-                    });
+        const formData = new FormData();
+
+        formData.set('summary', summary.current.value);
+        formData.set('description', description.current.value);
+        formData.set('location', location.current.value);
+        formData.append('file', photoData);
+
+        axios.post('http://localhost:8080/v1/me/projects', formData,
+            {
+                headers: {
+                    'Content-Type': "multipart/form-data; boundary=--------------------------a string of numbers that is never the same",
+                    'Authorization': 'Bearer ' + authCtx.apiToken
+                }
+            })
+            .then(response => {
+                props.addToProjectList(response.data);
+                console.log(response.data.showcase_photo)
+                props.viewProject(response.data);
             });
     };
 
@@ -62,23 +59,23 @@ const NewProject = (props) => {
                 <div className="wb-form-control">
                     <form onSubmit={submitProjectHandler}>
 
-                            <label>Summary: </label><input type="text" ref={summary}
-                                                           placeholder="A brief summary of your project"/>
-                            <label>Description: </label><input type="text" ref={description}
-                                                               placeholder="A description of your project"/>
-                            <label>Location: </label><input type="text" ref={location}
-                                                            placeholder="The location associated with your project"/>
-                            <label>Date: </label>
-                            <input type="date" ref={date}
-                                   placeholder="The day/first day of your project contents"/><br/>
-                            <label>Photo: </label>
-                            <label for="file" className="inputfile">Choose a file</label>
-                            <input id="file" className="inputfile" type="file"
-                                   onChange={setPhotoDataHandler}/><br/><br/>
-                            <button className="cancel" type="button"
-                                    onClick={props.viewProjectsHandler}>Cancel
-                            </button>
-                            <button type="submit" onClick={submitProjectHandler}>Submit</button>
+                        <label>Summary: </label><input type="text" ref={summary}
+                                                       placeholder="A brief summary of your project"/>
+                        <label>Description: </label><input type="text" ref={description}
+                                                           placeholder="A description of your project"/>
+                        <label>Location: </label><input type="text" ref={location}
+                                                        placeholder="The location associated with your project"/>
+                        <label>Date: </label>
+                        <input type="date" ref={date}
+                               placeholder="The day/first day of your project contents"/><br/>
+                        <label>Photo: </label>
+                        <label for="file" className="inputfile">Choose a file</label>
+                        <input id="file" className="inputfile" type="file"
+                               onChange={setPhotoDataHandler}/><br/><br/>
+                        <button className="cancel" type="button"
+                                onClick={props.viewProjectsHandler}>Cancel
+                        </button>
+                        <button type="submit" onClick={submitProjectHandler}>Submit</button>
                     </form>
                 </div>
             </div>

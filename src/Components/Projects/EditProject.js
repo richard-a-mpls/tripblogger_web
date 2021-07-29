@@ -42,6 +42,7 @@ const EditProject = (props) => {
         setDescription(event.target.value);
     }
     const publishedChangeHandler = (event) => {
+        console.log (props.editingProject)
         setPublished(published ? false : true);
     }
     const sharePrivateHandler = (event) => {
@@ -53,7 +54,6 @@ const EditProject = (props) => {
     const sharePublicHandler = (event) => {
         setShareWith("public");
     }
-
     return (
         <main>
             <form className="wb-form-control">
