@@ -5,7 +5,6 @@ const AuthorizationContext = React.createContext({
     apiToken: '',
     login: false,
     userProfile: '',
-    fbData: '',
     fbPicture: undefined,
     pageState: 'welcome_message',
     editProfileClickHandler: () => {},
@@ -24,11 +23,9 @@ export const AuthorizationContextProvider = (props) => {
     const [login, setLogin] = useState(false);
     const [userProfile, setUserProfile] = useState('');
     const [pageState, setPageState] = useState('welcome_message');
-    const [fbData, setFbData] = useState('');
     const [fbPicture, setFbPicture] = useState('');
 
     const setFbInfo = (dataReturned, pictureReturned) => {
-        setFbData(dataReturned);
         setFbPicture(pictureReturned);
     };
 
