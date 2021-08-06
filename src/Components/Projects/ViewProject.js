@@ -1,4 +1,5 @@
 import ProjectDay from "./ProjectDay";
+import ShareStatus from "./ShareStatus";
 
 const ViewProject = (props) => {
 
@@ -6,6 +7,15 @@ const ViewProject = (props) => {
         event.preventDefault();
         props.editProjectHandler(props.editingProject._id);
     }
+
+    let date = new Date();
+    if (props.editingProject.datestmp !== undefined) {
+        date = new Date(props.editingProject.datestmp.split("-"));
+    }
+    const month = date.toLocaleString('en-US', {month: 'long'});
+    const day = date.toLocaleString('en-US', {day: '2-digit'});
+    const year = date.getFullYear();
+
 
     return (
         <>
@@ -20,22 +30,17 @@ const ViewProject = (props) => {
                     <img alt="showcase"
                          src={"https://my-react.local:3000/v1/photos/" + props.editingProject.showcase_photo_id}/>
                     <div className="project-details">
-                        <h6>{props.editingProject.location}</h6><br/>
-                        <p>{props.editingProject.description}</p><br/><br/>
-                        <p><i>
-                            {(props.editingProject.share_with === "private") && "This project is only viewable by you."}
-                            {(props.editingProject.share_with === "connections" && props.editingProject.published) && "Only you and your connections can view this project."}
-                            {(props.editingProject.share_with === "connections" && !props.editingProject.published) && "Once published, only you and your connections can view this project."}
-                            {(props.editingProject.share_with === "public" && props.editingProject.published) && "This project is viewable by everyone."}
-                            {(props.editingProject.share_with === "public" && !props.editingProject.published) && "Once published, this project will be viewable by everyone."}
-                        </i></p>
+                        <h6>{props.editingProject.location} - {month} {day} {year}</h6><br/>
+                        <p>{props.editingProject.description}</p><br/>
+                        <ShareStatus project={props.editingProject}/>
                     </div>
+                    <br/><br/>
+                    {props.editingProject.project_days !== undefined && props.editingProject.project_days.map((projectDay) => (
+                        <ProjectDay projectDay={projectDay}/>
+                    ))}
                 </div>
             </main>
 
-            {props.editingProject.project_days !== undefined && props.editingProject.project_days.map((projectDay) => (
-                <ProjectDay projectDay={projectDay}/>
-            ))}
         </>
     );
 }
