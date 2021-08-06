@@ -1,14 +1,15 @@
+import ProjectDay from "./ProjectDay";
+import ShareStatus from "./ShareStatus";
 import ProjectActionButtons from "./ProjectActionButtons";
 import axios from "axios";
 import {useContext} from "react";
 import AuthorizationContext from "../../Context/authorization_context";
-import ShareStatus from "./ShareStatus";
 
-const Project = props => {
+const Project = (props) => {
     const authCtx = useContext(AuthorizationContext);
 
     let date = new Date();
-    if (props.datestmp !== undefined) {
+    if (props.project.datestmp !== undefined) {
         date = new Date(props.project.datestmp.split("-"));
     }
     const month = date.toLocaleString('en-US', {month: 'long'});
@@ -31,25 +32,27 @@ const Project = props => {
     return (
         <main>
             <header>
-                <div>
-                    <h4>{props.project.summary}</h4>
-                    <ProjectActionButtons projectId={props.project._id} editProjectHandler={props.editProjectHandler}
-                                          deleteHandler={deleteHandler}/>
-                </div>
+                <h5>{props.project.summary}</h5>
+                {props.view === "list" &&
+                <ProjectActionButtons projectId={props.project._id} editProjectHandler={props.editProjectHandler}
+                                      deleteHandler={deleteHandler}/>}
             </header>
             <div className="content">
-                <div>
-                    <img alt="showcase"
-                         src={"https://my-react.local:3000/v1/photos/" + props.project.showcase_photo_id}/>
-                    <div className="project-details">
-                        <b>{props.project.location} - {month} {day} {year}</b><br/>
-                        {props.project.description}<br/><br/>
-                        <ShareStatus project={props.project}/>
-                    </div>
+                <img alt="showcase"
+                     src={"https://my-react.local:3000/v1/photos/" + props.project.showcase_photo_id}/>
+                <div className="project-details">
+                    <h6>{props.project.location} - {month} {day} {year}</h6><br/>
+                    <p>{props.project.description}</p><br/>
+                    <ShareStatus project={props.project}/>
                 </div>
+                <br/><br/>
+                {props.view !== "list" && props.project.project_days !== undefined && props.project.project_days.map((projectDay) => (
+                    <ProjectDay projectDay={projectDay}/>
+                ))}
             </div>
         </main>
+
     );
-};
+}
 
 export default Project;

@@ -3,7 +3,7 @@ import ProjectList from "./ProjectList";
 import React, {useContext, useEffect, useState, useCallback} from "react";
 import EditProject from "./EditProject";
 import axios from 'axios'
-import ViewProject from "./ViewProject";
+import Project from "./Project";
 import AuthorizationContext from "../../Context/authorization_context";
 
 const ProjectParent = props => {
@@ -105,9 +105,9 @@ const ProjectParent = props => {
                     resetProject={resetEditingProject}
                     updateProjectList={updateProjectList}/>}
                 {pageState === "viewing_project" &&
-                <ViewProject
+                <Project
                     editProjectHandler={editProjectHandler}
-                    editingProject={editingProject}
+                    project={editingProject}
                 />}
             </div>
         </main>
