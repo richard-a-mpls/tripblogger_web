@@ -42,6 +42,11 @@
     width: 90%;
     margin-bottom: 8px;
 }
+.wb-form-control textarea {
+    display: block;
+    width: 90%;
+    margin-bottom: 8px;
+}
 
 .wb-form-control label.narrow {
     margin-bottom: 1px;
@@ -114,6 +119,13 @@ main {
     padding-top: 10px;
 }
 
+main .day {
+    margin: 0px;
+    padding: 0px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
 main header {
     display: inline-block;
     background-color: #f5f3f3;
@@ -125,6 +137,13 @@ main header {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     border-width: thin;
+}
+
+main header.day {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 main header h2, h3, h4, h5, h6 {
@@ -176,8 +195,8 @@ main .content img {
     margin-top: 10px;
     display: inline-block;
     float: left;
-    height: 125px;
-    width: 125px;
+    height: 150px;
+    width: 150px;
     object-fit:cover;
     border-radius: 16px;
     overflow: hidden
@@ -238,6 +257,7 @@ main .content img {
     width: 40px;
     height: 21px;
     padding-top: 15px;
+    vertical-align: middle;
 }
 
 /* Hide default HTML checkbox */
