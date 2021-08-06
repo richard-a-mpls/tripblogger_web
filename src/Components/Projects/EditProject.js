@@ -42,8 +42,7 @@ const EditProject = (props) => {
         setDescription(event.target.value);
     }
     const publishedChangeHandler = (event) => {
-        console.log (props.editingProject)
-        setPublished(published ? false : true);
+        setPublished(!published);
     }
     const sharePrivateHandler = (event) => {
         setShareWith("private");
@@ -70,24 +69,13 @@ const EditProject = (props) => {
                         <img alt="showcase"
                              src={"https://my-react.local:3000/v1/photos/" + props.editingProject.showcase_photo_id}/>
                         <div className="project-details">
-                            <label>Location:</label>
                             <input type="text" onChange={locationChangeHandler} value={location}/>
-                            <label>Description:</label>
-                            <input type="text" onChange={descriptionChangeHandler} value={description}/>
-                            <div style={{width: "150px", display: "inline-block"}}>
-                                <label>Published:</label>
-                            </div>
-                            <div style={{display: "inline-block"}}>
-                                <label className="switch">
-                                    <input type="checkbox" defaultChecked={published}
-                                           onChange={publishedChangeHandler}/>
-                                    <span className="slider round"></span>
-                                </label>
-                            </div>
-
+                            <textarea rows="3" onChange={descriptionChangeHandler}>
+                                {description}
+                            </textarea>
                             {published && <div>
                                 <div style={{width: "150px", display: "inline-block"}}>
-                                    <label>Available To:</label>
+                                    <label>Audience:</label>
                                 </div>
                                 <div style={{display: "inline-block"}}>
                                     <label onClick={sharePrivateHandler}
@@ -100,13 +88,27 @@ const EditProject = (props) => {
                                            className={shareWith === "public" ? "active" : "inactive"}>Everyone</label>
                                 </div>
                             </div>}
+
+                            <div style={{width: "150px", display: "inline-block"}}>
+                                <label>Published:</label>
+                            </div>
+                            <div style={{display: "inline-block"}}>
+                                <span style={{verticalAlign: 'middle', display: 'inline-block', lineHeight: '30px'}}>
+                                <label className="switch">
+                                    <input type="checkbox" defaultChecked={published}
+                                           onChange={publishedChangeHandler}/>
+                                    <span className="slider round"></span>
+                                </label>
+                                </span>
+                            </div>
+
                         </div>
                     </div>
                     <div style={{display: "inline-block", marginTop: "25px"}}>
                         <button className="cancel" type="button"
                                 onClick={cancelEditHandler}>Cancel
                         </button>
-                        <button type="submit" onClick={submitEditHandler}>Submit</button>
+                        <button type="submit" onClick={submitEditHandler}>Save</button>
                     </div>
                 </div>
             </form>
