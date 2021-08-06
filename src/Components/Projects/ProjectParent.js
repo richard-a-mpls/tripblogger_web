@@ -1,6 +1,6 @@
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState, useCallback} from "react";
 import EditProject from "./EditProject";
 import axios from 'axios'
 import ViewProject from "./ViewProject";
@@ -28,13 +28,13 @@ const ProjectParent = props => {
         setProjectList([addProject, ...projectList]);
     }
 
-    const updateProjectList = (updatedProject) => {
+    const updateProjectList = useCallback((updatedProject) => {
         const newProjects = [];
         projectList.forEach(prj => {
             newProjects.push(prj._id === updatedProject._id ? updatedProject : prj);
         })
         setProjectList(newProjects);
-    }
+    }, [projectList]);
 
     const removeProject = (idToRemove) => {
         setProjectList(projectList.filter((prj => {
