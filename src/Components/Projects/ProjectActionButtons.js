@@ -14,27 +14,33 @@ const ProjectActionButtons = (props) => {
             props.editProjectHandler(props.projectId);
         }
 
+        const confirmDeleteHandler = (event) => {
+            event.preventDefault();
+            props.deleteHandler();
+            setConfirmDelete(false);
+        }
+
         return (
-            <form onSubmit={props.deleteHandler}>
+            <form onSubmit={confirmDeleteHandler}>
                 {!props.editable && !confirmDelete &&
                 <div className="wb-form-control">
-                    <button type="button" onClick={initiateDeleteHandler}>Delete
-                    </button>
                     <button type="button"
-                            onClick={initiateEditHandler}>View
+                            onClick={initiateEditHandler}><i className="fas fa-eye"></i>
                     </button>
                 </div>
                 }
-                {!props.editable && confirmDelete &&
+                {confirmDelete &&
                 <div className="wb-form-control">
+                    <button className="confirm" type="submit"><i className="fas fa-check"/></button>
                     <button className="cancel" type="button"
-                            onClick={cancelDeleteHandler}>Cancel
+                            onClick={cancelDeleteHandler}><i className="fas fa-times"/>
                     </button>
-                    <button className="confirm" type="submit">Confirm</button>
                 </div>
                 }
-                {props.editable && !props.editing &&
+                {!confirmDelete && props.editable && !props.editing &&
                 <div className="wb-form-control">
+                    <button type="button" onClick={initiateDeleteHandler}><i className="fas fa-trash"/>
+                    </button>
                     <button onClick={props.onSetEdit} type="button">
                         <i className='far fa-edit'/>
                     </button>
@@ -46,7 +52,7 @@ const ProjectActionButtons = (props) => {
                         <i className="fas fa-check"/>
                     </button>
                     <button onClick={props.onCancelEdit} className='cancel' type="button">
-                        <i className="fas fa-times"></i>
+                        <i className="fas fa-times"/>
                     </button>
                 </div>
                 }
