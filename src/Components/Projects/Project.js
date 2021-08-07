@@ -42,15 +42,11 @@ const Project = (props) => {
         setUpdateData(prevState => {
             const tmpState = prevState;
             tmpState[attribute] = value;
-            console.log(tmpState);
-            console.log(tmpState.published);
             return tmpState;
         });
     }
 
     const submitEditHandler = () => {
-        console.log(updateData);
-
         axios.patch('http://localhost:8080/v1/me/projects/' + props.project._id, JSON.stringify(updateData), { // receive two parameter endpoint url ,form data
             headers: {Authorization: `Bearer ${authCtx.apiToken}`, 'Content-Type': 'application/json',}
         })

@@ -10,7 +10,6 @@ const ProjectActionButtons = (props) => {
             setConfirmDelete(false);
         }
         const initiateEditHandler = (event) => {
-            console.log(props.projectId);
             props.editProjectHandler(props.projectId);
         }
 

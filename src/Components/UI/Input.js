@@ -20,14 +20,11 @@ const Input = (props) => {
     };
 
     const updateButtonSelectorHandler = (event) => {
-        console.log(event.target.id);
         setValue(event.target.id);
         props.onUpdate(props.attribute, event.target.id);
     };
 
     useEffect(() => {
-
-        console.log(props.value);
         setValue(props.value);
     }, [props.value]);
 
