@@ -1,7 +1,6 @@
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import React, {useContext, useEffect, useState, useCallback} from "react";
-import EditProject from "./EditProject";
 import axios from 'axios'
 import Project from "./Project";
 import AuthorizationContext from "../../Context/authorization_context";
