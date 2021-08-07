@@ -1,9 +1,8 @@
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
-import React, {useContext, useEffect, useState} from "react";
-import EditProject from "./EditProject";
+import React, {useContext, useEffect, useState, useCallback} from "react";
 import axios from 'axios'
-import ViewProject from "./ViewProject";
+import Project from "./Project";
 import AuthorizationContext from "../../Context/authorization_context";
 
 const ProjectParent = props => {
@@ -28,13 +27,13 @@ const ProjectParent = props => {
         setProjectList([addProject, ...projectList]);
     }
 
-    const updateProjectList = (updatedProject) => {
+    const updateProjectList = useCallback((updatedProject) => {
         const newProjects = [];
         projectList.forEach(prj => {
             newProjects.push(prj._id === updatedProject._id ? updatedProject : prj);
         })
         setProjectList(newProjects);
-    }
+    }, [projectList]);
 
     const removeProject = (idToRemove) => {
         setProjectList(projectList.filter((prj => {
@@ -80,10 +79,10 @@ const ProjectParent = props => {
             <header>
                 <h3>My Projects</h3>
                 <form onSubmit={initNewProjectHandler} className="wb-form-control">
-                    <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
-                    {pageState === "viewing" && <button type="submit">Create a New Project</button>}
+                    <button type="button" onClick={props.showWelcomePage}>Dashboard</button>
+                    {pageState === "viewing" && <button type="submit">New Project</button>}
                     {pageState === "creating" && <button className="cancel" type="button"
-                                                         onClick={viewProjectsHandler}>Cancel Create a New Project
+                                                         onClick={viewProjectsHandler}>Cancel
                     </button>}
                     {(pageState === "editing" || pageState === "viewing_project") &&
                     <button type="button" onClick={viewProjectsHandler}>All Projects</button>}
@@ -98,16 +97,13 @@ const ProjectParent = props => {
                 <ProjectList removeProject={removeProject} projectList={projectList}
                              changePageState={viewProjectsHandler}
                              editProjectHandler={viewProjectHandler}/>}
-                {pageState === "editing" &&
-                <EditProject
-                    editingProject={editingProject}
-                    viewProjectHandler={viewProjectHandler}
-                    resetProject={resetEditingProject}
-                    updateProjectList={updateProjectList}/>}
                 {pageState === "viewing_project" &&
-                <ViewProject
+                <Project
                     editProjectHandler={editProjectHandler}
-                    editingProject={editingProject}
+                    resetProject={resetEditingProject}
+                    updateProjectList={updateProjectList}
+                    project={editingProject}
+                    view="edit"
                 />}
             </div>
         </main>

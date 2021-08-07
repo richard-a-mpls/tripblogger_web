@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 
+import '../UI/BloggerCard.css';
+
 const ProjectDay = (props) => {
 
     const [expanded, setExpanded] = useState(false);
@@ -22,18 +24,20 @@ const ProjectDay = (props) => {
     }
 
     return (
-        <main>
-            <header>
+        <main className='day'>
+            <header className='header day' style={{verticalAlign: 'middle', display: 'inline-block'}}>
+                <span style={{verticalAlign: 'middle', display: 'inline-block', lineHeight: '40px'}}>
                 <h6>
                     {month} {day} {year} - {props.projectDay.summary}
                 </h6>
+                </span>
                 <form className="wb-form-control" onSubmit={switchExpandedHandler}>
                     {expanded && <>
                         <button type="submit">Collapse</button>
                         <button type="button">Edit</button>
                     </>}
                     {!expanded &&
-                        <button type="submit">Expand</button>
+                    <button type="submit">Expand</button>
                     }
                 </form>
 

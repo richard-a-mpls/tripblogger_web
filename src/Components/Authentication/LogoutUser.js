@@ -1,5 +1,6 @@
 import {useContext} from "react";
 import AuthorizationContext from "../../Context/authorization_context";
+import React from "react";
 
 const LogoutUser = () => {
 
@@ -24,4 +25,4 @@ const LogoutUser = () => {
     );
 };
 
-export default LogoutUser;
+export default React.memo(LogoutUser);

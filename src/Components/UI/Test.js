@@ -38,7 +38,7 @@ const Test = props => {
                         </form>
                     </header>
                     <div className="content">
-                        <img src="/001.JPG"/>
+                        <img alt="showcase" src="/001.JPG"/>
                         <div className="project-details">
                             <h6>Winona Minnesota, August 20, 2019</h6>
                             <p>Trip to Winona after we lost our sweet, sweet girl. She was such a dream and will
@@ -58,7 +58,7 @@ const Test = props => {
                         </form>
                     </header>
                     <div className="content">
-                        <img src="/001.JPG"/>
+                        <img alt="showcase" src="/001.JPG"/>
                         <div className="project-details">
                             <h6>Winona Minnesota, August 20, 2019</h6>
                             <p>Trip to Winona after we lost our sweet, sweet girl. She was such a dream and will
@@ -78,7 +78,7 @@ const Test = props => {
                         </header>
                         <div className="content">
                             <div>
-                                <img src="/001.JPG"/>
+                                <img alt="showcase" src="/001.JPG"/>
                                 <div className="project-details">
                                     <label>Location:</label>
                                     <input type="text" value="Winona Minnesota"/>

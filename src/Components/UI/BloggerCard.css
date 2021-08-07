@@ -37,7 +37,13 @@
     border-radius: 8px;
 }
 
-.wb-form-control input {
+.content input {
+    display: block;
+    width: 90%;
+    margin-bottom: 8px;
+    font-weight: bolder;
+}
+.wb-form-control textarea {
     display: block;
     width: 90%;
     margin-bottom: 8px;
@@ -49,6 +55,15 @@
 }
 
 .wb-form-control input.summary {
+    font-weight: bolder;
+    font-size: 1.25em;
+    width: 80%;
+    border-color: #888b8b;
+    border-width: thin;
+    display: inline-block;
+}
+
+.wb-form-control label.summary {
     font-weight: bolder;
     font-size: 1.25em;
     width: 80%;
@@ -114,6 +129,13 @@ main {
     padding-top: 10px;
 }
 
+main .day {
+    margin: 0px;
+    padding: 0px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
 main header {
     display: inline-block;
     background-color: #f5f3f3;
@@ -125,6 +147,13 @@ main header {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     border-width: thin;
+}
+
+main header.day {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 main header h2, h3, h4, h5, h6 {
@@ -176,8 +205,8 @@ main .content img {
     margin-top: 10px;
     display: inline-block;
     float: left;
-    height: 125px;
-    width: 125px;
+    height: 150px;
+    width: 150px;
     object-fit:cover;
     border-radius: 16px;
     overflow: hidden
@@ -192,8 +221,10 @@ main .content img {
     padding-left: 5px;
 }
 
-.project-details h6 {
+.project-details label {
     font-weight: bold;
+    display: block;
+    margin-bottom: 15px;
 }
 
 .project-details p {
@@ -238,6 +269,7 @@ main .content img {
     width: 40px;
     height: 21px;
     padding-top: 15px;
+    vertical-align: middle;
 }
 
 /* Hide default HTML checkbox */

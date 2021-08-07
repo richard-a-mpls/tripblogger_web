@@ -12,22 +12,16 @@ const NewProject = (props) => {
     const location = useRef();
     const date = useRef();
     const [photoData, setPhotoData] = useState('');
-    const [photoSelected, setPhotoSelected] = useState(false);
 
     const submitProjectHandler = (event) => {
         event.preventDefault();
         console.log("submit new project");
-        const projectDays = [
-            {
-                'datestmp': date.current.value
-            }
-        ]
-
         const formData = new FormData();
 
         formData.set('summary', summary.current.value);
         formData.set('description', description.current.value);
         formData.set('location', location.current.value);
+        formData.set('datestmp', date.current.value);
         formData.append('file', photoData);
 
         axios.post('http://localhost:8080/v1/me/projects', formData,
@@ -46,7 +40,6 @@ const NewProject = (props) => {
 
     const setPhotoDataHandler = (event) => {
         setPhotoData(event.target.files[0])
-        setPhotoSelected(true);
     }
 
     return (
