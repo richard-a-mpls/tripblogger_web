@@ -9,7 +9,7 @@ import Input from "../UI/Input";
 const Project = (props) => {
     const [editing, setEditing] = useState(false);
     const [updateData, setUpdateData] = useState({});
-    const [showAudience, setShowAudience] = useState(false);
+    const [showAudience, setShowAudience] = useState();
     const authCtx = useContext(AuthorizationContext);
 
     let date = new Date();
@@ -27,7 +27,6 @@ const Project = (props) => {
     ];
 
     const deleteHandler = (event) => {
-        event.preventDefault();
         axios.delete('https://my-react.local:3000/v1/me/projects/' + props.project._id,
             {
                 headers: {
