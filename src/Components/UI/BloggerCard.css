@@ -37,10 +37,11 @@
     border-radius: 8px;
 }
 
-.wb-form-control input {
+.content input {
     display: block;
     width: 90%;
     margin-bottom: 8px;
+    font-weight: bolder;
 }
 .wb-form-control textarea {
     display: block;
@@ -54,6 +55,15 @@
 }
 
 .wb-form-control input.summary {
+    font-weight: bolder;
+    font-size: 1.25em;
+    width: 80%;
+    border-color: #888b8b;
+    border-width: thin;
+    display: inline-block;
+}
+
+.wb-form-control label.summary {
     font-weight: bolder;
     font-size: 1.25em;
     width: 80%;
@@ -211,8 +221,10 @@ main .content img {
     padding-left: 5px;
 }
 
-.project-details h6 {
+.project-details label {
     font-weight: bold;
+    display: block;
+    margin-bottom: 15px;
 }
 
 .project-details p {
