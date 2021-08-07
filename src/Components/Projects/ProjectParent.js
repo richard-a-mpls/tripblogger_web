@@ -97,12 +97,6 @@ const ProjectParent = props => {
                 <ProjectList removeProject={removeProject} projectList={projectList}
                              changePageState={viewProjectsHandler}
                              editProjectHandler={viewProjectHandler}/>}
-                {pageState === "editing" &&
-                <EditProject
-                    editingProject={editingProject}
-                    viewProjectHandler={viewProjectHandler}
-                    resetProject={resetEditingProject}
-                    updateProjectList={updateProjectList}/>}
                 {pageState === "viewing_project" &&
                 <Project
                     editProjectHandler={editProjectHandler}
