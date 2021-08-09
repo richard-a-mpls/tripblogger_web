@@ -11,7 +11,6 @@ const Project = (props) => {
     const [editing, setEditing] = useState(false);
     const [updateData, setUpdateData] = useState({});
     const [showAudience, setShowAudience] = useState();
-    const [photoData, setPhotoData] = useState();
 
     const [tmpPhotoId, setTmpPhotoId] = useState();
     const [uploadingTmpPhoto, setUploadingTmpPhoto] = useState(false);
@@ -85,6 +84,7 @@ const Project = (props) => {
     }
 
     const setPhotoDataHandler = (event) => {
+        setUploadingTmpPhoto(true);
         const formData = new FormData();
         formData.append('file', event.target.files[0]);
         axios.post('http://localhost:8080/v1/photos', formData,
@@ -98,6 +98,7 @@ const Project = (props) => {
                 console.log(response.data.id);
                 updateData['showcase_photo_id'] = response.data.id;
                 setTmpPhotoId(response.data.id);
+                setUploadingTmpPhoto(false);
             });
     }
 
@@ -114,8 +115,6 @@ const Project = (props) => {
 
     const dateDisplay = month + " " + day + " " + year;
     const allowEdit = editing || props.view === "create";
-
-    const showcasePhotoUrl = "https://my-react.local:3000/v1/photos/" + tmpPhotoId ? tmpPhotoId : props.project.showcase_photo_id;
 
     return (
         <main>
@@ -140,7 +139,7 @@ const Project = (props) => {
                      src={"https://my-react.local:3000/v1/photos/" + tmpPhotoId}/>
                 }
 
-                {!tmpPhotoId && !props.project.showcase_photo_id && <div className="wb-form-control addphoto" style={{marginTop: '5px', display: "inline-block", textAlign: "center", backgroundColor: "#26567b", borderRadius: '16px'}}>
+                {!uploadingTmpPhoto && !tmpPhotoId && !props.project.showcase_photo_id && <div className="wb-form-control addphoto" style={{marginTop: '5px', display: "inline-block", textAlign: "center", backgroundColor: "#26567b", borderRadius: '16px'}}>
                     <label htmlFor="file" className="inputfile">
                         <span style={{display: "block"}}><i className="showcase fas fa-image"/></span>
                         <span style={{display: "block", color: "#ffffff"}}>+ Add Photo</span>
@@ -148,6 +147,10 @@ const Project = (props) => {
                     <input id="file" className="inputfile" type="file"
                            onChange={setPhotoDataHandler}/>
                 </div>}
+                {uploadingTmpPhoto &&
+                <img alt="showcase"
+                     src={"/spin.gif"}/>
+                }
                 {!tmpPhotoId && props.project.showcase_photo_id &&
                 <img alt="showcase"
                      src={"https://my-react.local:3000/v1/photos/" + props.project.showcase_photo_id}/>
