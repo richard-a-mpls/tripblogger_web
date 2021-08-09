@@ -1,4 +1,3 @@
-import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import React, {useContext, useEffect, useState, useCallback} from "react";
 import axios from 'axios'
@@ -101,10 +100,6 @@ const ProjectParent = props => {
                 </form>
             </header>
             <div className="content">
-                {pageState === "creatingx" &&
-                <NewProject addToProjectList={addToProjectList} viewProjectsHandler={viewProjectsHandler}
-                            changePageState={viewProjectsHandler}
-                            viewProject={resetEditingProject}/>}
                 {pageState === "viewing" &&
                 <ProjectList removeProject={removeProject} projectList={projectList}
                              changePageState={viewProjectsHandler}
