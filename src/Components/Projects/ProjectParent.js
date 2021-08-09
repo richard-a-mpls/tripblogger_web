@@ -12,6 +12,8 @@ const ProjectParent = props => {
     const [editingProject, setEditingProject] = useState('');
     const [projectList, setProjectList] = useState([]);
 
+    const defaultProject = {};
+
     // project list functions
     useEffect(() => {
         axios.get('https://my-react.local:3000/v1/me/projects', {
@@ -29,9 +31,19 @@ const ProjectParent = props => {
 
     const updateProjectList = useCallback((updatedProject) => {
         const newProjects = [];
+        let updateApplied = false;
         projectList.forEach(prj => {
             newProjects.push(prj._id === updatedProject._id ? updatedProject : prj);
+            if (prj._id === updatedProject._id) {
+                updateApplied = true;
+            }
         })
+
+        if (!updateApplied) {
+            // add as first element, must be a new create
+            newProjects.unshift(updatedProject);
+        }
+
         setProjectList(newProjects);
     }, [projectList]);
 
@@ -89,7 +101,7 @@ const ProjectParent = props => {
                 </form>
             </header>
             <div className="content">
-                {pageState === "creating" &&
+                {pageState === "creatingx" &&
                 <NewProject addToProjectList={addToProjectList} viewProjectsHandler={viewProjectsHandler}
                             changePageState={viewProjectsHandler}
                             viewProject={resetEditingProject}/>}
@@ -99,12 +111,23 @@ const ProjectParent = props => {
                              editProjectHandler={viewProjectHandler}/>}
                 {pageState === "viewing_project" &&
                 <Project
+                    removeProject={removeProject}
                     editProjectHandler={editProjectHandler}
                     resetProject={resetEditingProject}
                     updateProjectList={updateProjectList}
                     project={editingProject}
                     view="edit"
                 />}
+                {pageState === "creating" &&
+                <Project
+                    removeProject={removeProject}
+                    updateProjectList={updateProjectList}
+                    resetProject={resetEditingProject}
+                    project={defaultProject}
+                    view="create"
+                />
+                }
+
             </div>
         </main>
     );
