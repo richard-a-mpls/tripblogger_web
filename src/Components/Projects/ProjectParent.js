@@ -24,10 +24,6 @@ const ProjectParent = props => {
             });
     }, [authCtx.apiToken]);
 
-    const addToProjectList = (addProject) => {
-        setProjectList([addProject, ...projectList]);
-    }
-
     const updateProjectList = useCallback((updatedProject) => {
         const newProjects = [];
         let updateApplied = false;
