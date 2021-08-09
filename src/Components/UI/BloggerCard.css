@@ -332,12 +332,18 @@ input:checked + .slider:before {
 }
 
 .inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
+    margin-top: 10px;
+    object-fit:cover;
 }
+
+main .content i.showcase {
+    font-size: 8em;
+    margin-top: 5px;
+    height: 150px;
+    width: 150px;
+    color: #26567b;
+}
+
 
 .inputfile:focus + label,
 .inputfile + label:hover {
