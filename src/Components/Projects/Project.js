@@ -5,11 +5,16 @@ import axios from "axios";
 import React, {useContext, useState} from "react";
 import AuthorizationContext from "../../Context/authorization_context";
 import Input from "../UI/Input";
+import FormData from "form-data";
 
 const Project = (props) => {
     const [editing, setEditing] = useState(false);
     const [updateData, setUpdateData] = useState({});
     const [showAudience, setShowAudience] = useState();
+
+    const [tmpPhotoId, setTmpPhotoId] = useState();
+    const [uploadingTmpPhoto, setUploadingTmpPhoto] = useState(false);
+
     const authCtx = useContext(AuthorizationContext);
 
     let date = new Date();
@@ -46,7 +51,17 @@ const Project = (props) => {
         });
     }
 
-    const submitEditHandler = () => {
+    const submitHandler = () => {
+        if (props.project._id) {
+            submitEdit();
+        } else {
+            submitCreate();
+        }
+        setUpdateData({});
+        setEditing(false);
+    }
+
+    const submitEdit = () => {
         axios.patch('http://localhost:8080/v1/me/projects/' + props.project._id, JSON.stringify(updateData), { // receive two parameter endpoint url ,form data
             headers: {Authorization: `Bearer ${authCtx.apiToken}`, 'Content-Type': 'application/json',}
         })
@@ -54,8 +69,37 @@ const Project = (props) => {
                 props.resetProject(response.data);
                 props.updateProjectList(response.data);
             });
-        setUpdateData({});
-        setEditing(false);
+    }
+
+    const submitCreate = () => {
+        console.log("POST");
+        console.log(updateData);
+        axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateData), { // receive two parameter endpoint url ,form data
+            headers: {Authorization: `Bearer ${authCtx.apiToken}`, 'Content-Type': 'application/json',}
+        })
+            .then(response => {
+                props.resetProject(response.data);
+                props.updateProjectList(response.data);
+            });
+    }
+
+    const setPhotoDataHandler = (event) => {
+        setUploadingTmpPhoto(true);
+        const formData = new FormData();
+        formData.append('file', event.target.files[0]);
+        axios.post('http://localhost:8080/v1/photos', formData,
+            {
+                headers: {
+                    'Content-Type': "multipart/form-data; boundary=--------------------------a string of numbers that is never the same",
+                    'Authorization': 'Bearer ' + authCtx.apiToken
+                }
+            })
+            .then(response => {
+                console.log(response.data.id);
+                updateData['showcase_photo_id'] = response.data.id;
+                setTmpPhotoId(response.data.id);
+                setUploadingTmpPhoto(false);
+            });
     }
 
     const setEditingHandler = () => {
@@ -70,12 +114,12 @@ const Project = (props) => {
     }
 
     const dateDisplay = month + " " + day + " " + year;
-
+    const allowEdit = editing || props.view === "create";
 
     return (
         <main>
             <header className='wb-form-control'>
-                <Input editing={editing} attribute="summary" value={props.project.summary}
+                <Input placeholder="summary" editing={allowEdit} attribute="summary" value={props.project.summary}
                        className='wb-form-control summary' onUpdate={updateDataHandler}/>
                 <ProjectActionButtons
                     editable={props.view === "edit"}
@@ -83,24 +127,51 @@ const Project = (props) => {
                     editProjectHandler={props.editProjectHandler}
                     onSetEdit={setEditingHandler}
                     onCancelEdit={cancelEditingHandler}
-                    onSubmit={submitEditHandler}
-                    editing={editing}
+                    onSubmit={submitHandler}
+                    editing={allowEdit}
+                    view={props.view}
                     deleteHandler={deleteHandler}/>
             </header>
             <div className="content">
+
+                {tmpPhotoId &&
+                <img alt="showcase"
+                     src={"https://my-react.local:3000/v1/photos/" + tmpPhotoId}/>
+                }
+
+                {!uploadingTmpPhoto && !tmpPhotoId && !props.project.showcase_photo_id && <div className="wb-form-control addphoto" style={{marginTop: '5px', display: "inline-block", textAlign: "center", backgroundColor: "#26567b", borderRadius: '16px'}}>
+                    <label htmlFor="file" className="inputfile">
+                        <span style={{display: "block"}}><i className="showcase fas fa-image"/></span>
+                        <span style={{display: "block", color: "#ffffff"}}>+ Add Photo</span>
+                    </label>
+                    <input id="file" className="inputfile" type="file"
+                           onChange={setPhotoDataHandler}/>
+                </div>}
+                {uploadingTmpPhoto &&
+                <img alt="showcase"
+                     src={"/spin.gif"}/>
+                }
+                {!tmpPhotoId && props.project.showcase_photo_id &&
                 <img alt="showcase"
                      src={"https://my-react.local:3000/v1/photos/" + props.project.showcase_photo_id}/>
+                }
+
+
                 <div className="project-details">
-                    <Input editing={editing} attribute="location" value={props.project.location}  onUpdate={updateDataHandler}/>
-                    <Input editing={editing} attribute="date" value={dateDisplay}  onUpdate={updateDataHandler}/>
-                    <Input editing={editing} attribute="description"
-                           value={props.project.description}  onUpdate={updateDataHandler}/><br/>
+                    <Input placeholder="location" editing={allowEdit} attribute="location"
+                           value={props.project.location} onUpdate={updateDataHandler}/>
+                    <Input type={"date"} editing={allowEdit} attribute="datestmp" value={dateDisplay}
+                           onUpdate={updateDataHandler}/>
+                    <Input placeholder="description" editing={allowEdit} attribute="description"
+                           value={props.project.description} onUpdate={updateDataHandler}/><br/>
                     {!editing && <ShareStatus project={props.project}/>}
                     {editing &&
-                        <Input type="slider" attribute="published" value={props.project.published} onUpdate={updateDataHandler} onUpdate2={toggleShowAudienceHandler}/>
+                    <Input type="slider" attribute="published" value={props.project.published}
+                           onUpdate={updateDataHandler} onUpdate2={toggleShowAudienceHandler}/>
                     }
                     {editing && ((!props.project.published && showAudience) || (props.project.published && showAudience !== false)) &&
-                        <Input type="button-selector" label="Audience:" attribute="share_with" value={props.project.share_with} options={shareWithOptions} onUpdate={updateDataHandler}/>
+                    <Input type="button-selector" label="Audience:" attribute="share_with"
+                           value={props.project.share_with} options={shareWithOptions} onUpdate={updateDataHandler}/>
                     }
                 </div>
                 <br/><br/>

@@ -68,7 +68,7 @@ const Input = (props) => {
         <>
             {!props.editing && <label className={props.className}>{props.value}</label>}
             {props.editing &&
-            <input type="text" className={props.className} onChange={valueChangeHandler} value={value}/>
+            <input placeholder={props.placeholder} type={props.type ? props.type : "text"} className={props.className} onChange={valueChangeHandler} value={value}/>
             }
         </>
     );

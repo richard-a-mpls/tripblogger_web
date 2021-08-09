@@ -1,4 +1,3 @@
-import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import React, {useContext, useEffect, useState, useCallback} from "react";
 import axios from 'axios'
@@ -11,6 +10,8 @@ const ProjectParent = props => {
     const [pageState, setPageState] = useState('viewing');
     const [editingProject, setEditingProject] = useState('');
     const [projectList, setProjectList] = useState([]);
+
+    const defaultProject = {};
 
     // project list functions
     useEffect(() => {
@@ -29,9 +30,19 @@ const ProjectParent = props => {
 
     const updateProjectList = useCallback((updatedProject) => {
         const newProjects = [];
+        let updateApplied = false;
         projectList.forEach(prj => {
             newProjects.push(prj._id === updatedProject._id ? updatedProject : prj);
+            if (prj._id === updatedProject._id) {
+                updateApplied = true;
+            }
         })
+
+        if (!updateApplied) {
+            // add as first element, must be a new create
+            newProjects.unshift(updatedProject);
+        }
+
         setProjectList(newProjects);
     }, [projectList]);
 
@@ -39,6 +50,7 @@ const ProjectParent = props => {
         setProjectList(projectList.filter((prj => {
             return prj._id !== idToRemove;
         })));
+        setPageState('viewing');
     }
 
     const initNewProjectHandler = (event) => {
@@ -89,22 +101,29 @@ const ProjectParent = props => {
                 </form>
             </header>
             <div className="content">
-                {pageState === "creating" &&
-                <NewProject addToProjectList={addToProjectList} viewProjectsHandler={viewProjectsHandler}
-                            changePageState={viewProjectsHandler}
-                            viewProject={resetEditingProject}/>}
                 {pageState === "viewing" &&
                 <ProjectList removeProject={removeProject} projectList={projectList}
                              changePageState={viewProjectsHandler}
                              editProjectHandler={viewProjectHandler}/>}
                 {pageState === "viewing_project" &&
                 <Project
+                    removeProject={removeProject}
                     editProjectHandler={editProjectHandler}
                     resetProject={resetEditingProject}
                     updateProjectList={updateProjectList}
                     project={editingProject}
                     view="edit"
                 />}
+                {pageState === "creating" &&
+                <Project
+                    removeProject={removeProject}
+                    updateProjectList={updateProjectList}
+                    resetProject={resetEditingProject}
+                    project={defaultProject}
+                    view="create"
+                />
+                }
+
             </div>
         </main>
     );
