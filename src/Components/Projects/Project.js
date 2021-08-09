@@ -12,6 +12,10 @@ const Project = (props) => {
     const [updateData, setUpdateData] = useState({});
     const [showAudience, setShowAudience] = useState();
     const [photoData, setPhotoData] = useState();
+
+    const [tmpPhotoId, setTmpPhotoId] = useState();
+    const [uploadingTmpPhoto, setUploadingTmpPhoto] = useState(false);
+
     const authCtx = useContext(AuthorizationContext);
 
     let date = new Date();
@@ -69,15 +73,21 @@ const Project = (props) => {
     }
 
     const submitCreate = () => {
+        console.log("POST");
+        console.log(updateData);
+        axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateData), { // receive two parameter endpoint url ,form data
+            headers: {Authorization: `Bearer ${authCtx.apiToken}`, 'Content-Type': 'application/json',}
+        })
+            .then(response => {
+                props.resetProject(response.data);
+                props.updateProjectList(response.data);
+            });
+    }
+
+    const setPhotoDataHandler = (event) => {
         const formData = new FormData();
-
-        formData.set('summary', updateData['summary']);
-        formData.set('description', updateData['description']);
-        formData.set('location', updateData['location']);
-        formData.set('datestmp', updateData['datestmp']);
-        formData.append('file', photoData);
-
-        axios.post('http://localhost:8080/v1/me/projects', formData,
+        formData.append('file', event.target.files[0]);
+        axios.post('http://localhost:8080/v1/photos', formData,
             {
                 headers: {
                     'Content-Type': "multipart/form-data; boundary=--------------------------a string of numbers that is never the same",
@@ -85,14 +95,10 @@ const Project = (props) => {
                 }
             })
             .then(response => {
-                props.resetProject(response.data);
-                props.updateProjectList(response.data);
-                console.log(response.data);
+                console.log(response.data.id);
+                updateData['showcase_photo_id'] = response.data.id;
+                setTmpPhotoId(response.data.id);
             });
-    }
-
-    const setPhotoDataHandler = (event) => {
-        setPhotoData(event.target.files[0])
     }
 
     const setEditingHandler = () => {
@@ -108,6 +114,8 @@ const Project = (props) => {
 
     const dateDisplay = month + " " + day + " " + year;
     const allowEdit = editing || props.view === "create";
+
+    const showcasePhotoUrl = "https://my-react.local:3000/v1/photos/" + tmpPhotoId ? tmpPhotoId : props.project.showcase_photo_id;
 
     return (
         <main>
@@ -126,15 +134,26 @@ const Project = (props) => {
                     deleteHandler={deleteHandler}/>
             </header>
             <div className="content">
-                {!props.project.showcase_photo_id && <div className="wb-form-control" style={{display: "inline", textAlign: "center"}}>
-                    <label htmlFor="file" className="inputfile"><i className="showcase fas fa-image"/></label>
+
+                {tmpPhotoId &&
+                <img alt="showcase"
+                     src={"https://my-react.local:3000/v1/photos/" + tmpPhotoId}/>
+                }
+
+                {!tmpPhotoId && !props.project.showcase_photo_id && <div className="wb-form-control addphoto" style={{marginTop: '5px', display: "inline-block", textAlign: "center", backgroundColor: "#26567b", borderRadius: '16px'}}>
+                    <label htmlFor="file" className="inputfile">
+                        <span style={{display: "block"}}><i className="showcase fas fa-image"/></span>
+                        <span style={{display: "block", color: "#ffffff"}}>+ Add Photo</span>
+                    </label>
                     <input id="file" className="inputfile" type="file"
                            onChange={setPhotoDataHandler}/>
                 </div>}
-                {props.project.showcase_photo_id &&
+                {!tmpPhotoId && props.project.showcase_photo_id &&
                 <img alt="showcase"
                      src={"https://my-react.local:3000/v1/photos/" + props.project.showcase_photo_id}/>
                 }
+
+
                 <div className="project-details">
                     <Input placeholder="location" editing={allowEdit} attribute="location"
                            value={props.project.location} onUpdate={updateDataHandler}/>
