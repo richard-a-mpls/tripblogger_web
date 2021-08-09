@@ -50,6 +50,7 @@ const ProjectParent = props => {
         setProjectList(projectList.filter((prj => {
             return prj._id !== idToRemove;
         })));
+        setPageState('viewing');
     }
 
     const initNewProjectHandler = (event) => {
