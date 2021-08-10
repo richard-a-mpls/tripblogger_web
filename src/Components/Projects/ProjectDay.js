@@ -33,11 +33,11 @@ const ProjectDay = (props) => {
                 </span>
                 <form className="wb-form-control" onSubmit={switchExpandedHandler}>
                     {expanded && <>
-                        <button type="submit">Collapse</button>
-                        <button type="button">Edit</button>
+                        <button type="button"><i className='far fa-edit'/></button>
+                        <button type="submit"><i className="fas fa-arrow-up"></i></button>
                     </>}
                     {!expanded &&
-                    <button type="submit">Expand</button>
+                    <button type="submit"><i className="fas fa-arrow-down"></i></button>
                     }
                 </form>
 
