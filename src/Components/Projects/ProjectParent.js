@@ -19,6 +19,7 @@ const ProjectParent = props => {
             headers: {Authorization: `Bearer ${authCtx.apiToken}`}
         })
             .then(response => {
+                console.log(response.data);
                 setProjectList(response.data);
                 console.log("got project list");
             });
