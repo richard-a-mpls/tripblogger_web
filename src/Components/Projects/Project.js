@@ -6,6 +6,7 @@ import React, {useContext, useState} from "react";
 import AuthorizationContext from "../../Context/authorization_context";
 import Input from "../UI/Input";
 import FormData from "form-data";
+import UploadGroup from "../PhotoGroups/UploadGroup";
 
 const Project = (props) => {
     const [editing, setEditing] = useState(false);
@@ -95,7 +96,6 @@ const Project = (props) => {
                 }
             })
             .then(response => {
-                console.log(response.data.id);
                 updateData['showcase_photo_id'] = response.data.id;
                 setTmpPhotoId(response.data.id);
                 setUploadingTmpPhoto(false);
@@ -139,7 +139,14 @@ const Project = (props) => {
                      src={"https://my-react.local:3000/v1/photos/" + tmpPhotoId}/>
                 }
 
-                {!uploadingTmpPhoto && !tmpPhotoId && !props.project.showcase_photo_id && <div className="wb-form-control addphoto" style={{marginTop: '5px', display: "inline-block", textAlign: "center", backgroundColor: "#26567b", borderRadius: '16px'}}>
+                {!uploadingTmpPhoto && !tmpPhotoId && !props.project.showcase_photo_id &&
+                <div className="wb-form-control addphoto" style={{
+                    marginTop: '5px',
+                    display: "inline-block",
+                    textAlign: "center",
+                    backgroundColor: "#26567b",
+                    borderRadius: '16px'
+                }}>
                     <label htmlFor="file" className="inputfile">
                         <span style={{display: "block"}}><i className="showcase fas fa-image"/></span>
                         <span style={{display: "block", color: "#ffffff"}}>+ Add Photo</span>
@@ -178,7 +185,17 @@ const Project = (props) => {
                 {props.view === "edit" && props.project.project_days !== undefined && props.project.project_days.map((projectDay) => (
                     <ProjectDay projectDay={projectDay}/>
                 ))}
+                {!editing && props.project.photo_array &&
+                <div>
+                    {props.project.photo_array.map((imageId) =>
+                        <img alt={imageId} style={{margin: "2px"}} key={imageId}
+                             src={`https://my-react.local:3000/v1/photos/${imageId}`}/>
+                    )}
+                    <UploadGroup projectId={props.project._id} photoArray={props.project.photo_array}/>
+                </div>
+                }
             </div>
+
         </main>
 
     );
