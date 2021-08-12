@@ -2,10 +2,8 @@ import React, {useState} from "react";
 import axios from "axios";
 
 const AuthorizationContext = React.createContext({
-    apiToken: '',
     login: false,
     userProfile: '',
-    fbPicture: undefined,
     pageState: 'welcome_message',
     editProfileClickHandler: () => {},
     logoutHandler: () => {},
@@ -14,30 +12,24 @@ const AuthorizationContext = React.createContext({
     refreshUserProfile: () => {},
     changePageState: () => {},
     setApiSession: () => {},
-    setPageState: () => {},
-    setFbInfo: () => {}
+    setPageState: () => {}
 });
 
+export const STORAGE_APITOKEN='apiToken';
+
 export const AuthorizationContextProvider = (props) => {
-    const [apiToken, setApiToken] = useState('');
     const [login, setLogin] = useState(false);
     const [userProfile, setUserProfile] = useState('');
     const [pageState, setPageState] = useState('welcome_message');
-    const [fbPicture, setFbPicture] = useState('');
-
-    const setFbInfo = (dataReturned, pictureReturned) => {
-        setFbPicture(pictureReturned);
-    };
 
     const setApiSession = (apiTokenId) => {
-        console.log(apiTokenId.api_token);
-        setApiToken(apiTokenId.api_token);
+        localStorage.setItem(STORAGE_APITOKEN, apiTokenId.api_token);
         // TODO
         //do i have projects already if userHasProjects setPageState=something
         setLogin(true);
 
         axios.get('https://my-react.local:3000/v1/profile', {
-            headers: {Authorization: `Bearer ${apiTokenId.api_token}`}
+            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => setUserProfile(response.data));
     };
@@ -48,7 +40,7 @@ export const AuthorizationContextProvider = (props) => {
     }
 
     const logoutHandler = () => {
-        setApiToken('');
+        localStorage.removeItem(STORAGE_APITOKEN);
         setPageState('');
         setLogin(false);
     };
@@ -70,11 +62,9 @@ export const AuthorizationContextProvider = (props) => {
     };
 
     return <AuthorizationContext.Provider value={{
-        apiToken: apiToken,
         login: login,
         userProfile: userProfile,
         pageState: pageState,
-        fbPicture: fbPicture,
         editProfileClickHandler: editProfileClickHandler,
         logoutHandler: logoutHandler,
         showProjectView: showProjectView,
@@ -82,8 +72,7 @@ export const AuthorizationContextProvider = (props) => {
         refreshUserProfile: refreshUserProfile,
         changePageState: changePageState,
         setApiSession: setApiSession,
-        setPageState: setPageState,
-        setFbInfo: setFbInfo
+        setPageState: setPageState
     }}>
         {props.children}
     </AuthorizationContext.Provider>

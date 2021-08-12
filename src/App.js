@@ -7,7 +7,7 @@ import Test from "./Components/UI/Test"
 import './App.css';
 import BloggerCard from "./Components/UI/BloggerCard";
 import Header from "./Components/UI/Header";
-import AuthorizationContext from "./Context/authorization_context";
+import AuthorizationContext, {STORAGE_APITOKEN} from "./Context/authorization_context";
 
 function App() {
     const authCtx = useContext(AuthorizationContext);
@@ -28,14 +28,14 @@ function App() {
                     <ProjectParent showWelcomePage={authCtx.showWelcomePage}/>
                     }
                     {authCtx.pageState === 'edit_profile' &&
-                    <EditProfile userProfile={authCtx.userProfile} apiToken={authCtx.apiToken}
+                    <EditProfile userProfile={authCtx.userProfile} apiToken={localStorage.getItem(STORAGE_APITOKEN)}
                                  refreshUserProfile={authCtx.refreshUserProfile} changePageState={authCtx.changePageState}
                                  showWelcomePage={authCtx.showWelcomePage}/>
                     }
                     <footer>
                         <br/>
                         <center>
-                            <p>API Token: {authCtx.apiToken}<br/>Page
+                            <p>API Token: {localStorage.getItem(STORAGE_APITOKEN)}<br/>Page
                                 State: {authCtx.pageState}</p>
                         </center>
                     </footer>

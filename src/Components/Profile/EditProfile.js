@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {STORAGE_APITOKEN} from "../../Context/authorization_context";
 
 const EditProfile = (props) => {
 
@@ -16,7 +17,7 @@ const EditProfile = (props) => {
             body: JSON.stringify(updateValue),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + props.apiToken
+                'Authorization': 'Bearer ' + localStorage.getItem(STORAGE_APITOKEN)
             })
         })
             .then(response => response.json())

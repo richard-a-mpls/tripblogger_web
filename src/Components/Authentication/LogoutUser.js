@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import AuthorizationContext from "../../Context/authorization_context";
+import AuthorizationContext, {STORAGE_APITOKEN} from "../../Context/authorization_context";
 import React from "react";
 
 const LogoutUser = () => {
@@ -12,7 +12,7 @@ const LogoutUser = () => {
             headers: {'Content-Type': 'application/json'}
         };
 
-        fetch('https://my-react.local:3000/v1/logout/?apiToken=' + authCtx.apiToken, requestOptions)
+        fetch('https://my-react.local:3000/v1/logout/?apiToken=' + localStorage.getItem(STORAGE_APITOKEN), requestOptions)
             .then(response => response.json())
             .then(data => console.log("DATER: " + JSON.stringify(data)));
         authCtx.logoutHandler();

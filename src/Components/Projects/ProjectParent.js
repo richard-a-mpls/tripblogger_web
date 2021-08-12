@@ -1,12 +1,10 @@
 import ProjectList from "./ProjectList";
-import React, {useContext, useEffect, useState, useCallback} from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import axios from 'axios'
 import Project from "./Project";
-import AuthorizationContext from "../../Context/authorization_context";
+import {STORAGE_APITOKEN} from "../../Context/authorization_context";
 
 const ProjectParent = props => {
-
-    const authCtx = useContext(AuthorizationContext);
     const [pageState, setPageState] = useState('viewing');
     const [editingProject, setEditingProject] = useState('');
     const [projectList, setProjectList] = useState([]);
@@ -16,14 +14,14 @@ const ProjectParent = props => {
     // project list functions
     useEffect(() => {
         axios.get('https://my-react.local:3000/v1/me/projects', {
-            headers: {Authorization: `Bearer ${authCtx.apiToken}`}
+            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => {
                 console.log(response.data);
                 setProjectList(response.data);
                 console.log("got project list");
             });
-    }, [authCtx.apiToken]);
+    }, []);
 
     const updateProjectList = useCallback((updatedProject) => {
         const newProjects = [];
@@ -71,7 +69,7 @@ const ProjectParent = props => {
 
     const loadEditingProject = (projectId) => {
         axios.get('http://localhost:8080/v1/projects/' + projectId, {
-            headers: {Authorization: `Bearer ${authCtx.apiToken}`}
+            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => {
                 setEditingProject(response.data);
