@@ -7,18 +7,19 @@ import Test from "./Components/UI/Test"
 import './App.css';
 import BloggerCard from "./Components/UI/BloggerCard";
 import Header from "./Components/UI/Header";
-import AuthorizationContext, {STORAGE_APITOKEN} from "./Context/authorization_context";
+import AuthorizationContext, {STORAGE_APITOKEN, STORAGE_LOGGEDIN} from "./Context/authorization_context";
 
 function App() {
     const authCtx = useContext(AuthorizationContext);
+    authCtx.initialize();
 
     return (
         <BloggerCard>
             {authCtx.pageState !== 'test' && <>
-                {!authCtx.login &&
+                {!localStorage.getItem(STORAGE_LOGGEDIN) &&
                     <AuthenticateUser/>
                 }
-                {authCtx.login &&
+                {localStorage.getItem(STORAGE_LOGGEDIN) &&
                 <>
                     <Header/>
                     {authCtx.pageState === 'welcome_message' &&

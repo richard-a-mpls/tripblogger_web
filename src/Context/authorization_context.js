@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import axios from "axios";
 
 const AuthorizationContext = React.createContext({
-    login: false,
     userProfile: '',
     pageState: 'welcome_message',
     editProfileClickHandler: () => {},
@@ -12,26 +11,32 @@ const AuthorizationContext = React.createContext({
     refreshUserProfile: () => {},
     changePageState: () => {},
     setApiSession: () => {},
-    setPageState: () => {}
+    setPageState: () => {},
+    initialize: () => {}
 });
 
 export const STORAGE_APITOKEN='apiToken';
+export const STORAGE_LOGGEDIN='logged_in';
+
+
 
 export const AuthorizationContextProvider = (props) => {
-    const [login, setLogin] = useState(false);
     const [userProfile, setUserProfile] = useState('');
     const [pageState, setPageState] = useState('welcome_message');
 
     const setApiSession = (apiTokenId) => {
-        localStorage.setItem(STORAGE_APITOKEN, apiTokenId.api_token);
+        localStorage.setItem(STORAGE_APITOKEN, apiTokenId);
         // TODO
         //do i have projects already if userHasProjects setPageState=something
-        setLogin(true);
-
+        localStorage.setItem(STORAGE_LOGGEDIN, 'yes');
         axios.get('https://my-react.local:3000/v1/profile', {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
-            .then(response => setUserProfile(response.data));
+            .then(response => setUserProfile(response.data))
+            .catch(error => {
+                console.log(error);
+                logoutHandler();
+            });
     };
 
     const refreshUserProfile = (newUserProfile) => {
@@ -41,8 +46,8 @@ export const AuthorizationContextProvider = (props) => {
 
     const logoutHandler = () => {
         localStorage.removeItem(STORAGE_APITOKEN);
+        localStorage.removeItem(STORAGE_LOGGEDIN);
         setPageState('');
-        setLogin(false);
     };
 
     const showWelcomePage = () => {
@@ -61,8 +66,15 @@ export const AuthorizationContextProvider = (props) => {
         changePageState("edit_profile");
     };
 
+    const initialize = () => {
+        console.log("setup");
+        if (localStorage.getItem(STORAGE_APITOKEN) && !userProfile) {
+            setApiSession(localStorage.getItem(STORAGE_APITOKEN));
+            setPageState('welcome_message')
+        }
+    }
+
     return <AuthorizationContext.Provider value={{
-        login: login,
         userProfile: userProfile,
         pageState: pageState,
         editProfileClickHandler: editProfileClickHandler,
@@ -72,7 +84,8 @@ export const AuthorizationContextProvider = (props) => {
         refreshUserProfile: refreshUserProfile,
         changePageState: changePageState,
         setApiSession: setApiSession,
-        setPageState: setPageState
+        setPageState: setPageState,
+        initialize: initialize
     }}>
         {props.children}
     </AuthorizationContext.Provider>
