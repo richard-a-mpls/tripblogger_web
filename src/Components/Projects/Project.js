@@ -2,8 +2,8 @@ import ProjectDay from "./ProjectDay";
 import ShareStatus from "./ShareStatus";
 import ProjectActionButtons from "./ProjectActionButtons";
 import axios from "axios";
-import React, {useContext, useState} from "react";
-import AuthorizationContext from "../../Context/authorization_context";
+import React, {useState} from "react";
+import {STORAGE_APITOKEN} from "../../Context/authorization_context";
 import Input from "../UI/Input";
 import FormData from "form-data";
 import UploadGroup from "../PhotoGroups/UploadGroup";
@@ -15,8 +15,6 @@ const Project = (props) => {
 
     const [tmpPhotoId, setTmpPhotoId] = useState();
     const [uploadingTmpPhoto, setUploadingTmpPhoto] = useState(false);
-
-    const authCtx = useContext(AuthorizationContext);
 
     let date = new Date();
     if (props.project.datestmp !== undefined) {
@@ -37,7 +35,7 @@ const Project = (props) => {
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + authCtx.apiToken
+                    'Authorization': 'Bearer ' + localStorage.getItem(STORAGE_APITOKEN)
                 }
             })
             .then(response => console.log(response.data));
@@ -64,7 +62,7 @@ const Project = (props) => {
 
     const submitEdit = () => {
         axios.patch('http://localhost:8080/v1/me/projects/' + props.project._id, JSON.stringify(updateData), { // receive two parameter endpoint url ,form data
-            headers: {Authorization: `Bearer ${authCtx.apiToken}`, 'Content-Type': 'application/json',}
+            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`, 'Content-Type': 'application/json',}
         })
             .then(response => {
                 props.resetProject(response.data);
@@ -76,7 +74,7 @@ const Project = (props) => {
         console.log("POST");
         console.log(updateData);
         axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateData), { // receive two parameter endpoint url ,form data
-            headers: {Authorization: `Bearer ${authCtx.apiToken}`, 'Content-Type': 'application/json',}
+            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`, 'Content-Type': 'application/json',}
         })
             .then(response => {
                 props.resetProject(response.data);
@@ -92,7 +90,7 @@ const Project = (props) => {
             {
                 headers: {
                     'Content-Type': "multipart/form-data; boundary=--------------------------a string of numbers that is never the same",
-                    'Authorization': 'Bearer ' + authCtx.apiToken
+                    'Authorization': 'Bearer ' + localStorage.getItem(STORAGE_APITOKEN)
                 }
             })
             .then(response => {

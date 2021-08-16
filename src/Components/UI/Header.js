@@ -9,7 +9,7 @@ const Header = () => {
         <header className="wb-form-control">
             <div className="left-item">
                 <button className="button-profile" onClick={authCtx.editProfileClickHandler}>
-                    <img alt="avatar" src={authCtx.fbPicture} className="profile-pic"/>&nbsp;{authCtx.userProfile.profile_name}
+                    <img alt="avatar" src={localStorage.getItem('profileUrl')} className="profile-pic"/>&nbsp;{authCtx.userProfile.profile_name}
                 </button>
             </div>
             <div className="right-item">

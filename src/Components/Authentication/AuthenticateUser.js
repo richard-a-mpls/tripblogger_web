@@ -8,22 +8,24 @@ const AuthenticateUser = () => {
 
     const authCtx = useContext(AuthorizationContext)
     const responseFacebook = (response) => {
-        console.log(response);
-        authCtx.setFbInfo(response, response.picture.data.url);
+        localStorage.setItem('profileUrl', response.picture.data.url);
         if (response.accessToken) {
             axios.post(
                 "http://localhost:8080/v1/authorize",
                 JSON.stringify({"identity_token": response.accessToken}),
                 {headers: {'Content-Type': 'application/json'}})
-                .then(response => authCtx.setApiSession(response.data));
+                .then(
+                    response => authCtx.setApiSession(response.data.api_token)
+                );
         } else {
         }
+        authCtx.showWelcomePage();
     }
 
     return (
         <FacebookLogin
             appId="1004027110356208"
-            autoLoad={true}
+            autoLoad={false}
             fields="name,email,picture"
             scope="public_profile email"
             callback={responseFacebook}

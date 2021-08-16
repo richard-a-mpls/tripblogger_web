@@ -2,10 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 
 const AuthorizationContext = React.createContext({
-    apiToken: '',
-    login: false,
     userProfile: '',
-    fbPicture: undefined,
     pageState: 'welcome_message',
     editProfileClickHandler: () => {},
     logoutHandler: () => {},
@@ -15,31 +12,31 @@ const AuthorizationContext = React.createContext({
     changePageState: () => {},
     setApiSession: () => {},
     setPageState: () => {},
-    setFbInfo: () => {}
+    initialize: () => {}
 });
 
+export const STORAGE_APITOKEN='apiToken';
+export const STORAGE_LOGGEDIN='logged_in';
+
+
+
 export const AuthorizationContextProvider = (props) => {
-    const [apiToken, setApiToken] = useState('');
-    const [login, setLogin] = useState(false);
     const [userProfile, setUserProfile] = useState('');
     const [pageState, setPageState] = useState('welcome_message');
-    const [fbPicture, setFbPicture] = useState('');
-
-    const setFbInfo = (dataReturned, pictureReturned) => {
-        setFbPicture(pictureReturned);
-    };
 
     const setApiSession = (apiTokenId) => {
-        console.log(apiTokenId.api_token);
-        setApiToken(apiTokenId.api_token);
+        localStorage.setItem(STORAGE_APITOKEN, apiTokenId);
         // TODO
         //do i have projects already if userHasProjects setPageState=something
-        setLogin(true);
-
+        localStorage.setItem(STORAGE_LOGGEDIN, 'yes');
         axios.get('https://my-react.local:3000/v1/profile', {
-            headers: {Authorization: `Bearer ${apiTokenId.api_token}`}
+            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
-            .then(response => setUserProfile(response.data));
+            .then(response => setUserProfile(response.data))
+            .catch(error => {
+                console.log(error);
+                logoutHandler();
+            });
     };
 
     const refreshUserProfile = (newUserProfile) => {
@@ -48,9 +45,9 @@ export const AuthorizationContextProvider = (props) => {
     }
 
     const logoutHandler = () => {
-        setApiToken('');
+        localStorage.removeItem(STORAGE_APITOKEN);
+        localStorage.removeItem(STORAGE_LOGGEDIN);
         setPageState('');
-        setLogin(false);
     };
 
     const showWelcomePage = () => {
@@ -69,12 +66,17 @@ export const AuthorizationContextProvider = (props) => {
         changePageState("edit_profile");
     };
 
+    const initialize = () => {
+        console.log("setup");
+        if (localStorage.getItem(STORAGE_APITOKEN) && !userProfile) {
+            setApiSession(localStorage.getItem(STORAGE_APITOKEN));
+            setPageState('welcome_message')
+        }
+    }
+
     return <AuthorizationContext.Provider value={{
-        apiToken: apiToken,
-        login: login,
         userProfile: userProfile,
         pageState: pageState,
-        fbPicture: fbPicture,
         editProfileClickHandler: editProfileClickHandler,
         logoutHandler: logoutHandler,
         showProjectView: showProjectView,
@@ -83,7 +85,7 @@ export const AuthorizationContextProvider = (props) => {
         changePageState: changePageState,
         setApiSession: setApiSession,
         setPageState: setPageState,
-        setFbInfo: setFbInfo
+        initialize: initialize
     }}>
         {props.children}
     </AuthorizationContext.Provider>
