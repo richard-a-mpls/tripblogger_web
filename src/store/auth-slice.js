@@ -19,6 +19,7 @@ const authSlice = createSlice({
         },
         logout(state) {
             localStorage.removeItem(STORAGE_APITOKEN);
+            state.apiToken = null;
             state.loggedIn = false;
         },
         login(state) {
@@ -54,6 +55,18 @@ export const authorizeFacebook = (fbAccessToken) => {
                 dispatch(authActions.setApiToken(response.data.api_token));
             });
     }
+}
+
+export const endSession = () => {
+    return async (dispatch) => {
+        axios.get('https://my-react.local:3000/v1/logout/?apiToken=' + localStorage.getItem(STORAGE_APITOKEN), {
+            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
+        })
+            .then(response => {
+                console.log(response.data);
+                dispatch(authActions.logout());
+            });
+    };
 }
 
 export const authActions = authSlice.actions;
