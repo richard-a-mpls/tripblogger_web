@@ -5,7 +5,7 @@ import {updateProfile} from "../../store/profile-slice";
 const EditProfile = (props) => {
 
     const dispatch = useDispatch();
-    const userProfile = useSelector(state => state.authSlice.userProfile);
+    const userProfile = useSelector(state => state.profileSlice.userProfile);
 
     const [profileName, setProfileName] = useState(userProfile.profile_name);
 
