@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 const Header = () => {
 
     const dispatch = useDispatch();
-    const userProfile = useSelector(state => state.authSlice.userProfile);
+    const userProfile = useSelector(state => state.profileSlice.userProfile);
 
     const editProfileClickHandler = () => {
         dispatch(uiActions.changePageState("edit_profile"));
