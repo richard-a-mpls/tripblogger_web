@@ -9,20 +9,19 @@ import BloggerCard from "./Components/UI/BloggerCard";
 import Header from "./Components/UI/Header";
 import AuthorizationContext, {STORAGE_APITOKEN} from "./Context/authorization_context";
 
-import {setupProfile} from "./store/auth-slice";
+import {authorizeSession} from "./store/auth-slice";
 import {useDispatch, useSelector} from "react-redux";
 import {uiActions} from "./store/ui-slice";
 
 function App() {
     const authCtx = useContext(AuthorizationContext);
-    //authCtx.initialize();
     const dispatch = useDispatch();
     const loggedIn = useSelector(state => state.authSlice.loggedIn);
     const pageState = useSelector(state => state.uiSlice.pageState);
     const apiToken = useSelector(state => state.authSlice.apiToken);
 
     useEffect(() => {
-        dispatch(setupProfile(apiToken));
+        dispatch(authorizeSession());
     }, [apiToken, dispatch]);
 
     const showProjectViewHandler = () => {
