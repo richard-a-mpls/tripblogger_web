@@ -3,10 +3,14 @@ import FacebookLogin from 'react-facebook-login';
 import axios from "axios";
 import {useContext} from "react";
 import AuthorizationContext from "../../Context/authorization_context";
+import {useDispatch} from "react-redux";
+import {authActions} from "../../store/auth-slice";
 
 const AuthenticateUser = () => {
 
     const authCtx = useContext(AuthorizationContext)
+    const dispatch = useDispatch();
+
     const responseFacebook = (response) => {
         localStorage.setItem('profileUrl', response.picture.data.url);
         if (response.accessToken) {
@@ -14,9 +18,7 @@ const AuthenticateUser = () => {
                 "http://localhost:8080/v1/authorize",
                 JSON.stringify({"identity_token": response.accessToken}),
                 {headers: {'Content-Type': 'application/json'}})
-                .then(
-                    response => authCtx.setApiSession(response.data.api_token)
-                );
+                .then(response => dispatch(authActions.setApiToken(response.data.api_token)));
         } else {
         }
         authCtx.showWelcomePage();
