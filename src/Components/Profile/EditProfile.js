@@ -1,28 +1,22 @@
 import React, {useState} from "react";
-import {STORAGE_APITOKEN} from "../../Context/authorization_context";
+import {useDispatch, useSelector} from "react-redux";
+import {updateProfile} from "../../store/profile-slice";
 
 const EditProfile = (props) => {
 
-    const [profileName, setProfileName] = useState(props.userProfile.profile_name);
+    const dispatch = useDispatch();
+    const userProfile = useSelector(state => state.authSlice.userProfile);
+
+    const [profileName, setProfileName] = useState(userProfile.profile_name);
 
     const cancelEditProfileHandler = () => {
-        props.changePageState("welcome_message");
+        props.showWelcomePage();
     };
 
     const submitEditProfileHandler = (event) => {
         event.preventDefault();
-        const updateValue = {"profile_name": profileName}
-        fetch('http://localhost:8080/v1/profile/' + props.userProfile._id, {
-            method: 'patch',
-            body: JSON.stringify(updateValue),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem(STORAGE_APITOKEN)
-            })
-        })
-            .then(response => response.json())
-            .then(data => props.refreshUserProfile(data));
-        props.changePageState("welcome_message");
+        dispatch(updateProfile(userProfile._id, {"profile_name": profileName}))
+        props.showWelcomePage();
     };
 
     const profileNameChangeHandler = (event) => {
