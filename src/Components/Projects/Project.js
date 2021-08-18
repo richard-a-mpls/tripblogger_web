@@ -30,7 +30,7 @@ const Project = (props) => {
         {value: "public", label: "Everyone"}
     ];
 
-    const deleteHandler = (event) => {
+    const deleteHandler = () => {
         axios.delete('https://my-react.local:3000/v1/me/projects/' + props.project._id,
             {
                 headers: {
@@ -189,7 +189,9 @@ const Project = (props) => {
                         <img alt={imageId} style={{margin: "2px"}} key={imageId}
                              src={`https://my-react.local:3000/v1/photos/${imageId}`}/>
                     )}
+                    {props.view !== 'list' &&
                     <UploadGroup projectId={props.project._id} photoArray={props.project.photo_array}/>
+                    }
                 </div>
                 }
             </div>
