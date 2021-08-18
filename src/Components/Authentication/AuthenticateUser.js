@@ -1,13 +1,9 @@
 import FacebookLogin from 'react-facebook-login';
-
-import {useContext} from "react";
-import AuthorizationContext from "../../Context/authorization_context";
 import {useDispatch} from "react-redux";
 import {authorizeFacebook} from "../../store/auth-slice";
 
 const AuthenticateUser = () => {
 
-    const authCtx = useContext(AuthorizationContext)
     const dispatch = useDispatch();
 
     const responseFacebook = (response) => {
