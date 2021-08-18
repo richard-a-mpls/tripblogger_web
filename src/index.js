@@ -4,11 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {AuthorizationContextProvider} from "./Context/authorization_context";
+import {Provider} from "react-redux";
+import store from "./store/index";
 
 ReactDOM.render(
     <React.StrictMode>
         <AuthorizationContextProvider>
-            <App/>
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </AuthorizationContextProvider>
     </React.StrictMode>,
     document.getElementById('root')
