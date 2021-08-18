@@ -7,8 +7,11 @@ import {STORAGE_APITOKEN} from "../../Context/authorization_context";
 import Input from "../UI/Input";
 import FormData from "form-data";
 import UploadGroup from "../PhotoGroups/UploadGroup";
+import {useDispatch} from "react-redux";
+import {createProject, removeProject, updateProject} from "../../store/project-slice";
 
 const Project = (props) => {
+    const dispatch = useDispatch();
     const [editing, setEditing] = useState(false);
     const [updateData, setUpdateData] = useState({});
     const [showAudience, setShowAudience] = useState();
@@ -30,16 +33,8 @@ const Project = (props) => {
         {value: "public", label: "Everyone"}
     ];
 
-    const deleteHandler = (event) => {
-        axios.delete('https://my-react.local:3000/v1/me/projects/' + props.project._id,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem(STORAGE_APITOKEN)
-                }
-            })
-            .then(response => console.log(response.data));
-        props.removeProject(props.project._id);
+    const deleteHandler = () => {
+        dispatch(removeProject(props.project._id));
     }
 
     const updateDataHandler = (attribute, value) => {
@@ -61,25 +56,11 @@ const Project = (props) => {
     }
 
     const submitEdit = () => {
-        axios.patch('http://localhost:8080/v1/me/projects/' + props.project._id, JSON.stringify(updateData), { // receive two parameter endpoint url ,form data
-            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`, 'Content-Type': 'application/json',}
-        })
-            .then(response => {
-                props.resetProject(response.data);
-                props.updateProjectList(response.data);
-            });
+        dispatch(updateProject(props.project._id, updateData));
     }
 
     const submitCreate = () => {
-        console.log("POST");
-        console.log(updateData);
-        axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(updateData), { // receive two parameter endpoint url ,form data
-            headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`, 'Content-Type': 'application/json',}
-        })
-            .then(response => {
-                props.resetProject(response.data);
-                props.updateProjectList(response.data);
-            });
+        dispatch(createProject(updateData));
     }
 
     const setPhotoDataHandler = (event) => {
