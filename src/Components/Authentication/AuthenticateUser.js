@@ -1,28 +1,20 @@
-import FacebookLogin from 'react-facebook-login';
 import {useDispatch} from "react-redux";
-import {authorizeFacebook} from "../../store/auth-slice";
+import {authorizeB2C} from "../../store/auth-slice";
+import {useEffect} from "react";
+import authentication from 'react-azure-b2c';
 
 const AuthenticateUser = () => {
 
     const dispatch = useDispatch();
 
-    const responseFacebook = (response) => {
-        localStorage.setItem('profileUrl', response.picture.data.url);
-        if (response.accessToken) {
-            dispatch(authorizeFacebook(response.accessToken))
-        } else {
-        }
-    }
+    const accessToken = authentication.getAccessToken();
 
-    return (
-        <FacebookLogin
-            appId="1004027110356208"
-            autoLoad={false}
-            fields="name,email,picture"
-            scope="public_profile email"
-            callback={responseFacebook}
-            icon="fa-facebook"/>
-    );
+    useEffect(() => {
+        dispatch(authorizeB2C(accessToken.idToken.rawIdToken));
+    }, [dispatch, accessToken]);
+
+    return <p>Authorizing...</p>
+
 }
 
 export default AuthenticateUser;

@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {setupProfile} from "./profile-slice";
 import axios from "axios";
+import authentication from "react-azure-b2c/lib/react-azure-adb2c";
 
 export const STORAGE_APITOKEN = 'apiToken';
 
@@ -44,6 +45,19 @@ export const authorizeSession = () => {
     }
 }
 
+export const authorizeB2C = (b2cAccessToken) => {
+    return async (dispatch) => {
+        await axios.post(
+            "http://localhost:8080/v1/authorize",
+            JSON.stringify({"identity_token": b2cAccessToken}),
+            {headers: {'Content-Type': 'application/json'}})
+            .then(response => {
+                console.log(response.data.api_token);
+                dispatch(authActions.setApiToken(response.data.api_token));
+            });
+    }
+}
+
 export const authorizeFacebook = (fbAccessToken) => {
     return async (dispatch) => {
         await axios.post(
@@ -62,12 +76,17 @@ export const endSession = () => {
         axios.get('https://my-react.local:3000/v1/logout/?apiToken=' + localStorage.getItem(STORAGE_APITOKEN), {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
-            .then(response => {
-                console.log(response.data);
+            .then(() => {
+                authentication.signOut();
+            })
+            .then(() => {
+                //console.log(response.data);
                 dispatch(authActions.logout());
-            });
+            })
     };
-}
+
+};
+
 
 export const authActions = authSlice.actions;
 

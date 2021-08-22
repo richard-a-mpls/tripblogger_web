@@ -11,6 +11,7 @@
     "bootstrap": "^5.0.2",
     "form-data": "^4.0.0",
     "react": "^17.0.2",
+    "react-azure-b2c": "^1.0.0-beta.5",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-facebook-login": "^4.1.1",

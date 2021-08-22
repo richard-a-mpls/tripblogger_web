@@ -16,7 +16,9 @@ const Header = () => {
         <header className="wb-form-control">
             <div className="left-item">
                 <button className="button-profile" onClick={editProfileClickHandler}>
-                    <img alt="avatar" src={localStorage.getItem('profileUrl')} className="profile-pic"/>&nbsp;{userProfile.profile_name}
+                    {localStorage.getItem('profileUrl') && <img alt="avatar" src={localStorage.getItem('profileUrl')} className="profile-pic"/>}
+                    {!localStorage.getItem('profileUrl') && <img alt="avatar" src="/v1/photos/61215421878dc8e7d6c3b217" className="profile-pic"/> }
+                    &nbsp;{userProfile.profile_name}
                 </button>
             </div>
             <div className="right-item">

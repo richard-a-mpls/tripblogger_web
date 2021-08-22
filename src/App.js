@@ -12,7 +12,6 @@ import AuthorizationContext, {STORAGE_APITOKEN} from "./Context/authorization_co
 import {authorizeSession} from "./store/auth-slice";
 import {useDispatch, useSelector} from "react-redux";
 import {uiActions} from "./store/ui-slice";
-
 function App() {
     const authCtx = useContext(AuthorizationContext);
     const dispatch = useDispatch();
