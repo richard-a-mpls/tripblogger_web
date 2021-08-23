@@ -1,7 +1,6 @@
 import React from "react";
 import {useMsal} from "@azure/msal-react";
 import {loginRequest} from "../authConfig";
-import Button from "react-bootstrap/Button";
 
 /**
  * Renders a button which, when selected, will open a popup for login
