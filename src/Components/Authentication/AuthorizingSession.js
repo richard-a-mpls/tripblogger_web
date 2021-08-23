@@ -21,7 +21,6 @@ const AuthorizingSession = () => {
         };
         instance.acquireTokenSilent(request).then((response) => {
             const accessToken = response.accessToken;
-            console.log(response.accessToken);
             dispatch(authorizeB2C(accessToken));
         });
 

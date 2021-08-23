@@ -20,7 +20,6 @@ const profileSlice = createSlice({
 export const setupProfile = (apiToken) => {
     return async (dispatch) => {
         try {
-            console.log(apiToken);
             axios.get('https://my-react.local:3000/v1/profile', {
                 headers: {Authorization: `Bearer ${apiToken}`}
             })
