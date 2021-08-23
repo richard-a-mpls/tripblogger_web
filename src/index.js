@@ -6,28 +6,23 @@ import reportWebVitals from './reportWebVitals';
 import {AuthorizationContextProvider} from "./Context/authorization_context";
 import {Provider} from "react-redux";
 import store from "./store/index";
-import authentication from 'react-azure-b2c';
-authentication.initialize({
-    tenant: 'rcaazdemo.onmicrosoft.com',
-    signInPolicy: 'B2C_1_BLoggerSignin',
-    clientId: '9375dba2-4e5f-4377-863e-b231c608eada',
-    cacheLocation: 'sessionStorage',
-    scopes: ['9375dba2-4e5f-4377-863e-b231c608eada openid'],
-    redirectUri: 'https://my-react.local:3000/',
-    postLogoutRedirectUri: 'https://my-react.local:3000/'
-});
+import {msalConfig} from "./authConfig";
+import {PublicClientApplication} from "@azure/msal-browser";
+import {MsalProvider} from "@azure/msal-react";
 
-authentication.run(() => {
+const msalInstance = new PublicClientApplication(msalConfig);
 ReactDOM.render(
     <React.StrictMode>
         <AuthorizationContextProvider>
             <Provider store={store}>
-                <App/>
+                <MsalProvider instance={msalInstance}>
+                    <App/>
+                </MsalProvider>
             </Provider>
         </AuthorizationContextProvider>
     </React.StrictMode>,
     document.getElementById('root')
-)});
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

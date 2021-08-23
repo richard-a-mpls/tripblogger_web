@@ -105,6 +105,8 @@ header img.profile-pic {
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
     margin-top: 15px;
     background-color: #26567b;
     width: 100%;
@@ -355,4 +357,19 @@ main .content i.showcase {
 .inputfile:focus + label,
 .inputfile + label:hover {
     background-color: red;
+}
+
+.logoblock {
+    background-color: #26567b;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border: 2px solid #26567b;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-right: 5px;
 }

@@ -1,7 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {setupProfile} from "./profile-slice";
 import axios from "axios";
-import authentication from "react-azure-b2c/lib/react-azure-adb2c";
 
 export const STORAGE_APITOKEN = 'apiToken';
 
@@ -21,22 +20,29 @@ const authSlice = createSlice({
         logout(state) {
             localStorage.removeItem(STORAGE_APITOKEN);
             state.apiToken = null;
-            state.loggedIn = false;
+            state.loggedIn = 'pending';
         },
-        login(state) {
-            state.loggedIn = true;
+        login(state, action) {
+            state.loggedIn = action.payload;
         }
     }
 });
 
-export const authorizeSession = () => {
+export const authorizeSession = (apiToken) => {
     return async (dispatch) => {
-        if (localStorage.getItem(STORAGE_APITOKEN)) {
+        if (!apiToken) {
+            apiToken = localStorage.getItem(STORAGE_APITOKEN);
+        }
+
+        dispatch(authActions.login('authorizing'))
+        if (apiToken) {
             // verify the token by getting user profile
             try {
-                await dispatch(setupProfile(localStorage.getItem(STORAGE_APITOKEN)));
-                dispatch(authActions.login());
+                await dispatch(setupProfile(apiToken));
+                dispatch(authActions.login('complete'));
             } catch (error) {
+                console.log(error);
+                localStorage.removeItem(STORAGE_APITOKEN);
                 dispatch(authActions.logout());
             }
         } else {
@@ -52,21 +58,8 @@ export const authorizeB2C = (b2cAccessToken) => {
             JSON.stringify({"identity_token": b2cAccessToken}),
             {headers: {'Content-Type': 'application/json'}})
             .then(response => {
-                console.log(response.data.api_token);
                 dispatch(authActions.setApiToken(response.data.api_token));
-            });
-    }
-}
-
-export const authorizeFacebook = (fbAccessToken) => {
-    return async (dispatch) => {
-        await axios.post(
-            "http://localhost:8080/v1/authorize",
-            JSON.stringify({"identity_token": fbAccessToken}),
-            {headers: {'Content-Type': 'application/json'}})
-            .then(response => {
-                console.log(response.data.api_token);
-                dispatch(authActions.setApiToken(response.data.api_token));
+                dispatch(authorizeSession(response.data.api_token));
             });
     }
 }
@@ -77,16 +70,10 @@ export const endSession = () => {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(() => {
-                authentication.signOut();
-            })
-            .then(() => {
-                //console.log(response.data);
                 dispatch(authActions.logout());
             })
     };
-
 };
-
 
 export const authActions = authSlice.actions;
 
