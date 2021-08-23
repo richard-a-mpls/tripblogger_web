@@ -6,12 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import {AuthorizationContextProvider} from "./Context/authorization_context";
 import {Provider} from "react-redux";
 import store from "./store/index";
+import {msalConfig} from "./authConfig";
+import {PublicClientApplication} from "@azure/msal-browser";
+import {MsalProvider} from "@azure/msal-react";
 
+const msalInstance = new PublicClientApplication(msalConfig);
 ReactDOM.render(
     <React.StrictMode>
         <AuthorizationContextProvider>
             <Provider store={store}>
-                <App/>
+                <MsalProvider instance={msalInstance}>
+                    <App/>
+                </MsalProvider>
             </Provider>
         </AuthorizationContextProvider>
     </React.StrictMode>,

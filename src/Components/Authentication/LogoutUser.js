@@ -1,20 +1,20 @@
 import React from "react";
-import {useDispatch} from "react-redux";
-import {endSession} from "../../store/auth-slice";
+import {useMsal} from "@azure/msal-react";
 
 const LogoutUser = () => {
 
-    const dispatch = useDispatch();
+    const { instance } = useMsal();
 
-    const endSessionHandler = (event) => {
-        event.preventDefault();
-        dispatch(endSession());
+    const endSessionHandler = () => {
+        instance.logoutPopup().catch(e => {
+            console.error(e);
+        });
     }
 
     return (
-        <form onSubmit={endSessionHandler}>
-            <button type="submit">Log Out</button>
-        </form>
+        <>
+            <button type="button" onClick={endSessionHandler}>Log Out</button>
+        </>
     );
 };
 

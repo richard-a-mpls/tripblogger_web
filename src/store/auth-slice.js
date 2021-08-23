@@ -20,22 +20,29 @@ const authSlice = createSlice({
         logout(state) {
             localStorage.removeItem(STORAGE_APITOKEN);
             state.apiToken = null;
-            state.loggedIn = false;
+            state.loggedIn = 'pending';
         },
-        login(state) {
-            state.loggedIn = true;
+        login(state, action) {
+            state.loggedIn = action.payload;
         }
     }
 });
 
-export const authorizeSession = () => {
+export const authorizeSession = (apiToken) => {
     return async (dispatch) => {
-        if (localStorage.getItem(STORAGE_APITOKEN)) {
+        if (!apiToken) {
+            apiToken = localStorage.getItem(STORAGE_APITOKEN);
+        }
+
+        dispatch(authActions.login('authorizing'))
+        if (apiToken) {
             // verify the token by getting user profile
             try {
-                await dispatch(setupProfile(localStorage.getItem(STORAGE_APITOKEN)));
-                dispatch(authActions.login());
+                await dispatch(setupProfile(apiToken));
+                dispatch(authActions.login('complete'));
             } catch (error) {
+                console.log(error);
+                localStorage.removeItem(STORAGE_APITOKEN);
                 dispatch(authActions.logout());
             }
         } else {
@@ -44,15 +51,15 @@ export const authorizeSession = () => {
     }
 }
 
-export const authorizeFacebook = (fbAccessToken) => {
+export const authorizeB2C = (b2cAccessToken) => {
     return async (dispatch) => {
         await axios.post(
             "http://localhost:8080/v1/authorize",
-            JSON.stringify({"identity_token": fbAccessToken}),
+            JSON.stringify({"identity_token": b2cAccessToken}),
             {headers: {'Content-Type': 'application/json'}})
             .then(response => {
-                console.log(response.data.api_token);
                 dispatch(authActions.setApiToken(response.data.api_token));
+                dispatch(authorizeSession(response.data.api_token));
             });
     }
 }
@@ -62,12 +69,11 @@ export const endSession = () => {
         axios.get('https://my-react.local:3000/v1/logout/?apiToken=' + localStorage.getItem(STORAGE_APITOKEN), {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
-            .then(response => {
-                console.log(response.data);
+            .then(() => {
                 dispatch(authActions.logout());
-            });
+            })
     };
-}
+};
 
 export const authActions = authSlice.actions;
 

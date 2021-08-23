@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@azure/msal-browser": "^2.16.1",
+    "@azure/msal-react": "^1.0.1",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -11,6 +13,7 @@
     "bootstrap": "^5.0.2",
     "form-data": "^4.0.0",
     "react": "^17.0.2",
+    "react-azure-b2c": "^1.0.0-beta.5",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-facebook-login": "^4.1.1",
