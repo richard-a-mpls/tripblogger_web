@@ -15,7 +15,7 @@ const ProjectPostcard = (props) => {
                 <p className={styles.paragraph}>
                     {props.project.description}
                 </p>
-                <h6 className={styles.text}>Published: <DateConverter date={props.project.datestmp}/></h6>
+                <h6 className={styles.text}><DateConverter date={props.project.datestmp}/></h6>
             </div>
         </div>
     </>);
