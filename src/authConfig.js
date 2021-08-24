@@ -6,7 +6,8 @@ const b2cPolicies = {
     },
     authorities: {
         signUpSignIn: {
-            authority: "https://rcaazdemo.b2clogin.com/rcaazdemo.onmicrosoft.com/B2C_1_BLoggerSignin",
+            authority: "https://rcaazdemo.b2clogin.com/rcaazdemo.onmicrosoft.com/B2C_1_BLoggerSignin"
+            //authority: "https://rcaazdemo.b2clogin.com/rcaazdemo.onmicrosoft.com/B2C_1_BLoggerSUSI"
         }//,
         // forgotPassword: {
         //     authority: "https://your-tenant-name.b2clogin.com/your-tenant-name.onmicrosoft.com/b2c_1_reset",
