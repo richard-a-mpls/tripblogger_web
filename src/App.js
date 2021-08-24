@@ -13,6 +13,7 @@ import {uiActions} from "./store/ui-slice";
 import {AuthenticatedTemplate, UnauthenticatedTemplate} from "@azure/msal-react";
 import AuthorizingSession from "./Components/Authentication/AuthorizingSession";
 import EndSession from "./Components/Authentication/EndSession";
+import PublicProjectsList from "./Components/Projects/PublicProjectsList";
 
 function App() {
     const authCtx = useContext(AuthorizationContext);
@@ -35,6 +36,7 @@ function App() {
                     {loggedIn === 'complete' &&
                     <EndSession/>
                     }
+                    <PublicProjectsList/>
                 </UnauthenticatedTemplate>
                 <AuthenticatedTemplate>
                     {loggedIn === 'pending' &&
@@ -58,7 +60,6 @@ function App() {
                     <br/>
                     <center>
                         <p>
-                            API Token: {localStorage.getItem(STORAGE_APITOKEN)}<br/>
                             Page State: {pageState}<br/>
                             Logged In: {loggedIn}
                         </p>
