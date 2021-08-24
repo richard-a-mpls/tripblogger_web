@@ -4,6 +4,8 @@ import {STORAGE_APITOKEN} from "./auth-slice";
 
 const initialState = {
     projectList: [],
+    publicProjectList: [],
+    connectionsProjectList: [],
     activeProject: {}
 };
 
@@ -32,6 +34,12 @@ const projectSlice = createSlice({
         },
         setActiveProject(state, action) {
             state.activeProject = action.payload;
+        },
+        setPublicProjectList(state, action) {
+            state.publicProjectList = action.payload;
+        },
+        setConnectionsProjectList(state, action) {
+            state.connectionsProjectList = action.payload;
         }
     }
 });
@@ -61,6 +69,31 @@ export const loadProjectList = () => {
         })
             .then(response => {
                 dispatch(projectActions.setProjectList(response.data));
+            });
+    }
+}
+
+export const loadPublicProjectList = () => {
+    return dispatch => {
+        let options = {};
+        if (localStorage.getItem(STORAGE_APITOKEN)) {
+            options = {headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}}
+        } else {
+            options = {headers: {Authorization: `Bearer nothing`}}
+        }
+        axios.get('https://my-react.local:3000/v1/public/projects', options)
+            .then(response => {
+                dispatch(projectActions.setPublicProjectList(response.data));
+            });
+    }
+}
+export const loadConnectionsProjectList = () => {
+    return dispatch => {
+        axios.get('https://my-react.local:3000/v1/connections/projects', {
+                headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
+            })
+            .then(response => {
+                dispatch(projectActions.setConnectionsProjectList(response.data));
             });
     }
 }
