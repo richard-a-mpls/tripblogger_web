@@ -73,10 +73,10 @@ export const loadProjectList = () => {
     }
 }
 
-export const loadPublicProjectList = () => {
+export const loadPublicProjectList = (isAuthenticated) => {
     return dispatch => {
         let options = {};
-        if (localStorage.getItem(STORAGE_APITOKEN)) {
+        if (localStorage.getItem(STORAGE_APITOKEN) && isAuthenticated) {
             options = {headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}}
         } else {
             options = {headers: {Authorization: `Bearer nothing`}}

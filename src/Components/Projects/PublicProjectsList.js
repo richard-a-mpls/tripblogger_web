@@ -22,8 +22,8 @@ const PublicProjectsList = () => {
     }
 
     useEffect(() => {
-        dispatch(loadPublicProjectList())
-    }, [dispatch]);
+        dispatch(loadPublicProjectList(isAuthenticated))
+    }, [dispatch, isAuthenticated]);
 
     return (
         <>
