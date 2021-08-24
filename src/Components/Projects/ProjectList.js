@@ -18,7 +18,6 @@ const ProjectList = props => {
                 editProjectHandler={props.editProjectHandler}
                 view="list"
             />)}
-            {(!props.projectList || props.projectList.length === 0) && <p>create a new project</p>}
         </>
     );
 }
