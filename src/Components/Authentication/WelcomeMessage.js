@@ -1,4 +1,11 @@
+import {useState} from "react";
+import PublicProjectsList from "../Projects/PublicProjectsList";
+import MyProjectsList from "../Projects/MyProjectsList";
+import ConnectionsProjectsList from "../Projects/ConnectionsProjectsList";
+
 const WelcomeMessage = (props) => {
+
+    const [showConnectionsProjects, setShowConnectionsProjects] = useState(false);
 
     return (
         <main>
@@ -15,15 +22,15 @@ const WelcomeMessage = (props) => {
                 </p>
                 <p>To get started, click the get started button to the upper-right.</p>
             </div>
-            <main>
+            {showConnectionsProjects && <main>
                 <header>
                     <h4>Connections: Recent Projects</h4>
                     <form className="wb-form-control">
                         <button type="button" onClick={props.changePageState}>&gt;&gt;</button>
                     </form>
                 </header>
-                <p className="content">PLACEHOLDER: be the first to publish a project.</p>
-            </main>
+                <ConnectionsProjectsList/>
+            </main>}
             <main>
                 <header>
                     <h4>Community: Recent Projects</h4>
@@ -31,7 +38,7 @@ const WelcomeMessage = (props) => {
                         <button type="submit">&gt;&gt;</button>
                     </form>
                 </header>
-                <p className="content">PLACEHOLDER: be the first to publish a project.</p>
+                <PublicProjectsList/>
             </main>
             <main>
                 <header>
@@ -40,7 +47,7 @@ const WelcomeMessage = (props) => {
                         <button type="submit">&gt;&gt;</button>
                     </form>
                 </header>
-                <p className="content">PLACEHOLDER: no projects found.</p>
+                <MyProjectsList/>
             </main>
         </main>
     );
