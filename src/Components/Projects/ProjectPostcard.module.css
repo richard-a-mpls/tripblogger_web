@@ -1,0 +1,51 @@
+.postcard {
+    margin: auto;
+    margin-top: 10px;
+    width: 90%;
+    align-content: center;
+    align-items: center;
+
+}
+
+.contentleft {
+    width: 200px;
+    float: left;
+    display: inline-block;
+    border: 2px solid #26567b;
+    border-bottom-left-radius: 75px;
+    border-top-left-radius: 75px;
+    overflow: hidden;
+    height: 150px;
+    margin-top: 10px;
+}
+.contentright {
+    border-bottom-right-radius: 75px;
+    border-top-right-radius: 75px;
+    border: 2px solid #26567b;
+    width: 70%;
+    float: left;
+    overflow: hidden;
+    display: inline-block;
+    height: 150px;
+    vertical-align: middle;
+    padding-top: 15px;
+    padding-left: 15px;
+    margin-top: 10px;
+}
+.text {
+    display: block;
+}
+
+.paragraph {
+    height: 50px;
+    overflow: scroll;
+    margin-left: 10px;
+    margin-right: 10px;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+
+}
+
+.stamp {
+    height: 150px;
+}
