@@ -166,7 +166,7 @@ const Project = (props) => {
                 ))}
                 {!editing && props.project.photo_array &&
                 <div>
-                    {props.project.photo_array.map((imageId) =>
+                    {props.view !== 'list' && props.project.photo_array.map((imageId) =>
                         <img alt={imageId} style={{margin: "2px"}} key={imageId}
                              src={`https://my-react.local:3000/v1/photos/${imageId}`}/>
                     )}
