@@ -55,6 +55,7 @@ function App() {
                                      showWelcomePage={showWelcomePageHandler}/>
                         }
                     </>}
+                    <br/><br/><br/><br/><br/>
                 </AuthenticatedTemplate>
                 <footer>
                     <br/>
