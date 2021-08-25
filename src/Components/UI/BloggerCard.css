@@ -273,6 +273,11 @@ main .content img {
     vertical-align: middle;
 }
 
+.fullspinner {
+    font-size: 6em;
+    color: #26567b;
+}
+
 /* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
