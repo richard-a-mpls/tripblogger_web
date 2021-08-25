@@ -1,28 +1,29 @@
 .postcard {
-    margin: auto;
-    margin-top: 10px;
-    width: 90%;
-    align-content: center;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: 350px;
     align-items: center;
-
+    align-self: center;
+    align-content: center;
+    alignment: center;
+    border-radius: 75px;
+    overflow: hidden;
+    border: 2px solid #26567b;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #26567b;
 }
 
-.contentleft {
-    width: 200px;
+.contenttop {
+    width: 400px;
     float: left;
     display: inline-block;
-    border: 2px solid #26567b;
-    border-bottom-left-radius: 75px;
-    border-top-left-radius: 75px;
+    height: 200px;
     overflow: hidden;
-    height: 150px;
-    margin-top: 10px;
 }
-.contentright {
-    border-bottom-right-radius: 75px;
-    border-top-right-radius: 75px;
-    border: 2px solid #26567b;
-    width: 70%;
+.contentbottom {
+    width: 100%;
     float: left;
     overflow: hidden;
     display: inline-block;
@@ -30,22 +31,60 @@
     vertical-align: middle;
     padding-top: 15px;
     padding-left: 15px;
-    margin-top: 10px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+
 }
 .text {
     display: block;
 }
 
 .paragraph {
-    height: 50px;
+    height: 100px;
     overflow: scroll;
     margin-left: 10px;
-    margin-right: 10px;
     -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    padding-bottom: 25px;
+}
 
+.imagegroup {
+    display: block;
+    border-top: 4px solid #26567b;
+    max-height: 300px;
+    overflow: scroll;
+    width: 100%;
+    margin-right: 20px;
+    padding-bottom: 20px;
+    background-color: #3574a4;
+}
+
+.projectimage{
+    width: 48%;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 2px;
+    border: 2px solid #26567b;
+}
+
+.expandbar {
+    height: 30px;
+    max-height: 30px;
+    background-color: #26567b;
+    display: inline-block;
+    width: 100%;
+    vertical-align: center;
+    overflow: hidden;
+}
+
+.smallimg{
+    height: 25px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 2px;
+    margin-top: 3px;
 }
 
 .stamp {
-    height: 150px;
+    width: 400px;
 }
