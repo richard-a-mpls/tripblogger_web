@@ -29,7 +29,7 @@ const Project = (props) => {
 
     const shareWithOptions = [
         {value: "private", label: "Only Me"},
-        {value: "connections", label: "My Connections"},
+        //{value: "connections", label: "My Connections"},
         {value: "public", label: "Everyone"}
     ];
 
