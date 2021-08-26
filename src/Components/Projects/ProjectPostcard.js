@@ -15,7 +15,7 @@ const ProjectPostcard = (props) => {
         setImagesExpanded(state => !state);
     }
 
-    let ownerProfile = <i className="fas fa-users" />;
+    let ownerProfile = <i className="fas fa-users" style={{marginRight: "5px"}}/>;
     if (profile._id === props.project.profile_id) {
         ownerProfile = <ProfileImage className="profilePicSm"/>
     }
