@@ -31,12 +31,11 @@ function App() {
     return (
         <BloggerCard>
             {pageState !== 'test' && <>
-                <Header/>
                 <UnauthenticatedTemplate>
                     {loggedIn === 'complete' &&
                     <EndSession/>
                     }
-                    <div className="center">
+                    <div className="center" style={{marginTop: "60px"}}>
                         <PublicProjectsList/>
                     </div>
                 </UnauthenticatedTemplate>
@@ -60,6 +59,7 @@ function App() {
                     <br/><br/><br/><br/><br/>
                 </AuthenticatedTemplate>
                 <br/><br/><br/><br/><br/>
+                <Header/>
                 <footer>
                     <br/>
                     <center>
