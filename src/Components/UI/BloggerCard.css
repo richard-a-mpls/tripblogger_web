@@ -120,12 +120,21 @@ header form {
     vertical-align: center;
 }
 
-header img.profile-pic {
+img.profile-pic {
     height: 40px;
     width: 40px;
     overflow: hidden;
     border-radius: 12px;
     display: inline-block;
+}
+
+img.profilePicSm {
+    height: 25px;
+    width: 25px;
+    overflow: hidden;
+    border-radius: 6px;
+    display: inline-block;
+    margin-right: 5px;
 }
 
 footer {

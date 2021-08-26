@@ -4,6 +4,7 @@ import {uiActions} from "../../store/ui-slice";
 import {useDispatch, useSelector} from "react-redux";
 import {SignInButton} from "../SignInButton";
 import {useIsAuthenticated} from "@azure/msal-react";
+import ProfileImage from "./ProfileImage";
 
 const Header = () => {
 
@@ -20,10 +21,7 @@ const Header = () => {
             <div className="left-item">
                 {isAuthenticated &&
                 <button className="button-profile" onClick={editProfileClickHandler}>
-                    {localStorage.getItem('profileUrl') &&
-                    <img alt="avatar" src={localStorage.getItem('profileUrl')} className="profile-pic"/>}
-                    {!localStorage.getItem('profileUrl') &&
-                    <img alt="avatar" src="/v1/photos/61215421878dc8e7d6c3b217" className="profile-pic"/>}
+                    <ProfileImage className="profile-pic"/>
                     &nbsp;{userProfile.profile_name}
                 </button>
                 }

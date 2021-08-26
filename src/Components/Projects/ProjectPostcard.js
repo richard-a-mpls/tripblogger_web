@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import DateConverter from "../UI/DateConverter";
 import {useIsAuthenticated} from "@azure/msal-react";
+import ProfileImage from "../UI/ProfileImage";
 
 
 const ProjectPostcard = (props) => {
@@ -14,13 +15,16 @@ const ProjectPostcard = (props) => {
         setImagesExpanded(state => !state);
     }
 
+    let ownerProfile = <i className="fas fa-users" />;
+    if (profile._id === props.project.profile_id) {
+        ownerProfile = <ProfileImage className="profilePicSm"/>
+    }
+
     return (<>
         <div className={styles.postcard} onClick={props.onClick}>
             <div className={styles.headertitle}>
                 <h6 className={styles.headertitle}>
-                    {isAuthenticated && profile._id !== props.project.profile_id &&
-                    <i className="fas fa-users" />
-                    }
+                    {isAuthenticated && ownerProfile}
                     <DateConverter date={props.project.datestmp}/>
                 </h6>
             </div>
