@@ -9,6 +9,7 @@ import FormData from "form-data";
 import UploadGroup from "../PhotoGroups/UploadGroup";
 import {useDispatch} from "react-redux";
 import {createProject, removeProject, updateProject} from "../../store/project-slice";
+import styles from './Project.module.css';
 
 const Project = (props) => {
     const dispatch = useDispatch();
@@ -97,9 +98,10 @@ const Project = (props) => {
 
     return (
         <main>
-            <header className='wb-form-control'>
+            <div className={styles.projectHeader}>
                 <Input placeholder="summary" editing={allowEdit} attribute="summary" value={props.project.summary}
-                       className='wb-form-control summary' onUpdate={updateDataHandler}/>
+                       className={styles.summary} onUpdate={updateDataHandler}/>
+                <div className={styles.actionButtons}>
                 <ProjectActionButtons
                     editable={props.view === "edit"}
                     projectId={props.project._id}
@@ -110,7 +112,8 @@ const Project = (props) => {
                     editing={allowEdit}
                     view={props.view}
                     deleteHandler={deleteHandler}/>
-            </header>
+                </div>
+            </div>
             <div className="content">
 
                 {tmpPhotoId &&

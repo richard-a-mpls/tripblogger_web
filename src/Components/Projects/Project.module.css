@@ -1,0 +1,36 @@
+.projectHeader {
+    display: inline-block;
+    background-color: #f5f3f3;
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    border-style: solid;
+    border-color: #ced2d7;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-width: thin;
+}
+
+input.summary {
+    font-weight: bolder;
+    font-size: 1.25em;
+    width: 80%;
+    border-color: #888b8b;
+    border-width: thin;
+    display: inline-block;
+}
+
+label.summary {
+    font-weight: bolder;
+    font-size: 1.25em;
+    width: 80%;
+    border-color: #888b8b;
+    border-width: thin;
+    display: inline-block;
+}
+
+div.actionButtons {
+    width: 20%;
+    text-align: right;
+    display: inline-block;
+}
