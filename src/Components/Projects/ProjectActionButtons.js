@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import styles from './ProjectActionButtons.module.css';
 
 const ProjectActionButtons = (props) => {
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -14,29 +15,28 @@ const ProjectActionButtons = (props) => {
     }
 
     const confirmDeleteHandler = (event) => {
-        event.preventDefault();
         props.deleteHandler();
         setConfirmDelete(false);
     }
 
-    return (
-        <form onSubmit={confirmDeleteHandler}>
-            {!props.editable && props.view !== "create" && !confirmDelete &&
+
+    return (<div className={styles.display}>
+        {!props.editable && props.view !== "create" && !confirmDelete &&
+        <button type="button"
+                onClick={initiateEditHandler}><i className="fas fa-eye"></i>
+        </button>
+        }
+        {confirmDelete &&
             <div className="wb-form-control">
-                <button type="button"
-                        onClick={initiateEditHandler}><i className="fas fa-eye"></i>
-                </button>
-            </div>
-            }
-            {confirmDelete &&
-            <div className="wb-form-control">
-                <button className="confirm" type="submit"><i className="fas fa-check"/></button>
+                <button className="confirm" type="button"
+                        onClick={confirmDeleteHandler}><i className="fas fa-check"/></button>
                 <button className="cancel" type="button"
                         onClick={cancelDeleteHandler}><i className="fas fa-times"/>
                 </button>
             </div>
-            }
-            {!confirmDelete && props.editable && !props.editing &&
+        }
+        {
+            !confirmDelete && props.editable && !props.editing &&
             <div className="wb-form-control">
                 <button type="button" onClick={initiateDeleteHandler}><i className="fas fa-trash"/>
                 </button>
@@ -47,8 +47,9 @@ const ProjectActionButtons = (props) => {
                     <i className='far fa-edit'/>
                 </button>
             </div>
-            }
-            {props.editing &&
+        }
+        {
+            props.editing &&
             <div className="wb-form-control">
                 <button onClick={props.onSubmit} type="button">
                     <i className="fas fa-check"/>
@@ -56,12 +57,11 @@ const ProjectActionButtons = (props) => {
                 {props.view !== "create" &&
                 <button onClick={props.onCancelEdit} className='cancel' type="button">
                     <i className="fas fa-times"/>
-                    </button>
+                </button>
                 }
             </div>
-            }
-        </form>
-    );
+        }
+    </div>);
 };
 
 export default ProjectActionButtons;

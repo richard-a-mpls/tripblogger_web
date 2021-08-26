@@ -78,24 +78,6 @@ button.inactive {
     width: 15%;
 }
 
-.wb-form-control input.summary {
-    font-weight: bolder;
-    font-size: 1.25em;
-    width: 80%;
-    border-color: #888b8b;
-    border-width: thin;
-    display: inline-block;
-}
-
-.wb-form-control label.summary {
-    font-weight: bolder;
-    font-size: 1.25em;
-    width: 80%;
-    border-color: #888b8b;
-    border-width: thin;
-    display: inline-block;
-}
-
 .wb-form-control p.note {
     font-size: small;
     color: #888b8b;
@@ -432,4 +414,10 @@ main .content i.showcase {
 
 .center {
     text-align: center;
+}
+
+.right {
+    width: auto;
+    text-align: right;
+    display: inline-block;
 }
