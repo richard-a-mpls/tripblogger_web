@@ -31,7 +31,7 @@ const ProjectParent = props => {
 
     return (
         <>
-            <main>
+            <main style={{marginTop: "60px"}}>
                 {pageState === "viewing" && <div className="center">
                     <button className="halfwidth" type="button" onClick={props.showWelcomePage}>Community</button>
                     <button className="halfwidth" onClick={initNewProjectHandler} type="submit">New Project</button>
