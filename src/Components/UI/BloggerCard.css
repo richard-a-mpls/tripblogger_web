@@ -416,3 +416,7 @@ main .content i.showcase {
     border-radius: 8px;
     margin-right: 5px;
 }
+
+.center {
+    text-align: center;
+}

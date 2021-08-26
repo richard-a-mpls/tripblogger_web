@@ -11,7 +11,8 @@ const WelcomeMessage = (props) => {
 
     return (
         <>
-            {showConnectionsProjects && <main>
+            {showConnectionsProjects &&
+            <main className="center">
                 <header>
                     <h4>Connections: Recent Projects</h4>
                     <form className="wb-form-control">
@@ -21,13 +22,13 @@ const WelcomeMessage = (props) => {
                 <ConnectionsProjectsList/>
             </main>
             }
-            <main>
+            <main className="center">
                 <button className="fullwidth" onClick={props.changePageState}>
                     Manage or create new Projects, {userProfile.profile_name}?
                 </button>
                 <PublicProjectsList/>
             </main>
-            <main>
+            <main className="center">
                 <header>
                     <h4>My Projects</h4>
                     <form className="wb-form-control" onSubmit={props.changePageState}>
