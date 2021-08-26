@@ -13,6 +13,7 @@
     display: inline-block;
     vertical-align: top;
     background-color: #26567b;
+    text-align: left;
 }
 
 .contenttop {
@@ -65,6 +66,20 @@
     overflow: hidden;
     margin: 2px;
     border: 2px solid #26567b;
+}
+
+div.headertitle {
+    text-align: center;
+    height: 30px;
+    max-height: 30px;
+    background-color: #26567b;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+h6.headertitle {
+    color: #FFFFFF;
 }
 
 .expandbar {
