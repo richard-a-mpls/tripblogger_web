@@ -24,7 +24,7 @@ const EditProfile = (props) => {
     };
 
     return (
-        <main>
+        <main style={{marginTop: "120px"}}>
             <header>
                 <h3>Edit Profile</h3>
                 <form className="wb-form-control">
