@@ -1,10 +1,14 @@
 import styles from './ProjectPostcard.module.css';
 import React, {useState} from "react";
+import {useSelector} from "react-redux";
 import DateConverter from "../UI/DateConverter";
+import {useIsAuthenticated} from "@azure/msal-react";
 
 
 const ProjectPostcard = (props) => {
     const [imagesExpaneded, setImagesExpanded] = useState(false);
+    const profile = useSelector(state => state.profileSlice.userProfile)
+    const isAuthenticated = useIsAuthenticated();
 
     const toggleImagesExpaneded = () => {
         setImagesExpanded(state => !state);
@@ -12,6 +16,14 @@ const ProjectPostcard = (props) => {
 
     return (<>
         <div className={styles.postcard} onClick={props.onClick}>
+            <div className={styles.headertitle}>
+                <h6 className={styles.headertitle}>
+                    {isAuthenticated && profile._id !== props.project.profile_id &&
+                    <i className="fas fa-users" />
+                    }
+                    <DateConverter date={props.project.datestmp}/>
+                </h6>
+            </div>
             <div className={styles.contenttop}>
                 <img className={styles.stamp} alt="logo" src={`/v1/photos/${props.project.showcase_photo_id}`}/>
             </div>
