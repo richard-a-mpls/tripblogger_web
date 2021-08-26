@@ -1,27 +1,16 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import PublicProjectsList from "../Projects/PublicProjectsList";
 import MyProjectsList from "../Projects/MyProjectsList";
 import ConnectionsProjectsList from "../Projects/ConnectionsProjectsList";
+import {useSelector} from "react-redux";
 
 const WelcomeMessage = (props) => {
 
     const [showConnectionsProjects, setShowConnectionsProjects] = useState(false);
+    const userProfile = useSelector(state => state.profileSlice.userProfile);
 
     return (
-        <main>
-            <header>
-                <h3>TripBlogger Dashboard</h3>
-                <form className="wb-form-control" onSubmit={props.changePageState}>
-                    <button type="submit">Get Started</button>
-                </form>
-            </header>
-            <div className="content">
-                <p>
-                    Tripblogger is an interactive project builder allowing organization of trip experiences and
-                    photos and is available via the web, android or iOS.
-                </p>
-                <p>To get started, click the get started button to the upper-right.</p>
-            </div>
+        <>
             {showConnectionsProjects && <main>
                 <header>
                     <h4>Connections: Recent Projects</h4>
@@ -30,26 +19,24 @@ const WelcomeMessage = (props) => {
                     </form>
                 </header>
                 <ConnectionsProjectsList/>
-            </main>}
+            </main>
+            }
             <main>
-                <header>
-                    <h4>Community: Recent Projects</h4>
-                    <form className="wb-form-control" onSubmit={props.changePageState}>
-                        <button type="submit">&gt;&gt;</button>
-                    </form>
-                </header>
+                <button className="fullwidth" onClick={props.changePageState}>
+                    Manage or create new Projects, {userProfile.profile_name}?
+                </button>
                 <PublicProjectsList/>
             </main>
             <main>
                 <header>
-                    <h4>My Recent Projects</h4>
+                    <h4>My Projects</h4>
                     <form className="wb-form-control" onSubmit={props.changePageState}>
                         <button type="submit">&gt;&gt;</button>
                     </form>
                 </header>
                 <MyProjectsList/>
             </main>
-        </main>
+        </>
     );
 }
 
