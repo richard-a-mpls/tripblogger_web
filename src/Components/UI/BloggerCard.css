@@ -17,10 +17,34 @@
     margin-right: 5px;
 }
 
-.wb-form-control button.cancel {
+button.cancel {
     background-color: white;
     color: black;
     border: 2px solid #26567b;
+}
+
+button {
+    background-color: #26567b;
+    color: white;
+    padding: 5px;
+    border: 2px solid #26567b;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+button.fullwidth {
+    width: 100%;
+}
+
+button.halfwidth {
+    max-width: 48%;
+    width: 48%;
 }
 
 .wb-form-control button.confirm {
@@ -29,7 +53,7 @@
 }
 
 
-.wb-form-control button.inactive {
+button.inactive {
     padding: 5px;
     background-color: #96989a;
     color: #e7e5e5;
@@ -123,8 +147,7 @@ footer h6 {
 
 main {
     width: 98%;
-    align: center;
-    margin: 0 auto;
+    margin: auto;
     position: relative;
     margin-bottom: 5px;
     padding-top: 10px;
@@ -161,6 +184,22 @@ main header h2, h3, h4, h5, h6 {
     font-weight: bold;
     margin-left: 5px;
     display: inline-block;
+}
+
+div.center {
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+h5.title {
+    border-radius: 8px;
+    border: 2px solid #26567b;
+    text-align: center;
+    margin-left: 5px;
+    margin-top: 20px;
+    padding:5px;
+    width: 50%;
 }
 
 main header form {
