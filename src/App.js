@@ -36,7 +36,9 @@ function App() {
                     {loggedIn === 'complete' &&
                     <EndSession/>
                     }
-                    <PublicProjectsList/>
+                    <div className="center">
+                        <PublicProjectsList/>
+                    </div>
                 </UnauthenticatedTemplate>
                 <AuthenticatedTemplate>
                     {loggedIn === 'pending' &&
