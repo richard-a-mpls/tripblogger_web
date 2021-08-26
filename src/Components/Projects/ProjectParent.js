@@ -11,7 +11,6 @@ const ProjectParent = props => {
     const dispatch = useDispatch();
 
     const initNewProjectHandler = (event) => {
-        event.preventDefault();
         dispatch(loadActiveProject()); // set empty project create
         setPageState('creating');
     }
@@ -31,19 +30,18 @@ const ProjectParent = props => {
     }
 
     return (
-        <main>
-            <header>
-                <h3>My Projects</h3>
-                <form onSubmit={initNewProjectHandler} className="wb-form-control">
-                    <button type="button" onClick={props.showWelcomePage}>Dashboard</button>
-                    {pageState === "viewing" && <button type="submit">New Project</button>}
-                    {pageState === "creating" && <button className="cancel" type="button"
-                                                         onClick={viewProjectsHandler}>Cancel
-                    </button>}
-                    {(pageState === "editing" || pageState === "viewing_project") &&
-                    <button type="button" onClick={viewProjectsHandler}>All Projects</button>}
-                </form>
-            </header>
+        <>
+            <main>
+                {pageState === "viewing" && <div className="center">
+                    <button className="halfwidth" type="button" onClick={props.showWelcomePage}>Community</button>
+                    <button className="halfwidth" onClick={initNewProjectHandler} type="submit">New Project</button>
+                </div>}
+                {pageState === "creating" && <button className="fullwidth cancel" type="button"
+                                                     onClick={viewProjectsHandler}>Cancel
+                </button>}
+            </main>
+            {(pageState === "editing" || pageState === "viewing_project") &&
+            <button type="button" className="fullwidth" onClick={viewProjectsHandler}>All Projects</button>}
             <div className="content">
                 {pageState === "viewing" &&
                 <ProjectList changePageState={viewProjectsHandler}
@@ -62,7 +60,7 @@ const ProjectParent = props => {
                 }
 
             </div>
-        </main>
+        </>
     );
 }
 
