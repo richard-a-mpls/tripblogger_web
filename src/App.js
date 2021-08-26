@@ -59,6 +59,7 @@ function App() {
                     </>}
                     <br/><br/><br/><br/><br/>
                 </AuthenticatedTemplate>
+                <br/><br/><br/><br/><br/>
                 <footer>
                     <br/>
                     <center>
