@@ -2,19 +2,19 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../../store/profile-slice";
 import styles from "../Projects/Project.module.css";
+import SingleUpload from "../PhotoGroups/SingleUpload";
 
 const EditProfile = (props) => {
 
     const dispatch = useDispatch();
     const userProfile = useSelector(state => state.profileSlice.userProfile);
-
     const [profileName, setProfileName] = useState(userProfile.profile_name);
 
     const cancelEditProfileHandler = () => {
         props.showWelcomePage();
     };
 
-    const submitEditProfileHandler = (event) => {
+    const submitEditProfileHandler = () => {
         dispatch(updateProfile(userProfile._id, {"profile_name": profileName}))
         props.showWelcomePage();
     };
@@ -22,6 +22,10 @@ const EditProfile = (props) => {
     const profileNameChangeHandler = (event) => {
         setProfileName(event.target.value);
     };
+
+    const updatePhotoId = (id) => {
+        dispatch(updateProfile(userProfile._id, {"profile_img": id}))
+    }
 
     return (
         <main style={{marginTop: "60px"}}>
@@ -41,6 +45,7 @@ const EditProfile = (props) => {
             </div>
             <div className="content">
                 <p className="note small">This is the name that is publicly visible on your projects.</p>
+                <SingleUpload updateData={updatePhotoId} photoId={userProfile.profile_img}/>
             </div>
         </main>
     );
