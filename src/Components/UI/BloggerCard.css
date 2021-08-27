@@ -284,6 +284,7 @@ main .content img {
     float: left;
     color: white;
     position: relative;
+    text-align: left;
     top: 10%;
 }
 
