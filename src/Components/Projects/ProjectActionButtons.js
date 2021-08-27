@@ -31,13 +31,13 @@ const ProjectActionButtons = (props) => {
         </button>
         }
         {confirmDelete &&
-            <div className="wb-form-control">
-                <button className="confirm" type="button"
-                        onClick={confirmDeleteHandler}>Delete <i className="fas fa-check"/></button>
-                <button className="cancel" type="button"
-                        onClick={cancelDeleteHandler}><i className="fas fa-times"/>
-                </button>
-            </div>
+        <div className="wb-form-control">
+            <button className="confirm" type="button"
+                    onClick={confirmDeleteHandler}>Delete <i className="fas fa-check"/></button>
+            <button className="cancel" type="button"
+                    onClick={cancelDeleteHandler}><i className="fas fa-times"/>
+            </button>
+        </div>
         }
         {
             !confirmDelete && props.editable && !props.editing &&
@@ -49,19 +49,14 @@ const ProjectActionButtons = (props) => {
                 </button>
             </div>
         }
-        {
-            props.editing &&
-            <div className="wb-form-control">
-                <button onClick={props.onSubmit} type="button">
-                    <i className="fas fa-check"/>
-                </button>
-
-                <button onClick={cancel} className='cancel' type="button">
-                    <i className="fas fa-times"/>
-                </button>
-
-            </div>
-        }
+        {props.editing && <div className={styles.display}>
+            <button className={styles.display} onClick={props.onSubmit} type="button">
+                <i className="fas fa-check"/>
+            </button>
+            <button onClick={cancel} className='cancel' type="button">
+                <i className="fas fa-times"/>
+            </button>
+        </div>}
     </div>);
 };
 
