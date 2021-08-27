@@ -44,10 +44,10 @@ const ProjectPostcard = (props) => {
                 )}
             </div>}
             <div onClick={toggleImagesExpaneded} className={styles.expandbar}>
-                {props.project.photo_array.map((imageId) =>
+                {props.project.photo_array.slice(0, 3).map((imageId) =>
                     <img className={styles.smallimg} alt={imageId} key={imageId}
                          src={`https://my-react.local:3000/v1/photos/${imageId}`}/>
-                )}
+                )} <h6>+{props.project.photo_array.length-3}</h6>
             </div>
         </div>
     </>);

@@ -89,7 +89,9 @@ h6.headertitle {
     display: inline-block;
     width: 100%;
     vertical-align: center;
+    text-align: center;
     overflow: hidden;
+    color: #FFFFFF;
 }
 
 .smallimg{
