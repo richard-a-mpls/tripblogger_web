@@ -31,12 +31,13 @@ function App() {
     return (
         <BloggerCard>
             {pageState !== 'test' && <>
-                <Header/>
                 <UnauthenticatedTemplate>
                     {loggedIn === 'complete' &&
                     <EndSession/>
                     }
-                    <PublicProjectsList/>
+                    <div className="center" style={{marginTop: "60px"}}>
+                        <PublicProjectsList/>
+                    </div>
                 </UnauthenticatedTemplate>
                 <AuthenticatedTemplate>
                     {loggedIn === 'pending' &&
@@ -57,6 +58,8 @@ function App() {
                     </>}
                     <br/><br/><br/><br/><br/>
                 </AuthenticatedTemplate>
+                <br/><br/><br/><br/><br/>
+                <Header/>
                 <footer>
                     <br/>
                     <center>

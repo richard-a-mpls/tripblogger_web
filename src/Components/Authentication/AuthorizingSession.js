@@ -27,7 +27,7 @@ const AuthorizingSession = () => {
     }, [dispatch, instance, currentAccount]);
 
     return (
-        <>Authorizing Session...</>
+        <i className="fullspinner fas fa-cog fa-spin"/>
     );
 }
 

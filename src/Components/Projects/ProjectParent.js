@@ -11,7 +11,6 @@ const ProjectParent = props => {
     const dispatch = useDispatch();
 
     const initNewProjectHandler = (event) => {
-        event.preventDefault();
         dispatch(loadActiveProject()); // set empty project create
         setPageState('creating');
     }
@@ -31,19 +30,16 @@ const ProjectParent = props => {
     }
 
     return (
-        <main>
-            <header>
-                <h3>My Projects</h3>
-                <form onSubmit={initNewProjectHandler} className="wb-form-control">
-                    <button type="button" onClick={props.showWelcomePage}>Dashboard</button>
-                    {pageState === "viewing" && <button type="submit">New Project</button>}
-                    {pageState === "creating" && <button className="cancel" type="button"
-                                                         onClick={viewProjectsHandler}>Cancel
-                    </button>}
-                    {(pageState === "editing" || pageState === "viewing_project") &&
-                    <button type="button" onClick={viewProjectsHandler}>All Projects</button>}
-                </form>
-            </header>
+        <>
+            <main style={{marginTop: "60px"}}>
+                {pageState === "viewing" && <div className="center">
+                    <button className="halfwidth" type="button" onClick={props.showWelcomePage}>Community</button>
+                    <button className="halfwidth" onClick={initNewProjectHandler} type="submit">New Project</button>
+                </div>}
+                {(pageState === "creating" || pageState === "editing" || pageState === "viewing_project") &&
+                <button type="button" className="fullwidth" onClick={viewProjectsHandler}>All Projects</button>
+                }
+            </main>
             <div className="content">
                 {pageState === "viewing" &&
                 <ProjectList changePageState={viewProjectsHandler}
@@ -51,18 +47,22 @@ const ProjectParent = props => {
                 {pageState === "viewing_project" &&
                 <Project
                     editProjectHandler={editProjectHandler}
+                    viewProjectsHandler={viewProjectsHandler}
                     project={activeProject}
                     view="edit"
                 />}
                 {pageState === "creating" &&
                 <Project
                     project={activeProject}
+                    onCancelEdit={viewProjectsHandler}
+                    viewProjectsHandler={viewProjectsHandler}
+                    onPostCreate={viewProjectHandler}
                     view="create"
                 />
                 }
 
             </div>
-        </main>
+        </>
     );
 }
 

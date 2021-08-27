@@ -2,25 +2,34 @@
 
 }
 
-.wb-form-control button {
+button.cancel {
+    background-color: white;
+    color: black;
+    border: 2px solid #26567b;
+}
+
+button {
     background-color: #26567b;
-    border: none;
     color: white;
-    padding: 5px 10px;
+    padding: 5px;
     border: 2px solid #26567b;
     text-align: center;
     text-decoration: none;
     font-weight: bold;
-    display: inline-block;
     font-size: 16px;
     border-radius: 8px;
     margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
-.wb-form-control button.cancel {
-    background-color: white;
-    color: black;
-    border: 2px solid #26567b;
+button.fullwidth {
+    width: 99%;
+}
+
+button.halfwidth {
+    max-width: 48%;
+    width: 48%;
 }
 
 .wb-form-control button.confirm {
@@ -29,7 +38,7 @@
 }
 
 
-.wb-form-control button.inactive {
+button.inactive {
     padding: 5px;
     background-color: #96989a;
     color: #e7e5e5;
@@ -54,24 +63,6 @@
     width: 15%;
 }
 
-.wb-form-control input.summary {
-    font-weight: bolder;
-    font-size: 1.25em;
-    width: 80%;
-    border-color: #888b8b;
-    border-width: thin;
-    display: inline-block;
-}
-
-.wb-form-control label.summary {
-    font-weight: bolder;
-    font-size: 1.25em;
-    width: 80%;
-    border-color: #888b8b;
-    border-width: thin;
-    display: inline-block;
-}
-
 .wb-form-control p.note {
     font-size: small;
     color: #888b8b;
@@ -82,6 +73,10 @@ header {
     width: 100%;
     vertical-align: middle;
     overflow: auto;
+    position: fixed;
+    top: 0;
+    text-align: center;
+    color: white;
 }
 
 header h6 {
@@ -96,12 +91,21 @@ header form {
     vertical-align: center;
 }
 
-header img.profile-pic {
+img.profile-pic {
     height: 40px;
     width: 40px;
     overflow: hidden;
     border-radius: 12px;
     display: inline-block;
+}
+
+img.profilePicSm {
+    height: 25px;
+    width: 25px;
+    overflow: hidden;
+    border-radius: 6px;
+    display: inline-block;
+    margin-right: 5px;
 }
 
 footer {
@@ -123,8 +127,7 @@ footer h6 {
 
 main {
     width: 98%;
-    align: center;
-    margin: 0 auto;
+    margin: auto;
     position: relative;
     margin-bottom: 5px;
     padding-top: 10px;
@@ -161,6 +164,22 @@ main header h2, h3, h4, h5, h6 {
     font-weight: bold;
     margin-left: 5px;
     display: inline-block;
+}
+
+div.center {
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+h5.title {
+    border-radius: 8px;
+    border: 2px solid #26567b;
+    text-align: center;
+    margin-left: 5px;
+    margin-top: 20px;
+    padding:5px;
+    width: 50%;
 }
 
 main header form {
@@ -246,16 +265,17 @@ main .content img {
 .left-item {
     display: inline-block;
     padding-left: 20px;
-    width: 33%;
+    width: 80%;
     float: left;
     color: white;
     position: relative;
+    text-align: left;
     top: 10%;
 }
 
 .right-item {
     display: inline-block;
-    width: 66%;
+    width: 20%;
     float: right;
     color: white;
     text-align: right;
@@ -271,6 +291,11 @@ main .content img {
     height: 21px;
     padding-top: 15px;
     vertical-align: middle;
+}
+
+.fullspinner {
+    font-size: 6em;
+    color: #26567b;
 }
 
 /* Hide default HTML checkbox */
@@ -371,4 +396,32 @@ main .content i.showcase {
     font-size: 16px;
     border-radius: 8px;
     margin-right: 5px;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    width: auto;
+    text-align: right;
+    display: inline-block;
+}
+
+input.summary {
+    font-weight: bolder;
+    font-size: 1.25em;
+    width: 80%;
+    border-color: #888b8b;
+    border-width: thin;
+    display: inline-block;
+}
+
+label.summary {
+    font-weight: bolder;
+    font-size: 1.25em;
+    width: 80%;
+    border-color: #888b8b;
+    border-width: thin;
+    display: inline-block;
 }

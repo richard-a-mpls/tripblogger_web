@@ -25,8 +25,10 @@ const Input = (props) => {
     };
 
     useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
+        if (props.value || props.dateValue) {
+            setValue(props.dateValue ? props.dateValue : props.value);
+        }
+    }, [props.value, props.dateValue]);
 
     if (props.type === 'button-selector') {
         return (
@@ -36,7 +38,8 @@ const Input = (props) => {
                 </div>
                 <div style={{display: "inline-block"}}>
                     {props.options.map((opt) =>
-                        <label key={opt.value} style={{display: "inline-block"}} id={opt.value} onClick={updateButtonSelectorHandler}
+                        <label key={opt.value} style={{display: "inline-block"}} id={opt.value}
+                               onClick={updateButtonSelectorHandler}
                                className={value === opt.value ? "active" : "inactive"}>{opt.label}</label>
                     )}
                 </div>
@@ -68,7 +71,8 @@ const Input = (props) => {
         <>
             {!props.editing && <label className={props.className}>{props.value}</label>}
             {props.editing &&
-            <input placeholder={props.placeholder} type={props.type ? props.type : "text"} className={props.className} onChange={valueChangeHandler} value={value}/>
+            <input placeholder={props.placeholder} type={props.type ? props.type : "text"} className={props.className}
+                   onChange={valueChangeHandler} value={value}/>
             }
         </>
     );

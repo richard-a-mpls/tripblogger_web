@@ -10,7 +10,7 @@ const EndSession = () => {
     }, [dispatch]);
 
     return (
-      <p>Ending Session...</p>
+        <i className="fullspinner fas fa-cog fa-spin"/>
     );
 }
 
