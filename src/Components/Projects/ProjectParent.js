@@ -49,6 +49,7 @@ const ProjectParent = props => {
                 {pageState === "viewing_project" &&
                 <Project
                     editProjectHandler={editProjectHandler}
+                    viewProjectsHandler={viewProjectsHandler}
                     project={activeProject}
                     view="edit"
                 />}

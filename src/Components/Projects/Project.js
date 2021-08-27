@@ -36,6 +36,7 @@ const Project = (props) => {
 
     const deleteHandler = () => {
         dispatch(removeProject(props.project._id));
+        props.viewProjectsHandler();
     }
 
     const updateDataHandler = (attribute, value) => {
