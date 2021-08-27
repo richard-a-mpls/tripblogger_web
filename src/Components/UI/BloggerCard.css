@@ -2,21 +2,6 @@
 
 }
 
-.wb-form-control button {
-    background-color: #26567b;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    border: 2px solid #26567b;
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 8px;
-    margin-right: 5px;
-}
-
 button.cancel {
     background-color: white;
     color: black;
