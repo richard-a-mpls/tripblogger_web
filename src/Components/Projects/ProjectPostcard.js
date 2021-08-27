@@ -35,7 +35,6 @@ const ProjectPostcard = (props) => {
                 <h6 className={styles.text}>{props.project.summary}</h6>
                 <p className={styles.paragraph}>
                     {props.project.description}<br/>
-                    <h6><DateConverter date={props.project.datestmp}/></h6>
                 </p>
             </div>
             {imagesExpaneded && <div className={styles.imagegroup}>
