@@ -63,6 +63,7 @@ const Project = (props) => {
 
     const submitCreate = () => {
         dispatch(createProject(updateData));
+        props.onPostCreate();
     }
 
     const setPhotoDataHandler = (event) => {

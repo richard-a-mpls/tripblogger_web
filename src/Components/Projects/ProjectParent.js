@@ -56,6 +56,7 @@ const ProjectParent = props => {
                     project={activeProject}
                     onCancelEdit={viewProjectsHandler}
                     viewProjectsHandler={viewProjectsHandler}
+                    onPostCreate={viewProjectHandler}
                     view="create"
                 />
                 }
