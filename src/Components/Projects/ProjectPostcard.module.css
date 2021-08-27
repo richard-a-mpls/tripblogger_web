@@ -96,6 +96,7 @@ h6.headertitle {
 
 .smallimg{
     height: 25px;
+    width: 25px;
     border-radius: 2px;
     overflow: hidden;
     margin: 2px;
