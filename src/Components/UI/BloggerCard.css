@@ -265,7 +265,7 @@ main .content img {
 .left-item {
     display: inline-block;
     padding-left: 20px;
-    width: 33%;
+    width: 80%;
     float: left;
     color: white;
     position: relative;
@@ -275,7 +275,7 @@ main .content img {
 
 .right-item {
     display: inline-block;
-    width: 66%;
+    width: 20%;
     float: right;
     color: white;
     text-align: right;
