@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../../store/profile-slice";
+import styles from "../Projects/Project.module.css";
 
 const EditProfile = (props) => {
 
@@ -14,7 +15,6 @@ const EditProfile = (props) => {
     };
 
     const submitEditProfileHandler = (event) => {
-        event.preventDefault();
         dispatch(updateProfile(userProfile._id, {"profile_name": profileName}))
         props.showWelcomePage();
     };
@@ -24,26 +24,28 @@ const EditProfile = (props) => {
     };
 
     return (
-        <main style={{marginTop: "120px"}}>
-            <header>
-                <h3>Edit Profile</h3>
-                <form className="wb-form-control">
-                    <button type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
-                </form>
-            </header>
-            <div className="content">
-                    <form className="wb-form-control" onSubmit={submitEditProfileHandler}>
-                        <label>Name:</label>
-                        <input type="text" value={profileName} onChange={profileNameChangeHandler}/>
-                        <p className="note">This is the name that is publicly visible on your projects.</p>
-                        <button className="cancel" type="button"
-                                onClick={cancelEditProfileHandler}>Cancel
+        <main style={{marginTop: "60px"}}>
+            <button className={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
+            <div className={styles.projectHeader}>
+                <input className={styles.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
+
+                <div className={styles.actionButtons}>
+                    <div className="wb-form-control">
+                        <button onClick={submitEditProfileHandler} type="button">
+                            <i className="fas fa-check"/>
                         </button>
-                        <button type="submit">Submit</button>
-                    </form>
+
+                        <button onClick={cancelEditProfileHandler} className='cancel' type="button">
+                            <i className="fas fa-times"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className="content">
+                <p className="note small">This is the name that is publicly visible on your projects.</p>
             </div>
         </main>
-);
+    );
 
 };
 

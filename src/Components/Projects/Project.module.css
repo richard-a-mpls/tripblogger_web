@@ -34,3 +34,8 @@ div.actionButtons {
     text-align: right;
     display: inline-block;
 }
+
+button {
+    padding-right: 10px;
+    padding-left: 10px;
+}
