@@ -44,9 +44,6 @@ const ProjectActionButtons = (props) => {
             <div className="wb-form-control">
                 <button type="button" onClick={initiateDeleteHandler}><i className="fas fa-trash"/>
                 </button>
-                <button type="button">
-                    <i className="fas fa-plus"/>
-                </button>
                 <button onClick={props.onSetEdit} type="button">
                     <i className='far fa-edit'/>
                 </button>
