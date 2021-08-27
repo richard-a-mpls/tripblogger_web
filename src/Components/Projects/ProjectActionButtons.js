@@ -19,6 +19,10 @@ const ProjectActionButtons = (props) => {
         setConfirmDelete(false);
     }
 
+    let cancel = props.onCancelEdit;
+    if (props.view === "create") {
+        cancel = props.viewProjectsHandler;
+    }
 
     return (<div className={styles.display}>
         {!props.editable && props.view !== "create" && !confirmDelete &&
@@ -29,7 +33,7 @@ const ProjectActionButtons = (props) => {
         {confirmDelete &&
             <div className="wb-form-control">
                 <button className="confirm" type="button"
-                        onClick={confirmDeleteHandler}><i className="fas fa-check"/></button>
+                        onClick={confirmDeleteHandler}>Delete <i className="fas fa-check"/></button>
                 <button className="cancel" type="button"
                         onClick={cancelDeleteHandler}><i className="fas fa-times"/>
                 </button>
@@ -54,11 +58,11 @@ const ProjectActionButtons = (props) => {
                 <button onClick={props.onSubmit} type="button">
                     <i className="fas fa-check"/>
                 </button>
-                {props.view !== "create" &&
-                <button onClick={props.onCancelEdit} className='cancel' type="button">
+
+                <button onClick={cancel} className='cancel' type="button">
                     <i className="fas fa-times"/>
                 </button>
-                }
+
             </div>
         }
     </div>);

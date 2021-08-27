@@ -36,12 +36,10 @@ const ProjectParent = props => {
                     <button className="halfwidth" type="button" onClick={props.showWelcomePage}>Community</button>
                     <button className="halfwidth" onClick={initNewProjectHandler} type="submit">New Project</button>
                 </div>}
-                {pageState === "creating" && <button className="fullwidth cancel" type="button"
-                                                     onClick={viewProjectsHandler}>Cancel
-                </button>}
+                {(pageState === "creating" || pageState === "editing" || pageState === "viewing_project") &&
+                <button type="button" className="fullwidth" onClick={viewProjectsHandler}>All Projects</button>
+                }
             </main>
-            {(pageState === "editing" || pageState === "viewing_project") &&
-            <button type="button" className="fullwidth" onClick={viewProjectsHandler}>All Projects</button>}
             <div className="content">
                 {pageState === "viewing" &&
                 <ProjectList changePageState={viewProjectsHandler}
@@ -56,6 +54,8 @@ const ProjectParent = props => {
                 {pageState === "creating" &&
                 <Project
                     project={activeProject}
+                    onCancelEdit={viewProjectsHandler}
+                    viewProjectsHandler={viewProjectsHandler}
                     view="create"
                 />
                 }

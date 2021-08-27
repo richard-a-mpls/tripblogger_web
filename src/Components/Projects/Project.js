@@ -107,6 +107,7 @@ const Project = (props) => {
                     editable={props.view === "edit"}
                     projectId={props.project._id}
                     editProjectHandler={props.editProjectHandler}
+                    viewProjectsHandler={props.viewProjectsHandler}
                     onSetEdit={setEditingHandler}
                     onCancelEdit={cancelEditingHandler}
                     onSubmit={submitHandler}
