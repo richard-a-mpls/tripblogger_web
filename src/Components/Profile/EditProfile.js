@@ -30,15 +30,13 @@ const EditProfile = (props) => {
                 <input className={styles.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
 
                 <div className={styles.actionButtons}>
-                    <div className="wb-form-control">
-                        <button onClick={submitEditProfileHandler} type="button">
-                            <i className="fas fa-check"/>
-                        </button>
+                    <button onClick={submitEditProfileHandler} type="button">
+                        <i className="fas fa-check"/>
+                    </button>
 
-                        <button onClick={cancelEditProfileHandler} className='cancel' type="button">
-                            <i className="fas fa-times"/>
-                        </button>
-                    </div>
+                    <button onClick={cancelEditProfileHandler} className='cancel' type="button">
+                        <i className="fas fa-times"/>
+                    </button>
                 </div>
             </div>
             <div className="content">
