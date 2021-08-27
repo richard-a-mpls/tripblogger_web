@@ -25,7 +25,9 @@ const Input = (props) => {
     };
 
     useEffect(() => {
-        setValue(props.dateValue ? props.dateValue : props.value);
+        if (props.value || props.dateValue) {
+            setValue(props.dateValue ? props.dateValue : props.value);
+        }
     }, [props.value, props.dateValue]);
 
     if (props.type === 'button-selector') {
