@@ -27,6 +27,23 @@ const Project = (props) => {
     const month = date.toLocaleString('en-US', {month: 'long'});
     const day = date.toLocaleString('en-US', {day: '2-digit'});
     const year = date.getFullYear();
+    const dateDisplay = month + " " + day + " " + year;
+
+    const formatDate = (date) => {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
+    const dateInput = formatDate(date);
 
     const shareWithOptions = [
         {value: "private", label: "Only Me"},
@@ -95,7 +112,6 @@ const Project = (props) => {
         setShowAudience(value);
     }
 
-    const dateDisplay = month + " " + day + " " + year;
     const allowEdit = editing || props.view === "create";
 
     return (
@@ -152,7 +168,7 @@ const Project = (props) => {
                 <div className="project-details">
                     <Input placeholder="location" editing={allowEdit} attribute="location"
                            value={props.project.location} onUpdate={updateDataHandler}/>
-                    <Input type={"date"} editing={allowEdit} attribute="datestmp" value={dateDisplay}
+                    <Input type="date" editing={allowEdit} attribute="datestmp" value={dateDisplay} dateValue={dateInput}
                            onUpdate={updateDataHandler}/>
                     <Input placeholder="description" editing={allowEdit} attribute="description"
                            value={props.project.description} onUpdate={updateDataHandler}/><br/>
