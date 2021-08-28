@@ -13,19 +13,21 @@ const ProjectPostcard = (props) => {
     const profile = useSelector(state => state.profileSlice.userProfile)
     const isAuthenticated = useIsAuthenticated();
 
-    const toggleImagesExpaneded = () => {
-        setImagesExpanded(state => !state);
+    const clickHandler = () => {
+        if (isAuthenticated) {
+            setImagesExpanded(state => !state);
+        } else {
+            props.onClick();
+        }
     }
 
     const isOwner = profile._id === props.project.profile_id;
 
     useEffect(() => {
-        console.log('useEffect');
-        if (!isOwner) {
+        if (isAuthenticated && !isOwner) {
             axios.get('/v1/projects/' + props.project._id + '/profile',
                 {headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}})
                 .then((response) => {
-                    console.log(response.data);
                     setOwnerInfo(response.data);
                 })
         }
@@ -42,7 +44,7 @@ const ProjectPostcard = (props) => {
     }
 
     return (<>
-        <div className={styles.postcard} onClick={props.onClick}>
+        <div className={styles.postcard} onClick={clickHandler}>
             {isAuthenticated &&
             <div className={styles.headertitle}>
                 <h6 className={styles.headertitle}>
@@ -60,16 +62,17 @@ const ProjectPostcard = (props) => {
                 </p>
 
             </div>
-            {imagesExpaneded && <div className={styles.imagegroup}>
+            {imagesExpaneded &&
+            <div className={styles.imagegroup}>
                 {props.project.photo_array.map((imageId) =>
                     <img className={styles.projectimage} alt={imageId} key={imageId}
-                         src={`https://my-react.local:3000/v1/photos/${imageId}`}/>
+                         src={`/v1/photos/${imageId}`}/>
                 )}
             </div>}
-            <div onClick={toggleImagesExpaneded} className={styles.expandbar}>
+            <div className={styles.expandbar}>
                 {props.project.photo_array.slice(0, 3).map((imageId) =>
                     <img className={styles.smallimg} alt={imageId} key={imageId}
-                         src={`https://my-react.local:3000/v1/photos/${imageId}`}/>
+                         src={`/v1/photos/${imageId}`}/>
                 )}
                 {props.project.photo_array && props.project.photo_array.length > 3 &&
                 <h6>+{props.project.photo_array.length - 3}</h6>
