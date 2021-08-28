@@ -29,7 +29,7 @@ export const AuthorizationContextProvider = (props) => {
         // TODO
         //do i have projects already if userHasProjects setPageState=something
         localStorage.setItem(STORAGE_LOGGEDIN, 'yes');
-        axios.get('https://my-react.local:3000/v1/profile', {
+        axios.get('/v1/profile', {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => setUserProfile(response.data))
