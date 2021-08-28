@@ -20,7 +20,7 @@ const profileSlice = createSlice({
 export const setupProfile = (apiToken) => {
     return async (dispatch) => {
         try {
-            axios.get('https://my-react.local:3000/v1/profile', {
+            axios.get('/v1/profile', {
                 headers: {Authorization: `Bearer ${apiToken}`}
             })
                 .then(response => {
@@ -44,7 +44,7 @@ export const setupProfile = (apiToken) => {
 
 export const updateProfile = (userProfileId, updateData) => {
     return async (dispatch) => {
-        axios.patch('http://localhost:8080/v1/profile/' + userProfileId,
+        axios.patch('/v1/profile/' + userProfileId,
             JSON.stringify(updateData), {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`,

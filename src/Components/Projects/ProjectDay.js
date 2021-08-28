@@ -50,7 +50,7 @@ const ProjectDay = (props) => {
                     <img
                         key={photoId}
                         alt="showcase"
-                        src={"https://my-react.local:3000/v1/photos/" + photoId}/>
+                        src={"/v1/photos/" + photoId}/>
                 )}
             </div>
             }
