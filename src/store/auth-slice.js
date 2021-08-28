@@ -54,7 +54,7 @@ export const authorizeSession = (apiToken) => {
 export const authorizeB2C = (b2cAccessToken) => {
     return async (dispatch) => {
         await axios.post(
-            "http://localhost:8080/v1/authorize",
+            "/v1/authorize",
             JSON.stringify({"identity_token": b2cAccessToken}),
             {headers: {'Content-Type': 'application/json'}})
             .then(response => {
@@ -66,7 +66,7 @@ export const authorizeB2C = (b2cAccessToken) => {
 
 export const endSession = () => {
     return async (dispatch) => {
-        axios.get('https://my-react.local:3000/v1/logout/?apiToken=' + localStorage.getItem(STORAGE_APITOKEN), {
+        axios.get('/v1/logout/?apiToken=' + localStorage.getItem(STORAGE_APITOKEN), {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(() => {

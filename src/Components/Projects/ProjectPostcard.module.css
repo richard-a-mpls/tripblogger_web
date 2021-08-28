@@ -13,7 +13,7 @@
     display: inline-block;
     vertical-align: top;
     background-color: #26567b;
-    text-align: left;
+    text-align: center;
 }
 
 .contenttop {
@@ -34,10 +34,12 @@
     padding-left: 15px;
     overflow: hidden;
     background-color: #FFFFFF;
+    text-align: center;
 
 }
 .text {
     display: block;
+    text-align: left;
 }
 
 .paragraph {
@@ -47,21 +49,23 @@
     -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     padding-bottom: 25px;
+    text-align: left;
 }
 
 .imagegroup {
     display: block;
     border-top: 4px solid #26567b;
-    max-height: 300px;
+    max-height: 600px;
     overflow: scroll;
     width: 100%;
     margin-right: 20px;
-    padding-bottom: 20px;
+    margin-bottom: 30px;
     background-color: #3574a4;
+    text-align: center;
 }
 
 .projectimage{
-    width: 48%;
+    width: 95%;
     border-radius: 8px;
     overflow: hidden;
     margin: 2px;

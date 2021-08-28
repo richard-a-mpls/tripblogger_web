@@ -47,7 +47,7 @@ const projectSlice = createSlice({
 export const loadActiveProject = (projectId) => {
     return dispatch => {
         if (projectId) {
-        axios.get('http://localhost:8080/v1/projects/' + projectId, {
+        axios.get('/v1/projects/' + projectId, {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => {
@@ -64,7 +64,7 @@ export const loadActiveProject = (projectId) => {
 
 export const loadProjectList = () => {
     return dispatch => {
-        axios.get('https://my-react.local:3000/v1/me/projects', {
+        axios.get('/v1/me/projects', {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => {
@@ -81,7 +81,7 @@ export const loadPublicProjectList = (isAuthenticated) => {
         } else {
             options = {headers: {Authorization: `Bearer nothing`}}
         }
-        axios.get('https://my-react.local:3000/v1/public/projects', options)
+        axios.get('/v1/public/projects', options)
             .then(response => {
                 dispatch(projectActions.setPublicProjectList(response.data));
             });
@@ -89,7 +89,7 @@ export const loadPublicProjectList = (isAuthenticated) => {
 }
 export const loadConnectionsProjectList = () => {
     return dispatch => {
-        axios.get('https://my-react.local:3000/v1/connections/projects', {
+        axios.get('/v1/connections/projects', {
                 headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
             })
             .then(response => {
@@ -100,7 +100,7 @@ export const loadConnectionsProjectList = () => {
 
 export const removeProject = (projectId) => {
     return dispatch => {
-        axios.delete('https://my-react.local:3000/v1/me/projects/' + projectId,
+        axios.delete('/v1/me/projects/' + projectId,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ export const removeProject = (projectId) => {
 
 export const updateProject = (projectId, data) => {
     return dispatch => {
-        axios.patch('http://localhost:8080/v1/me/projects/' + projectId, JSON.stringify(data), { // receive two parameter endpoint url ,form data
+        axios.patch('/v1/me/projects/' + projectId, JSON.stringify(data), { // receive two parameter endpoint url ,form data
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`, 'Content-Type': 'application/json',}
         })
             .then(response => {
@@ -128,7 +128,7 @@ export const updateProject = (projectId, data) => {
 
 export const createProject = (data) => {
     return dispatch => {
-        axios.post('http://localhost:8080/v1/me/projects', JSON.stringify(data), { // receive two parameter endpoint url ,form data
+        axios.post('/v1/me/projects', JSON.stringify(data), { // receive two parameter endpoint url ,form data
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`,
                 'Content-Type': 'application/json',
