@@ -31,7 +31,7 @@ const ProjectPostcard = (props) => {
                     setOwnerInfo(response.data);
                 })
         }
-    }, [isOwner, props.project._id]);
+    }, [isOwner, props.project._id, isAuthenticated]);
 
     let ownerProfile = <></>;
     if (isOwner) {
