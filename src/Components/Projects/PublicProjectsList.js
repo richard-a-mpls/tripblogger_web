@@ -27,7 +27,7 @@ const PublicProjectsList = () => {
 
     return (
         <>
-            {publicProjectList.map((prj) =>
+            {publicProjectList && publicProjectList.map((prj) =>
                 <ProjectPostcard onClick={clickHandler} project={prj} key={prj._id}/>
             )}
         </>
