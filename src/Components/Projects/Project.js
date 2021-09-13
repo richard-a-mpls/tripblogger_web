@@ -15,9 +15,6 @@ const Project = (props) => {
     const [updateData, setUpdateData] = useState({});
     const [showAudience, setShowAudience] = useState();
 
-    // const [tmpPhotoId, setTmpPhotoId] = useState();
-    // const [uploadingTmpPhoto, setUploadingTmpPhoto] = useState(false);
-
     let date = new Date();
     if (props.project.datestmp !== undefined) {
         date = new Date(props.project.datestmp.split("-"));

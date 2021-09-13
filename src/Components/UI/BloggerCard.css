@@ -361,6 +361,11 @@ input:checked + .slider:before {
     display: inline-block;
     textAlign: center;
     backgroundColor: #26567b;
+    borderRadius: 16px;
+    height: 150px;
+    paddingRight: 5px;
+    paddingBottom: 5px;
+    verticalAlign: "middle";
 }
 
 .inputfile + label {

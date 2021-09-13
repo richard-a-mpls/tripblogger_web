@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
 import EditProfile from "./Components/Profile/EditProfile";
 import ProjectParent from "./Components/Projects/ProjectParent"
-import Test from "./Components/UI/Test"
 import './App.css';
 import BloggerCard from "./Components/UI/BloggerCard";
 import Header from "./Components/UI/Header";
@@ -30,7 +29,7 @@ function App() {
 
     return (
         <BloggerCard>
-            {pageState !== 'test' && <>
+            <>
                 <UnauthenticatedTemplate>
                     {loggedIn === 'complete' &&
                     <EndSession/>
@@ -70,10 +69,7 @@ function App() {
                     </center>
                 </footer>
 
-            </>}
-            {pageState === 'test' &&
-            <Test showWelcome={showWelcomePageHandler}></Test>
-            }
+            </>
         </BloggerCard>
     );
 }

@@ -2,7 +2,7 @@ import {useMsal} from "@azure/msal-react";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {loginRequest} from "../../authConfig";
-import {authorizeB2C, authorizeSession, STORAGE_APITOKEN} from "../../store/auth-slice";
+import {authorizeSession, STORAGE_APITOKEN} from "../../store/auth-slice";
 
 const AuthorizingSession = () => {
     const {instance, accounts} = useMsal();
@@ -21,7 +21,7 @@ const AuthorizingSession = () => {
         };
         instance.acquireTokenSilent(request).then((response) => {
             const accessToken = response.accessToken;
-            dispatch(authorizeB2C(accessToken));
+            dispatch(authorizeSession(accessToken));
         });
 
     }, [dispatch, instance, currentAccount]);
