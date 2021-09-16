@@ -38,7 +38,9 @@ const ProjectPostcard = (props) => {
         ownerProfile = <><ProfileImage className="profilePicSm"/>Your Project<br/></>
     } else {
         ownerProfile = <>
+            {ownerInfo.profile_img &&
             <img alt="avatar" src={`/v1/photos/${ownerInfo.profile_img}`} className="profilePicSm"/>
+            }
             {ownerInfo.profile_name}<br/>
         </>
     }
