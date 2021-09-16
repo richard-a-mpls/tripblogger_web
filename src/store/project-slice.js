@@ -47,7 +47,7 @@ const projectSlice = createSlice({
 export const loadActiveProject = (projectId) => {
     return dispatch => {
         if (projectId) {
-        axios.get('/v1/projects/' + projectId, {
+        axios.get('/v1/me/projects/' + projectId, {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => {
@@ -81,19 +81,10 @@ export const loadPublicProjectList = (isAuthenticated) => {
         } else {
             options = {headers: {Authorization: `Bearer nothing`}}
         }
-        axios.get('/v1/public/projects', options)
+        axios.get('/v1/projects', options)
             .then(response => {
+                console.log(response.data);
                 dispatch(projectActions.setPublicProjectList(response.data));
-            });
-    }
-}
-export const loadConnectionsProjectList = () => {
-    return dispatch => {
-        axios.get('/v1/connections/projects', {
-                headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
-            })
-            .then(response => {
-                dispatch(projectActions.setConnectionsProjectList(response.data));
             });
     }
 }

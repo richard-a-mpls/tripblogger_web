@@ -40,12 +40,6 @@ const Project = (props) => {
 
     const dateInput = formatDate(date);
 
-    const shareWithOptions = [
-        {value: "private", label: "Only Me"},
-        //{value: "connections", label: "My Connections"},
-        {value: "public", label: "Everyone"}
-    ];
-
     const deleteHandler = () => {
         dispatch(removeProject(props.project._id));
         props.viewProjectsHandler();
@@ -129,10 +123,6 @@ const Project = (props) => {
                     {editing &&
                     <Input type="slider" attribute="published" value={props.project.published}
                            onUpdate={updateDataHandler} onUpdate2={toggleShowAudienceHandler}/>
-                    }
-                    {editing && ((!props.project.published && showAudience) || (props.project.published && showAudience !== false)) &&
-                    <Input type="button-selector" label="Audience:" attribute="share_with"
-                           value={props.project.share_with} options={shareWithOptions} onUpdate={updateDataHandler}/>
                     }
                 </div>
                 <br/><br/>
