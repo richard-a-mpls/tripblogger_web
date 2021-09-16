@@ -12,7 +12,7 @@ const Project = (props) => {
     const dispatch = useDispatch();
     const [editing, setEditing] = useState(false);
     const [updateData, setUpdateData] = useState({});
-    const [setShowAudience] = useState()[1];
+    const setShowAudience = useState()[1];
 
     let date = new Date();
     if (props.project.datestmp !== undefined) {
