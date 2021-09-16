@@ -1,4 +1,3 @@
-import ProjectDay from "./ProjectDay";
 import ShareStatus from "./ShareStatus";
 import ProjectActionButtons from "./ProjectActionButtons";
 import React, {useState} from "react";
@@ -13,7 +12,7 @@ const Project = (props) => {
     const dispatch = useDispatch();
     const [editing, setEditing] = useState(false);
     const [updateData, setUpdateData] = useState({});
-    const [showAudience, setShowAudience] = useState();
+    const [setShowAudience] = useState()[1];
 
     let date = new Date();
     if (props.project.datestmp !== undefined) {
@@ -126,9 +125,6 @@ const Project = (props) => {
                     }
                 </div>
                 <br/><br/>
-                {props.view === "edit" && props.project.project_days !== undefined && props.project.project_days.map((projectDay) => (
-                    <ProjectDay projectDay={projectDay}/>
-                ))}
                 {!editing && props.project.photo_array &&
                 <div>
                     {props.view !== 'list' && props.project.photo_array.map((imageId) =>
