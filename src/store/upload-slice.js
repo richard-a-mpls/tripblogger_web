@@ -1,6 +1,6 @@
 import FormData from "form-data";
 import axios from "axios";
-import {STORAGE_APITOKEN} from "../Context/authorization_context";
+import {STORAGE_APITOKEN} from "./constants";
 
 const uploadData = (projectId, data, setUrlCallback) => {
     return () => {

@@ -1,4 +1,4 @@
-import {STORAGE_APITOKEN} from "../Context/authorization_context";
+import {STORAGE_APITOKEN} from "./constants";
 import axios from "axios";
 import {authActions} from "./auth-slice";
 import {createSlice} from "@reduxjs/toolkit";

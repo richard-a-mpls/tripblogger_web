@@ -1,6 +1,6 @@
 import FormData from "form-data";
 import axios from "axios";
-import {STORAGE_APITOKEN} from "../../Context/authorization_context";
+import {STORAGE_APITOKEN} from "../../store/constants";
 import React, {useState} from "react";
 
 const SingleUpload = (props) => {
