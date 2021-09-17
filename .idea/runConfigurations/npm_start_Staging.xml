@@ -10,8 +10,8 @@
       <env name="HOST" value="10.0.0.19" />
       <env name="REACT_APP_ENVIRONMENT" value="TEST" />
       <env name="REACT_APP_OIDC_REDIRECT_URI" value="https://10.0.0.19:3000/" />
-      <env name="REACT_APP_PYTHON_API" value="http://localhost:8000/" />
-      <env name="REACT_APP_PROJECTS_API" value="http://localhost:8080/" />
+      <env name="REACT_APP_PYTHON_API" value="http://localhost:8000" />
+      <env name="REACT_APP_PROJECTS_API" value="http://localhost:8080" />
     </envs>
     <method v="2" />
   </configuration>
