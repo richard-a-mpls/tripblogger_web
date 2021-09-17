@@ -2,6 +2,7 @@ import FormData from "form-data";
 import axios from "axios";
 import {STORAGE_APITOKEN} from "../../store/constants";
 import React, {useState} from "react";
+import {photosEndpoint} from "../../store/upload-slice";
 
 const SingleUpload = (props) => {
 
@@ -12,7 +13,7 @@ const SingleUpload = (props) => {
         setUploadingTmpPhoto(true);
         const formData = new FormData();
         formData.append('file', event.target.files[0]);
-        axios.post('/v1/photos', formData,
+        axios.post(photosEndpoint, formData,
             {
                 headers: {
                     'Content-Type': "multipart/form-data; boundary=--------------------------a string of numbers that is never the same",
@@ -29,7 +30,7 @@ const SingleUpload = (props) => {
     return (<>
         {tmpPhotoId &&
         <img alt="showcase"
-             src={"/v1/photos/" + tmpPhotoId}/>
+             src={`${photosEndpoint}/${tmpPhotoId}`}/>
         }
 
         {!uploadingTmpPhoto && !tmpPhotoId && !props.photoId &&
@@ -53,7 +54,7 @@ const SingleUpload = (props) => {
         }
         {!tmpPhotoId && props.photoId &&
         <img alt="showcase"
-             src={"/v1/photos/" + props.photoId}/>
+             src={`${photosEndpoint}/${props.photoId}`}/>
         }
     </>);
 

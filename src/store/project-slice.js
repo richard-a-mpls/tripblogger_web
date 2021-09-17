@@ -9,6 +9,12 @@ const initialState = {
     activeProject: {}
 };
 
+export const projectsEndpoint = (process.env.REACT_APP_PROJECTS_API || "https://tripblogger-api-spring.azurewebsites.net") + "/v1/projects";
+export const projectsMeEndpoint = (process.env.REACT_APP_PROJECTS_API || "https://tripblogger-api-spring.azurewebsites.net") + "/v1/me/projects";
+export const prevProjectsEndpoint = (process.env.REACT_APP_PYTHON_API || "https://tripblogger-api.azurewebsites.net") + "/v1/projects";
+
+
+
 const projectSlice = createSlice({
     name: 'projectSlice',
     initialState,
@@ -47,7 +53,7 @@ const projectSlice = createSlice({
 export const loadActiveProject = (projectId) => {
     return dispatch => {
         if (projectId) {
-        axios.get('/v1/me/projects/' + projectId, {
+        axios.get(`${projectsMeEndpoint}/${projectId}`, {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => {
@@ -64,7 +70,7 @@ export const loadActiveProject = (projectId) => {
 
 export const loadProjectList = () => {
     return dispatch => {
-        axios.get('/v1/me/projects', {
+        axios.get(projectsMeEndpoint, {
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}
         })
             .then(response => {
@@ -75,13 +81,16 @@ export const loadProjectList = () => {
 
 export const loadPublicProjectList = (isAuthenticated) => {
     return dispatch => {
+        console.log(projectsEndpoint);
+        console.log(process.env.REACT_APP_PROJECTS_API);
+
         let options = {};
         if (localStorage.getItem(STORAGE_APITOKEN) && isAuthenticated) {
             options = {headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}}
         } else {
             options = {headers: {Authorization: `Bearer nothing`}}
         }
-        axios.get('/v1/projects', options)
+        axios.get(projectsEndpoint, options)
             .then(response => {
                 console.log(response.data);
                 dispatch(projectActions.setPublicProjectList(response.data));
@@ -91,7 +100,7 @@ export const loadPublicProjectList = (isAuthenticated) => {
 
 export const removeProject = (projectId) => {
     return dispatch => {
-        axios.delete('/v1/me/projects/' + projectId,
+        axios.delete(`${projectsMeEndpoint}/${projectId}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,7 +116,7 @@ export const removeProject = (projectId) => {
 
 export const updateProject = (projectId, data) => {
     return dispatch => {
-        axios.patch('/v1/me/projects/' + projectId, JSON.stringify(data), { // receive two parameter endpoint url ,form data
+        axios.patch(`${projectsMeEndpoint}/${projectId}`, JSON.stringify(data), { // receive two parameter endpoint url ,form data
             headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`, 'Content-Type': 'application/json',}
         })
             .then(response => {
@@ -119,7 +128,7 @@ export const updateProject = (projectId, data) => {
 
 export const createProject = (data) => {
     return dispatch => {
-        axios.post('/v1/me/projects', JSON.stringify(data), { // receive two parameter endpoint url ,form data
+        axios.post(projectsMeEndpoint, JSON.stringify(data), { // receive two parameter endpoint url ,form data
             headers: {
                 Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`,
                 'Content-Type': 'application/json',

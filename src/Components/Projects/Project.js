@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {createProject, removeProject, updateProject} from "../../store/project-slice";
 import styles from './Project.module.css';
 import SingleUpload from "../PhotoGroups/SingleUpload";
+import {photosEndpoint} from "../../store/upload-slice";
 
 const Project = (props) => {
     const dispatch = useDispatch();
@@ -129,7 +130,7 @@ const Project = (props) => {
                 <div>
                     {props.view !== 'list' && props.project.photo_array.map((imageId) =>
                         <img alt={imageId} style={{margin: "2px"}} key={imageId}
-                             src={`/v1/photos/${imageId}`}/>
+                             src={`${photosEndpoint}/${imageId}`}/>
                     )}
                     {props.view !== 'list' &&
                     <UploadGroup projectId={props.project._id} photoArray={props.project.photo_array}/>
