@@ -12,7 +12,7 @@ const SingleUpload = (props) => {
         setUploadingTmpPhoto(true);
         const formData = new FormData();
         formData.append('file', event.target.files[0]);
-        axios.post('/v1/photos', formData,
+        axios.post(`${process.env.REACT_APP_PYTHON_API}/v1/photos}`, formData,
             {
                 headers: {
                     'Content-Type': "multipart/form-data; boundary=--------------------------a string of numbers that is never the same",
@@ -29,7 +29,7 @@ const SingleUpload = (props) => {
     return (<>
         {tmpPhotoId &&
         <img alt="showcase"
-             src={"/v1/photos/" + tmpPhotoId}/>
+             src={`${process.env.REACT_APP_PYTHON_API}/v1/photos${tmpPhotoId}`}/>
         }
 
         {!uploadingTmpPhoto && !tmpPhotoId && !props.photoId &&
@@ -53,7 +53,7 @@ const SingleUpload = (props) => {
         }
         {!tmpPhotoId && props.photoId &&
         <img alt="showcase"
-             src={"/v1/photos/" + props.photoId}/>
+             src={`${process.env.REACT_APP_PYTHON_API}/v1/photos/${props.photoId}`}/>
         }
     </>);
 

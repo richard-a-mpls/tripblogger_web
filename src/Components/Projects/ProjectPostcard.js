@@ -25,7 +25,7 @@ const ProjectPostcard = (props) => {
 
     useEffect(() => {
         if (isAuthenticated && !isOwner) {
-            axios.get('/v1/projects/' + props.project._id + '/profile',
+            axios.get(`${process.env.REACT_APP_PYTHON_API}/v1/projects/${props.project._id}/profile`,
                 {headers: {Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`}})
                 .then((response) => {
                     setOwnerInfo(response.data);
@@ -39,7 +39,7 @@ const ProjectPostcard = (props) => {
     } else {
         ownerProfile = <>
             {ownerInfo.profile_img &&
-            <img alt="avatar" src={`/v1/photos/${ownerInfo.profile_img}`} className="profilePicSm"/>
+            <img alt="avatar" src={`${process.env.REACT_APP_PYTHON_API}/v1/photos/${ownerInfo.profile_img}`} className="profilePicSm"/>
             }
             {ownerInfo.profile_name}<br/>
         </>
@@ -55,7 +55,7 @@ const ProjectPostcard = (props) => {
             </div>
             }
             <div className={styles.contenttop}>
-                <img className={styles.stamp} alt="logo" src={`/v1/photos/${props.project.showcase_photo_id}`}/>
+                <img className={styles.stamp} alt="logo" src={`${process.env.REACT_APP_PYTHON_API}/v1/photos/${props.project.showcase_photo_id}`}/>
             </div>
             <div className={styles.contentbottom}>
                 <h6 className={styles.text}>{props.project.summary}</h6>
@@ -68,13 +68,13 @@ const ProjectPostcard = (props) => {
             <div className={styles.imagegroup}>
                 {props.project.photo_array.map((imageId) =>
                     <img className={styles.projectimage} alt={imageId} key={imageId}
-                         src={`/v1/photos/${imageId}`}/>
+                         src={`${process.env.REACT_APP_PYTHON_API}/v1/photos/${imageId}`}/>
                 )}
             </div>}
             <div className={styles.expandbar}>
                 {props.project.photo_array.slice(0, 3).map((imageId) =>
                     <img className={styles.smallimg} alt={imageId} key={imageId}
-                         src={`/v1/photos/${imageId}`}/>
+                         src={`${process.env.REACT_APP_PYTHON_API}/v1/photos/${imageId}`}/>
                 )}
                 {props.project.photo_array && props.project.photo_array.length > 3 &&
                 <h6>+{props.project.photo_array.length - 3}</h6>

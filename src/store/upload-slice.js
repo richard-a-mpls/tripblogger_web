@@ -7,7 +7,7 @@ const uploadData = (projectId, data, setUrlCallback) => {
         const formData = new FormData();
         console.log("uploading data");
         formData.append('file', data);
-        axios.post(`/v1/me/projects/${projectId}/photos`, formData,
+        axios.post(`${process.env.REACT_APP_PROJECTS_API}/v1/me/projects/${projectId}/photos`, formData,
             {
                 headers: {
                     'Content-Type': "multipart/form-data; boundary=--------------------------a string of numbers that is never the same",
@@ -16,7 +16,7 @@ const uploadData = (projectId, data, setUrlCallback) => {
             })
             .then(response => {
                 console.log(response.data.id);
-                setUrlCallback("/v1/photos/" + response.data.id);
+                setUrlCallback(`${process.env.REACT_APP_PYTHON_API}/v1/photos/` + response.data.id);
             });
     }
 }
