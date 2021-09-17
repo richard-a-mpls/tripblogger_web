@@ -7,6 +7,8 @@ const initialState = {
     userProfile: {}
 };
 
+export const profileEndpoint = (process.env.REACT_APP_PYTHON_API || "https://tripblogger-api.azurewebsites.net") + "/v1/profile";
+
 const profileSlice = createSlice({
     name: 'profile',
     initialState,
@@ -19,8 +21,9 @@ const profileSlice = createSlice({
 
 export const setupProfile = (apiToken) => {
     return async (dispatch) => {
+
         try {
-            axios.get(`${process.env.REACT_APP_PYTHON_API}/v1/profile`, {
+            axios.get(profileEndpoint, {
                 headers: {Authorization: `Bearer ${apiToken}`}
             })
                 .then(response => {
@@ -44,7 +47,8 @@ export const setupProfile = (apiToken) => {
 
 export const updateProfile = (userProfileId, updateData) => {
     return async (dispatch) => {
-        axios.patch(`${process.env.REACT_APP_PYTHON_API}/v1/profile/${userProfileId}`,
+
+        axios.patch(`${profileEndpoint}/${userProfileId}`,
             JSON.stringify(updateData), {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem(STORAGE_APITOKEN)}`,
