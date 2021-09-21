@@ -3,7 +3,7 @@ import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
 import EditProfile from "./Components/Profile/EditProfile";
 import ProjectParent from "./Components/Projects/ProjectParent"
 import './App.css';
-import BloggerCard from "./Components/UI/BloggerCard";
+import StylesCard from "./Components/UI/StylesCard";
 import Header from "./Components/UI/Header";
 
 import {useDispatch, useSelector} from "react-redux";
@@ -26,7 +26,7 @@ function App() {
     }
 
     return (
-        <BloggerCard>
+        <StylesCard>
             <>
                 <UnauthenticatedTemplate>
                     {loggedIn === 'complete' &&
@@ -66,7 +66,7 @@ function App() {
                 </footer>
 
             </>
-        </BloggerCard>
+        </StylesCard>
     );
 }
 
