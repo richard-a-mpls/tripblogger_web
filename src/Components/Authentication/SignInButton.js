@@ -15,8 +15,6 @@ export const SignInButton = () => {
     }
 
     return (
-        <div>
-            <button type="button" onClick={() => handleLogin(instance)}>Sign In</button>
-        </div>
+        <button type="button" onClick={() => handleLogin(instance)}>Sign In</button>
     );
 }
