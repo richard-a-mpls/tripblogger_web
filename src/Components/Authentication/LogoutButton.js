@@ -1,7 +1,7 @@
 import React from "react";
 import {useMsal} from "@azure/msal-react";
 
-const LogoutUser = () => {
+const LogoutButton = () => {
 
     const { instance } = useMsal();
 
@@ -18,4 +18,4 @@ const LogoutUser = () => {
     );
 };
 
-export default React.memo(LogoutUser);
+export default React.memo(LogoutButton);

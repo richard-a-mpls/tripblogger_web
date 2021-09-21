@@ -1,8 +1,8 @@
-import LogoutUser from "../Authentication/LogoutUser";
+import LogoutUser from "../Authentication/LogoutButton";
 import React from "react";
 import {uiActions} from "../../store/ui-slice";
 import {useDispatch, useSelector} from "react-redux";
-import {SignInButton} from "../SignInButton";
+import {SignInButton} from "../Authentication/SignInButton";
 import {useIsAuthenticated} from "@azure/msal-react";
 import ProfileImage from "./ProfileImage";
 
