@@ -358,32 +358,6 @@ input:checked + .slider:before {
     display: none;
 }
 
-.addphoto {
-    display: inline-block;
-    textAlign: center;
-    backgroundColor: #26567b;
-    borderRadius: 16px;
-    height: 150px;
-    paddingRight: 5px;
-    paddingBottom: 5px;
-    verticalAlign: "middle";
-}
-
-.inputfile + label {
-    margin-top: 2px;
-    height: 50px;
-    object-fit:cover;
-}
-
-main .content i.showcase {
-    font-size: 8em;
-    margin-top: 0px;
-    height: 100px;
-    width: 150px;
-    color: #ffffff;
-}
-
-
 .inputfile:focus + label,
 .inputfile + label:hover {
     background-color: red;
