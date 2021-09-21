@@ -3,7 +3,7 @@ import {useMsal} from "@azure/msal-react";
 
 const LogoutButton = () => {
 
-    const { instance } = useMsal();
+    const {instance} = useMsal();
 
     const endSessionHandler = () => {
         instance.logoutPopup().catch(e => {
@@ -12,9 +12,7 @@ const LogoutButton = () => {
     }
 
     return (
-        <>
-            <button type="button" onClick={endSessionHandler}>Log Out</button>
-        </>
+        <button type="button" onClick={endSessionHandler}>Log Out</button>
     );
 };
 
