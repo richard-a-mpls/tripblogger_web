@@ -5,45 +5,12 @@
     margin-bottom: 8px;
     font-weight: bolder;
 }
-.wb-form-control textarea {
-    display: block;
-    width: 90%;
-    margin-bottom: 8px;
-}
 
-.wb-form-control label.narrow {
-    margin-bottom: 1px;
-    width: 15%;
-}
-
-.wb-form-control p.note {
+p.note {
     font-size: small;
     color: #888b8b;
 }
 
-header {
-    background-color: #26567b;
-    width: 100%;
-    vertical-align: middle;
-    overflow: auto;
-    position: fixed;
-    top: 0;
-    text-align: center;
-    color: white;
-    height: 60px;
-}
-
-header h6 {
-    display: inline-block;
-    padding-left: 15px;
-}
-
-header form {
-    display: inline-block;
-    padding-right: 15px;
-    float: right;
-    vertical-align: center;
-}
 
 img.profilePicSm {
     height: 25px;
