@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import styles from './ProjectActionButtons.module.css';
+import classes from './ProjectActionButtons.module.css';
 
 const ProjectActionButtons = (props) => {
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -24,7 +24,7 @@ const ProjectActionButtons = (props) => {
         cancel = props.viewProjectsHandler;
     }
 
-    return (<div className={styles.display}>
+    return (<div className={classes.display}>
         {!props.editable && props.view !== "create" && !confirmDelete &&
         <button type="button"
                 onClick={initiateEditHandler}><i className="fas fa-eye"></i>
@@ -49,8 +49,8 @@ const ProjectActionButtons = (props) => {
                 </button>
             </div>
         }
-        {props.editing && <div className={styles.display}>
-            <button className={styles.display} onClick={props.onSubmit} type="button">
+        {props.editing && <div className={classes.display}>
+            <button className={classes.display} onClick={props.onSubmit} type="button">
                 <i className="fas fa-check"/>
             </button>
             <button onClick={cancel} className='cancel' type="button">
