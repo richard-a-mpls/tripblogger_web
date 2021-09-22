@@ -6,53 +6,58 @@ import {loadActiveProject} from "../../store/project-slice";
 import classes from './ProjectParent.module.css';
 
 const ProjectParent = props => {
-    const [pageState, setPageState] = useState('viewing');
+
+    const PAGE_STATE_LIST = 'page_state_list';
+    const PAGE_STATE_CREATING = 'page_state_creating';
+    const PAGE_STATE_EDITING = 'page_state_editing';
+    const PAGE_STATE_VIEW = 'page_state_view';
+    const [pageState, setPageState] = useState(PAGE_STATE_LIST);
     const activeProject = useSelector(state => state.projectSlice.activeProject);
 
     const dispatch = useDispatch();
 
     const initNewProjectHandler = (event) => {
         dispatch(loadActiveProject()); // set empty project create
-        setPageState('creating');
+        setPageState(PAGE_STATE_CREATING);
     }
 
     const viewProjectsHandler = (event) => {
-        setPageState('viewing');
+        setPageState(PAGE_STATE_LIST);
     }
 
     const editProjectHandler = (projectId) => {
         dispatch(loadActiveProject(projectId));
-        setPageState('editing');
+        setPageState(PAGE_STATE_EDITING);
     }
 
     const viewProjectHandler = (projectId) => {
         dispatch(loadActiveProject(projectId));
-        setPageState('viewing_project');
+        setPageState(PAGE_STATE_VIEW);
     }
 
     return (
         <>
             <main>
-                {pageState === "viewing" && <div className="center">
+                {pageState === PAGE_STATE_LIST && <div className="center">
                     <button className="halfwidth" type="button" onClick={props.showWelcomePage}>Community</button>
                     <button className="halfwidth" onClick={initNewProjectHandler} type="submit">New Project</button>
                 </div>}
-                {(pageState === "creating" || pageState === "editing" || pageState === "viewing_project") &&
+                {(pageState === PAGE_STATE_CREATING || pageState === PAGE_STATE_EDITING || pageState === PAGE_STATE_VIEW) &&
                 <button type="button" className="fullwidth" onClick={viewProjectsHandler}>All Projects</button>
                 }
             </main>
             <div className={classes.projectParentWrapper}>
-                {pageState === "viewing" &&
+                {pageState === PAGE_STATE_LIST &&
                 <ProjectList changePageState={viewProjectsHandler}
                              editProjectHandler={viewProjectHandler}/>}
-                {pageState === "viewing_project" &&
+                {pageState === PAGE_STATE_VIEW &&
                 <Project
                     editProjectHandler={editProjectHandler}
                     viewProjectsHandler={viewProjectsHandler}
                     project={activeProject}
                     view="edit"
                 />}
-                {pageState === "creating" &&
+                {pageState === PAGE_STATE_CREATING &&
                 <Project
                     project={activeProject}
                     onCancelEdit={viewProjectsHandler}
