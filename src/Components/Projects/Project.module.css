@@ -41,7 +41,7 @@ div.actionButtons button {
 }
 
 .projectphoto {
-    margin-top: 10px;
+    margin: 2px;
     display: inline-block;
     float: left;
     height: 150px;

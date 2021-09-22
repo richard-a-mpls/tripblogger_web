@@ -13,7 +13,7 @@ const ImageUpload = (props) => {
 
 
     return (
-        <img className={classes.showcasephoto} alt="showcase" src={imageUrl}/>
+        <img className={classes.projectphoto} alt="showcase" src={imageUrl}/>
     );
 }
 export default ImageUpload;

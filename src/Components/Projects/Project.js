@@ -129,7 +129,7 @@ const Project = (props) => {
                 {!editing && props.project.photo_array &&
                 <div>
                     {props.view !== 'list' && props.project.photo_array.map((imageId) =>
-                        <img className={classes.projectphoto} alt={imageId} style={{margin: "2px"}} key={imageId}
+                        <img className={classes.projectphoto} alt={imageId} key={imageId}
                              src={`${photosEndpoint}/${imageId}`}/>
                     )}
                     {props.view !== 'list' &&
