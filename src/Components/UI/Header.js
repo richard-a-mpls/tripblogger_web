@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {SignInButton} from "../Authentication/SignInButton";
 import {useIsAuthenticated} from "@azure/msal-react";
 import ProfileImage from "./ProfileImage";
+import Button from './Button';
 
 import classes from './Header.module.css';
 
@@ -22,10 +23,10 @@ const Header = () => {
         <header>
             <div className={classes.leftitem}>
                 {isAuthenticated &&
-                <button onClick={editProfileClickHandler}>
+                <Button onClick={editProfileClickHandler}>
                     <ProfileImage className={classes.profilepic}/>
                     &nbsp;{userProfile.profile_name}
-                </button>
+                </Button>
                 }
                 {!isAuthenticated &&
                 <div className={classes.logoblock}>

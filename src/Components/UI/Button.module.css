@@ -1,0 +1,46 @@
+.buttonwrapper {
+    display: inline;
+}
+
+.buttonwrapper button {
+    background-color: #26567b;
+    color: white;
+    padding: 5px;
+    border: 2px solid #26567b;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-right: 5px;
+    margin-left: 5px;
+    height: 100%;
+}
+
+.buttonwrapper button.cancel {
+    background-color: white;
+    color: black;
+    border: 2px solid #26567b;
+}
+
+.buttonwrapper button.fullwidth {
+    width: 99%;
+}
+
+.buttonwrapper button.halfwidth {
+    max-width: 48%;
+    width: 48%;
+}
+
+.buttonwrapper button.inactive {
+    padding: 5px;
+    background-color: #96989a;
+    color: #e7e5e5;
+    margin-right: 4px;
+    border-radius: 8px;
+}
+
+.buttonwrapper button.confirm {
+    background-color: #f33e3e;
+    border: 2px solid #26567b;
+}

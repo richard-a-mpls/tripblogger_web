@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../../store/profile-slice";
 import styles from "../Projects/Project.module.css";
 import SingleUpload from "../PhotoGroups/SingleUpload";
+import Button from '../UI/Button';
 
 const EditProfile = (props) => {
 
@@ -29,18 +30,18 @@ const EditProfile = (props) => {
 
     return (
         <main>
-            <button className={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
+            <Button className={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</Button>
             <div className={styles.projectHeader}>
                 <input className={styles.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
 
                 <div className={styles.actionButtons}>
-                    <button onClick={submitEditProfileHandler} type="button">
+                    <Button onClick={submitEditProfileHandler} type="button">
                         <i className="fas fa-check"/>
-                    </button>
+                    </Button>
 
-                    <button onClick={cancelEditProfileHandler} className='cancel' type="button">
+                    <Button onClick={cancelEditProfileHandler} className='cancel' type="button">
                         <i className="fas fa-times"/>
-                    </button>
+                    </Button>
                 </div>
             </div>
             <div className="content">

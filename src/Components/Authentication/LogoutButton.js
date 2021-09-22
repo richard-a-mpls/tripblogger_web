@@ -1,5 +1,6 @@
 import React from "react";
 import {useMsal} from "@azure/msal-react";
+import Button from '../UI/Button';
 
 const LogoutButton = () => {
 
@@ -12,7 +13,7 @@ const LogoutButton = () => {
     }
 
     return (
-        <button type="button" onClick={endSessionHandler}>Log Out</button>
+        <Button type="button" onClick={endSessionHandler}>Log Out</Button>
     );
 };
 

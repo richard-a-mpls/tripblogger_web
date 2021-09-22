@@ -1,6 +1,7 @@
 import React from "react";
 import PublicProjectsList from "../Projects/PublicProjectsList";
 import {useSelector} from "react-redux";
+import Button from '../UI/Button';
 
 const WelcomeMessage = (props) => {
 
@@ -8,9 +9,9 @@ const WelcomeMessage = (props) => {
 
     return (
         <main className="center">
-            <button className="fullwidth" onClick={props.changePageState}>
+            <Button className="fullwidth" onClick={props.changePageState}>
                 Manage or create new Projects, {userProfile.profile_name}?
-            </button>
+            </Button>
             <PublicProjectsList/>
         </main>
     );
