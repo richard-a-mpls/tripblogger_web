@@ -232,20 +232,6 @@ main header form {
     display: inline-block;
 }
 
-.fullspinner {
-    font-size: 6em;
-    color: #26567b;
-}
-
-.wb-form-control input[type="file"] {
-    display: none;
-}
-
-.inputfile:focus + label,
-.inputfile + label:hover {
-    background-color: red;
-}
-
 .center {
     text-align: center;
 }
