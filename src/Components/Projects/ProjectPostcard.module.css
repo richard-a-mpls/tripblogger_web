@@ -101,3 +101,12 @@ h6.headertitle {
 .stamp {
     width: 400px;
 }
+
+img.profilePicSm {
+    height: 25px;
+    width: 25px;
+    overflow: hidden;
+    border-radius: 6px;
+    display: inline-block;
+    margin-right: 5px;
+}

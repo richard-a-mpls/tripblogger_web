@@ -1,4 +1,4 @@
-import styles from './ProjectPostcard.module.css';
+import classes from './ProjectPostcard.module.css';
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import DateConverter from "../UI/DateConverter";
@@ -37,45 +37,45 @@ const ProjectPostcard = (props) => {
 
     let ownerProfile = <></>;
     if (isOwner) {
-        ownerProfile = <><ProfileImage className="profilePicSm"/>Your Project<br/></>
+        ownerProfile = <><ProfileImage className={classes.profilePicSm}/>Your Project<br/></>
     } else {
         ownerProfile = <>
             {ownerInfo.profile_img &&
-            <img alt="avatar" src={`${photosEndpoint}/${ownerInfo.profile_img}`} className="profilePicSm"/>
+            <img alt="avatar" src={`${photosEndpoint}/${ownerInfo.profile_img}`} className={classes.profilePicSm}/>
             }
             {ownerInfo.profile_name}<br/>
         </>
     }
 
     return (
-        <div className={styles.postcard} onClick={clickHandler}>
+        <div className={classes.postcard} onClick={clickHandler}>
             {isAuthenticated &&
-            <div className={styles.headertitle}>
-                <h6 className={styles.headertitle}>
+            <div className={classes.headertitle}>
+                <h6 className={classes.headertitle}>
                     {isAuthenticated && ownerProfile}
                 </h6>
             </div>
             }
-            <div className={styles.contenttop}>
-                <img className={styles.stamp} alt="logo" src={`${photosEndpoint}/${props.project.showcase_photo_id}`}/>
+            <div className={classes.contenttop}>
+                <img className={classes.stamp} alt="logo" src={`${photosEndpoint}/${props.project.showcase_photo_id}`}/>
             </div>
-            <div className={styles.contentbottom}>
-                <h6 className={styles.text}>{props.project.summary}</h6>
-                <p className={styles.paragraph}>
+            <div className={classes.contentbottom}>
+                <h6 className={classes.text}>{props.project.summary}</h6>
+                <p className={classes.paragraph}>
                     {props.project.description} <DateConverter date={props.project.datestmp}/>
                 </p>
 
             </div>
             {imagesExpaneded &&
-            <div className={styles.imagegroup}>
+            <div className={classes.imagegroup}>
                 {props.project.photo_array.map((imageId) =>
-                    <img className={styles.projectimage} alt={imageId} key={imageId}
+                    <img className={classes.projectimage} alt={imageId} key={imageId}
                          src={`${photosEndpoint}/${imageId}`}/>
                 )}
             </div>}
-            <div className={styles.expandbar}>
+            <div className={classes.expandbar}>
                 {props.project.photo_array.slice(0, 3).map((imageId) =>
-                    <img className={styles.smallimg} alt={imageId} key={imageId}
+                    <img className={classes.smallimg} alt={imageId} key={imageId}
                          src={`${photosEndpoint}/${imageId}`}/>
                 )}
                 {props.project.photo_array && props.project.photo_array.length > 3 &&
