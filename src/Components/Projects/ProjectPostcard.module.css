@@ -29,6 +29,11 @@
     text-align: center;
 }
 
+.contentbottom h6 {
+    font-size: medium;
+    font-weight: bold;
+}
+
 .text {
     display: block;
     text-align: left;
@@ -71,10 +76,13 @@ div.headertitle {
     background-color: #26567b;
     width: 100%;
     overflow: hidden;
+    margin-top: 3px;
 }
 
 h6.headertitle {
     color: #FFFFFF;
+    font-size: medium;
+    font-weight: bold;
 }
 
 .expandbar {

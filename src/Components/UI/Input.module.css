@@ -14,6 +14,10 @@ input.summary {
     display: inline-block;
 }
 
+label {
+    display: block;
+}
+
 label.summary {
     font-weight: bolder;
     font-size: 1.25em;
