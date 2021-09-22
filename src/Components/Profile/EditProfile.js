@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../../store/profile-slice";
-import styles from "../Projects/Project.module.css";
+import classes from "../Projects/Project.module.css";
 import SingleUpload from "../PhotoGroups/SingleUpload";
 import Button from '../UI/Button';
 
@@ -31,10 +31,10 @@ const EditProfile = (props) => {
     return (
         <main>
             <Button decorator={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</Button>
-            <div className={styles.projectHeader}>
-                <input className={styles.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
+            <div className={classes.projectHeader}>
+                <input className={classes.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
 
-                <div className={styles.actionButtons}>
+                <div className={classes.actionButtons}>
                     <Button onClick={submitEditProfileHandler} type="button">
                         <i className="fas fa-check"/>
                     </Button>
