@@ -28,7 +28,7 @@ const EditProfile = (props) => {
     }
 
     return (
-        <main style={{marginTop: "60px"}}>
+        <main>
             <button className={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
             <div className={styles.projectHeader}>
                 <input className={styles.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
