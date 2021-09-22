@@ -4,7 +4,7 @@ const Spinner = () => {
     return (
         <main>
             <div className={classes.spinner}>
-                <i className="fullspinner fas fa-cog fa-spin"/>
+                <i className={`${classes.fullspinner} fas fa-cog fa-spin`}/>
             </div>
         </main>
     );
