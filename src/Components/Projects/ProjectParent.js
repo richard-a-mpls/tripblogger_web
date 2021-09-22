@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import Project from "./Project";
 import {useDispatch, useSelector} from "react-redux";
 import {loadActiveProject} from "../../store/project-slice";
+import classes from './ProjectParent.module.css';
 
 const ProjectParent = props => {
     const [pageState, setPageState] = useState('viewing');
@@ -31,7 +32,7 @@ const ProjectParent = props => {
 
     return (
         <>
-            <main style={{marginTop: "60px"}}>
+            <main>
                 {pageState === "viewing" && <div className="center">
                     <button className="halfwidth" type="button" onClick={props.showWelcomePage}>Community</button>
                     <button className="halfwidth" onClick={initNewProjectHandler} type="submit">New Project</button>
@@ -40,7 +41,7 @@ const ProjectParent = props => {
                 <button type="button" className="fullwidth" onClick={viewProjectsHandler}>All Projects</button>
                 }
             </main>
-            <div className="content">
+            <div className={classes.projectParentWrapper}>
                 {pageState === "viewing" &&
                 <ProjectList changePageState={viewProjectsHandler}
                              editProjectHandler={viewProjectHandler}/>}
