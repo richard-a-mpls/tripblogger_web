@@ -111,7 +111,7 @@ const Project = (props) => {
             <div className='content'>
                 <SingleUpload updateData={updatePhotoId} photoId={props.project.showcase_photo_id}/>
 
-                <div className="project-details">
+                <div className={classes.projectdetails}>
                     <Input placeholder="location" editing={allowEdit} attribute="location"
                            value={props.project.location} onUpdate={updateDataHandler}/>
                     <Input type="date" editing={allowEdit} attribute="datestmp" value={dateDisplay}
