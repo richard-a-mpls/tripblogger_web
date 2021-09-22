@@ -30,7 +30,7 @@ const EditProfile = (props) => {
 
     return (
         <main>
-            <Button className={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</Button>
+            <Button decorator={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</Button>
             <div className={styles.projectHeader}>
                 <input className={styles.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
 
@@ -39,7 +39,7 @@ const EditProfile = (props) => {
                         <i className="fas fa-check"/>
                     </Button>
 
-                    <Button onClick={cancelEditProfileHandler} className='cancel' type="button">
+                    <Button onClick={cancelEditProfileHandler} decorator='cancel' type="button">
                         <i className="fas fa-times"/>
                     </Button>
                 </div>
