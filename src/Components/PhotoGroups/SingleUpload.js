@@ -31,7 +31,7 @@ const SingleUpload = (props) => {
 
     return (<>
         {tmpPhotoId &&
-        <img alt="showcase"
+        <img className={classes.showcasephoto} alt="showcase"
              src={`${photosEndpoint}/${tmpPhotoId}`}/>
         }
 
@@ -45,11 +45,11 @@ const SingleUpload = (props) => {
                    onChange={setPhotoDataHandler}/>
         </div>}
         {uploadingTmpPhoto &&
-        <img alt="showcase"
+        <img className={classes.showcasephoto} alt="showcase"
              src={"/spin.gif"}/>
         }
         {!tmpPhotoId && props.photoId &&
-        <img alt="showcase"
+        <img className={classes.showcasephoto} alt="showcase"
              src={`${photosEndpoint}/${props.photoId}`}/>
         }
     </>);
