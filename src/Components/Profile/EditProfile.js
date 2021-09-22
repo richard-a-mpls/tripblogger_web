@@ -45,7 +45,7 @@ const EditProfile = (props) => {
                 </div>
             </div>
             <div className="content">
-                <p className="note small">This is the name that is publicly visible on your projects.</p>
+                <p className="note">This is the name that is publicly visible on your projects.</p>
                 <SingleUpload updateData={updatePhotoId} photoId={userProfile.profile_img}/>
             </div>
         </main>
