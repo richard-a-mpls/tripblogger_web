@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {endSession} from "../../store/auth-slice";
+import Spinner from "../UI/Spinner";
 
 const EndSession = () => {
     const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const EndSession = () => {
     }, [dispatch]);
 
     return (
-        <i className="fullspinner fas fa-cog fa-spin"/>
+        <Spinner/>
     );
 }
 

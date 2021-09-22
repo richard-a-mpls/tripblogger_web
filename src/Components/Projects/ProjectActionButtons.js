@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import styles from './ProjectActionButtons.module.css';
+import Button from '../UI/Button';
+import classes from './ProjectActionButtons.module.css';
 
 const ProjectActionButtons = (props) => {
     const [confirmDelete, setConfirmDelete] = useState(false);
@@ -24,38 +25,33 @@ const ProjectActionButtons = (props) => {
         cancel = props.viewProjectsHandler;
     }
 
-    return (<div className={styles.display}>
+    return (<div className={classes.display}>
         {!props.editable && props.view !== "create" && !confirmDelete &&
-        <button type="button"
-                onClick={initiateEditHandler}><i className="fas fa-eye"></i>
-        </button>
+            <Button onClick={initiateEditHandler}><i className="fas fa-eye"/></Button>
         }
         {confirmDelete &&
-        <div className="wb-form-control">
-            <button className="confirm" type="button"
-                    onClick={confirmDeleteHandler}>Delete <i className="fas fa-check"/></button>
-            <button className="cancel" type="button"
-                    onClick={cancelDeleteHandler}><i className="fas fa-times"/>
-            </button>
-        </div>
+        <>
+            <Button decorator="confirm" onClick={confirmDeleteHandler}>Delete <i className="fas fa-check"/></Button>
+            <Button decorator="cancel" onClick={cancelDeleteHandler}><i className="fas fa-times"/></Button>
+        </>
         }
         {
             !confirmDelete && props.editable && !props.editing &&
             <div className="wb-form-control">
-                <button type="button" onClick={initiateDeleteHandler}><i className="fas fa-trash"/>
-                </button>
-                <button onClick={props.onSetEdit} type="button">
+                <Button type="button" onClick={initiateDeleteHandler}><i className="fas fa-trash"/>
+                </Button>
+                <Button onClick={props.onSetEdit} type="button">
                     <i className='far fa-edit'/>
-                </button>
+                </Button>
             </div>
         }
-        {props.editing && <div className={styles.display}>
-            <button className={styles.display} onClick={props.onSubmit} type="button">
+        {props.editing && <div className={classes.display}>
+            <Button onClick={props.onSubmit} type="button">
                 <i className="fas fa-check"/>
-            </button>
-            <button onClick={cancel} className='cancel' type="button">
+            </Button>
+            <Button onClick={cancel} decorator='cancel' type="button">
                 <i className="fas fa-times"/>
-            </button>
+            </Button>
         </div>}
     </div>);
 };

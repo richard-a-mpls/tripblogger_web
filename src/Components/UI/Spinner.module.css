@@ -1,0 +1,9 @@
+.spinner {
+    width: 100%;
+    text-align: center;
+}
+
+.fullspinner {
+    font-size: 6em;
+    color: #26567b;
+}

@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {updateProfile} from "../../store/profile-slice";
-import styles from "../Projects/Project.module.css";
+import classes from "../Projects/Project.module.css";
 import SingleUpload from "../PhotoGroups/SingleUpload";
+import Button from '../UI/Button';
 
 const EditProfile = (props) => {
 
@@ -28,23 +29,23 @@ const EditProfile = (props) => {
     }
 
     return (
-        <main style={{marginTop: "60px"}}>
-            <button className={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</button>
-            <div className={styles.projectHeader}>
-                <input className={styles.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
+        <main>
+            <Button decorator={"fullwidth"} type="button" onClick={props.showWelcomePage}>Show Dashboard</Button>
+            <div className={classes.projectHeader}>
+                <input className={classes.summary} type="text" value={profileName} onChange={profileNameChangeHandler}/>
 
-                <div className={styles.actionButtons}>
-                    <button onClick={submitEditProfileHandler} type="button">
+                <div className={classes.actionButtons}>
+                    <Button onClick={submitEditProfileHandler} type="button">
                         <i className="fas fa-check"/>
-                    </button>
+                    </Button>
 
-                    <button onClick={cancelEditProfileHandler} className='cancel' type="button">
+                    <Button onClick={cancelEditProfileHandler} decorator='cancel' type="button">
                         <i className="fas fa-times"/>
-                    </button>
+                    </Button>
                 </div>
             </div>
             <div className="content">
-                <p className="note small">This is the name that is publicly visible on your projects.</p>
+                <p className="note">This is the name that is publicly visible on your projects.</p>
                 <SingleUpload updateData={updatePhotoId} photoId={userProfile.profile_img}/>
             </div>
         </main>

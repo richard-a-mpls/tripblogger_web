@@ -3,7 +3,7 @@ import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
 import EditProfile from "./Components/Profile/EditProfile";
 import ProjectParent from "./Components/Projects/ProjectParent"
 import './App.css';
-import BloggerCard from "./Components/UI/BloggerCard";
+import StylesCard from "./Components/UI/StylesCard";
 import Header from "./Components/UI/Header";
 
 import {useDispatch, useSelector} from "react-redux";
@@ -12,6 +12,7 @@ import {AuthenticatedTemplate, UnauthenticatedTemplate} from "@azure/msal-react"
 import AuthorizingSession from "./Components/Authentication/AuthorizingSession";
 import EndSession from "./Components/Authentication/EndSession";
 import PublicProjectsList from "./Components/Projects/PublicProjectsList";
+import Footer from "./Components/UI/Footer";
 
 function App() {
     const dispatch = useDispatch();
@@ -26,15 +27,15 @@ function App() {
     }
 
     return (
-        <BloggerCard>
+        <StylesCard>
             <>
                 <UnauthenticatedTemplate>
                     {loggedIn === 'complete' &&
                     <EndSession/>
                     }
-                    <div className="center" style={{marginTop: "60px"}}>
+                    <main>
                         <PublicProjectsList/>
-                    </div>
+                    </main>
                 </UnauthenticatedTemplate>
                 <AuthenticatedTemplate>
                     {loggedIn === 'pending' &&
@@ -55,18 +56,10 @@ function App() {
                 </AuthenticatedTemplate>
                 <br/><br/><br/><br/><br/>
                 <Header/>
-                <footer>
-                    <br/>
-                    <center>
-                        <p>
-                            Page State: {pageState}<br/>
-                            Logged In: {loggedIn}
-                        </p>
-                    </center>
-                </footer>
+                <Footer pageState={pageState} loggedIn={loggedIn}/>
 
             </>
-        </BloggerCard>
+        </StylesCard>
     );
 }
 

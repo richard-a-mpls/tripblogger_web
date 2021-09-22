@@ -1,9 +1,10 @@
 import React from "react";
 import {useMsal} from "@azure/msal-react";
+import Button from '../UI/Button';
 
-const LogoutUser = () => {
+const LogoutButton = () => {
 
-    const { instance } = useMsal();
+    const {instance} = useMsal();
 
     const endSessionHandler = () => {
         instance.logoutPopup().catch(e => {
@@ -12,10 +13,8 @@ const LogoutUser = () => {
     }
 
     return (
-        <>
-            <button type="button" onClick={endSessionHandler}>Log Out</button>
-        </>
+        <Button type="button" onClick={endSessionHandler}>Log Out</Button>
     );
 };
 
-export default React.memo(LogoutUser);
+export default React.memo(LogoutButton);

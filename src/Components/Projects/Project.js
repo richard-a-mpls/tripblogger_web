@@ -5,7 +5,7 @@ import Input from "../UI/Input";
 import UploadGroup from "../PhotoGroups/UploadGroup";
 import {useDispatch} from "react-redux";
 import {createProject, removeProject, updateProject} from "../../store/project-slice";
-import styles from './Project.module.css';
+import classes from './Project.module.css';
 import SingleUpload from "../PhotoGroups/SingleUpload";
 import {photosEndpoint} from "../../store/upload-slice";
 
@@ -90,11 +90,11 @@ const Project = (props) => {
     const allowEdit = editing || props.view === "create";
 
     return (
-        <main>
-            <div className={styles.projectHeader}>
+        <>
+            <div className={classes.projectHeader}>
                 <Input placeholder="summary" editing={allowEdit} attribute="summary" value={props.project.summary}
                        className="summary" onUpdate={updateDataHandler}/>
-                <div className={styles.actionButtons}>
+                <div className={classes.actionButtons}>
                     <ProjectActionButtons
                         editable={props.view === "edit"}
                         projectId={props.project._id}
@@ -109,27 +109,28 @@ const Project = (props) => {
                 </div>
             </div>
             <div className='content'>
-                <SingleUpload updateData={updatePhotoId} photoId={props.project.showcase_photo_id}/>
-
-                <div className="project-details">
-                    <Input placeholder="location" editing={allowEdit} attribute="location"
-                           value={props.project.location} onUpdate={updateDataHandler}/>
-                    <Input type="date" editing={allowEdit} attribute="datestmp" value={dateDisplay}
-                           dateValue={dateInput}
-                           onUpdate={updateDataHandler}/>
-                    <Input placeholder="description" editing={allowEdit} attribute="description"
-                           value={props.project.description} onUpdate={updateDataHandler}/><br/>
-                    {!editing && <ShareStatus project={props.project}/>}
-                    {editing &&
-                    <Input type="slider" attribute="published" value={props.project.published}
-                           onUpdate={updateDataHandler} onUpdate2={toggleShowAudienceHandler}/>
-                    }
+                <div style={{minHeight: "150px"}}>
+                    <SingleUpload updateData={updatePhotoId} photoId={props.project.showcase_photo_id}/>
+                    <div className={classes.projectdetails}>
+                        <Input placeholder="location" editing={allowEdit} attribute="location"
+                               value={props.project.location} onUpdate={updateDataHandler}/>
+                        <Input type="date" editing={allowEdit} attribute="datestmp" value={dateDisplay}
+                               dateValue={dateInput}
+                               onUpdate={updateDataHandler}/>
+                        <Input placeholder="description" editing={allowEdit} attribute="description"
+                               value={props.project.description} onUpdate={updateDataHandler}/><br/>
+                        {!editing && <ShareStatus project={props.project}/>}
+                        {editing &&
+                        <Input type="slider" attribute="published" value={props.project.published}
+                               onUpdate={updateDataHandler} onUpdate2={toggleShowAudienceHandler}/>
+                        }
+                    </div>
                 </div>
                 <br/><br/>
                 {!editing && props.project.photo_array &&
                 <div>
                     {props.view !== 'list' && props.project.photo_array.map((imageId) =>
-                        <img alt={imageId} style={{margin: "2px"}} key={imageId}
+                        <img className={classes.projectphoto} alt={imageId} key={imageId}
                              src={`${photosEndpoint}/${imageId}`}/>
                     )}
                     {props.view !== 'list' &&
@@ -139,7 +140,7 @@ const Project = (props) => {
                 }
             </div>
 
-        </main>
+        </>
 
     );
 }

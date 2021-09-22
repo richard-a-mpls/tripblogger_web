@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import classes from './Input.module.css';
 
 const Input = (props) => {
 
@@ -19,49 +20,28 @@ const Input = (props) => {
         });
     };
 
-    const updateButtonSelectorHandler = (event) => {
-        setValue(event.target.id);
-        props.onUpdate(props.attribute, event.target.id);
-    };
-
     useEffect(() => {
         if (props.value || props.dateValue) {
             setValue(props.dateValue ? props.dateValue : props.value);
         }
     }, [props.value, props.dateValue]);
 
-    if (props.type === 'button-selector') {
-        return (
-            <div>
-                <div style={{width: "150px", display: "inline-block"}}>
-                    <label>{props.label}</label>
-                </div>
-                <div style={{display: "inline-block"}}>
-                    {props.options.map((opt) =>
-                        <label key={opt.value} style={{display: "inline-block"}} id={opt.value}
-                               onClick={updateButtonSelectorHandler}
-                               className={value === opt.value ? "active" : "inactive"}>{opt.label}</label>
-                    )}
-                </div>
-            </div>
-        )
-    }
-
+    const className = (props.className === 'summary')?classes.summary:undefined;
 
     if (props.type === 'slider') {
         return (
             <>
-                <div style={{width: "150px", display: "inline-block"}}>
+                <div style={{width: "100px", display: "inline-block"}}>
                     <label>Published:</label>
                 </div>
                 <div style={{display: "inline-block"}}>
-                                <span style={{verticalAlign: 'middle', display: 'inline-block', lineHeight: '30px'}}>
-                                <label className="switch">
-                                    <input type="checkbox" defaultChecked={props.value}
-                                           onChange={sliderChangeHandler}/>
-                                    <span className="slider round"></span>
-                                </label>
-                                </span>
+                    <span style={{verticalAlign: 'top', display: 'inline-block'}}>
+                        <label className={classes.switch}>
+                            <input type="checkbox" defaultChecked={props.value}
+                                   onChange={sliderChangeHandler}/>
+                            <span className={`${classes.slider} ${classes.round}`}></span>
+                        </label>
+                    </span>
                 </div>
             </>
         );
@@ -69,9 +49,9 @@ const Input = (props) => {
 
     return (
         <>
-            {!props.editing && <label className={props.className}>{props.value}</label>}
+            {!props.editing && <label className={className}>{props.value}</label>}
             {props.editing &&
-            <input placeholder={props.placeholder} type={props.type ? props.type : "text"} className={props.className}
+            <input placeholder={props.placeholder} type={props.type ? props.type : "text"} className={className}
                    onChange={valueChangeHandler} value={value}/>
             }
         </>

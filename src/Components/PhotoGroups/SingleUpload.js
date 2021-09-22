@@ -4,6 +4,8 @@ import {STORAGE_APITOKEN} from "../../store/constants";
 import React, {useState} from "react";
 import {photosEndpoint} from "../../store/upload-slice";
 
+import classes from './PhotoGroups.module.css';
+
 const SingleUpload = (props) => {
 
     const [tmpPhotoId, setTmpPhotoId] = useState();
@@ -29,31 +31,25 @@ const SingleUpload = (props) => {
 
     return (<>
         {tmpPhotoId &&
-        <img alt="showcase"
+        <img className={classes.showcasephoto} alt="showcase"
              src={`${photosEndpoint}/${tmpPhotoId}`}/>
         }
 
         {!uploadingTmpPhoto && !tmpPhotoId && !props.photoId &&
-        <div className="wb-form-control addphoto" style={{
-            marginTop: '5px',
-            display: "inline-block",
-            textAlign: "center",
-            backgroundColor: "#26567b",
-            borderRadius: '16px'
-        }}>
-            <label htmlFor="file" className="inputfile">
-                <span style={{display: "block"}}><i className="showcase fas fa-image"/></span>
-                <span style={{display: "block", color: "#ffffff"}}>+ Add Photo</span>
+        <div className={classes.singleupload}>
+            <label htmlFor="file" className={classes.inputfile}>
+                <span><i className={`${classes.showcase} fas fa-image`}/></span>
+                <span>+ Add Photo</span>
             </label>
-            <input id="file" className="inputfile" type="file"
+            <input id="file" style={{display: "none"}} type="file"
                    onChange={setPhotoDataHandler}/>
         </div>}
         {uploadingTmpPhoto &&
-        <img alt="showcase"
+        <img className={classes.showcasephoto} alt="showcase"
              src={"/spin.gif"}/>
         }
         {!tmpPhotoId && props.photoId &&
-        <img alt="showcase"
+        <img className={classes.showcasephoto} alt="showcase"
              src={`${photosEndpoint}/${props.photoId}`}/>
         }
     </>);

@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {loginRequest} from "../../authConfig";
 import {authorizeSession, STORAGE_APITOKEN} from "../../store/auth-slice";
+import Spinner from "../UI/Spinner";
 
 const AuthorizingSession = () => {
     const {instance, accounts} = useMsal();
@@ -27,7 +28,7 @@ const AuthorizingSession = () => {
     }, [dispatch, instance, currentAccount]);
 
     return (
-        <i className="fullspinner fas fa-cog fa-spin"/>
+        <Spinner/>
     );
 }
 

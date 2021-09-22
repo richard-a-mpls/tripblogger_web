@@ -39,3 +39,22 @@ div.actionButtons button {
     padding-right: 10px;
     padding-left: 10px;
 }
+
+.projectphoto {
+    margin: 2px;
+    display: inline-block;
+    float: left;
+    height: 150px;
+    width: 150px;
+    object-fit:cover;
+    border-radius: 16px;
+    overflow: hidden
+}
+
+.projectdetails {
+    width: 75%;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 10px;
+    padding-left: 5px;
+}

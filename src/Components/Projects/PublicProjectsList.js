@@ -26,11 +26,11 @@ const PublicProjectsList = () => {
     }, [dispatch, isAuthenticated]);
 
     return (
-        <>
+        <div style={{textAlign: "center"}}>
             {publicProjectList && publicProjectList.map((prj) =>
                 <ProjectPostcard onClick={clickHandler} project={prj} key={prj._id}/>
             )}
-        </>
+        </div>
     );
 }
 
