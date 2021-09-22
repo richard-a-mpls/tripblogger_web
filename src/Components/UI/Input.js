@@ -26,6 +26,8 @@ const Input = (props) => {
         }
     }, [props.value, props.dateValue]);
 
+    const className = (props.className === 'summary')?classes.summary:undefined;
+
     if (props.type === 'slider') {
         return (
             <>
@@ -47,9 +49,9 @@ const Input = (props) => {
 
     return (
         <>
-            {!props.editing && <label className={props.className}>{props.value}</label>}
+            {!props.editing && <label className={className}>{props.value}</label>}
             {props.editing &&
-            <input placeholder={props.placeholder} type={props.type ? props.type : "text"} className={props.className}
+            <input placeholder={props.placeholder} type={props.type ? props.type : "text"} className={className}
                    onChange={valueChangeHandler} value={value}/>
             }
         </>

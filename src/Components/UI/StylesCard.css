@@ -128,20 +128,3 @@ main header form {
     display: inline-block;
 }
 
-input.summary {
-    font-weight: bolder;
-    font-size: 1.25em;
-    width: 80%;
-    border-color: #888b8b;
-    border-width: thin;
-    display: inline-block;
-}
-
-label.summary {
-    font-weight: bolder;
-    font-size: 1.25em;
-    width: 80%;
-    border-color: #888b8b;
-    border-width: thin;
-    display: inline-block;
-}
