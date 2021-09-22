@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import uploadData from "../../store/upload-slice";
+import classes from "./PhotoGroups.module.css";
 
 const ImageUpload = (props) => {
     const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const ImageUpload = (props) => {
 
 
     return (
-        <img style={{marginTop: "0px"}} alt="showcase" src={imageUrl}/>
+        <img className={classes.showcasephoto} alt="showcase" src={imageUrl}/>
     );
 }
 export default ImageUpload;
