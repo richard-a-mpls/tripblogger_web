@@ -8,7 +8,7 @@ const WelcomeMessage = (props) => {
     const userProfile = useSelector(state => state.profileSlice.userProfile);
 
     return (
-        <main className="center">
+        <main>
             <Button decorator="fullwidth" onClick={props.changePageState}>
                 Manage or create new Projects, {userProfile.profile_name}?
             </Button>
