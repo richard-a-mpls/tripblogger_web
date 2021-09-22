@@ -30,24 +30,6 @@ const Input = (props) => {
         }
     }, [props.value, props.dateValue]);
 
-    if (props.type === 'button-selector') {
-        return (
-            <div>
-                <div style={{width: "150px", display: "inline-block"}}>
-                    <label>{props.label}</label>
-                </div>
-                <div style={{display: "inline-block"}}>
-                    {props.options.map((opt) =>
-                        <label key={opt.value} style={{display: "inline-block"}} id={opt.value}
-                               onClick={updateButtonSelectorHandler}
-                               className={value === opt.value ? "active" : "inactive"}>{opt.label}</label>
-                    )}
-                </div>
-            </div>
-        )
-    }
-
-
     if (props.type === 'slider') {
         return (
             <>
