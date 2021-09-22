@@ -129,6 +129,7 @@ footer h6 {
 main {
     width: 98%;
     margin: auto;
+    margin-top: 60px;
     position: relative;
     margin-bottom: 5px;
     padding-top: 10px;
@@ -189,7 +190,7 @@ main header form {
     float: right;
 }
 
-main .content {
+.content {
     width: 100%;
     padding-bottom: 5px;
     border-style: solid;
@@ -202,37 +203,24 @@ main .content {
     overflow: auto;
 }
 
-main .content label {
+.content label {
     font-weight: bold;
 }
 
-main .content label.active {
+.content label.active {
     padding: 5px;
     background-color: #26567b;
     color: white;
     margin-right: 4px;
     border-radius: 8px;
 }
-main .content label.inactive {
+.content label.inactive {
     padding: 5px;
     background-color: #96989a;
     color: #d4d2d2;
     margin-right: 4px;
     border-radius: 8px;
 }
-
-
-main .content img {
-    margin-top: 10px;
-    display: inline-block;
-    float: left;
-    height: 150px;
-    width: 150px;
-    object-fit:cover;
-    border-radius: 16px;
-    overflow: hidden
-}
-
 
 .project-details {
     width: 75%;
