@@ -39,7 +39,7 @@ const ProjectParent = props => {
     return (
         <>
             <main>
-                {pageState === PAGE_STATE_LIST && <div className="center">
+                {pageState === PAGE_STATE_LIST && <div style={{textAlign: "center"}}>
                     <Button decorator="halfwidth" type="button" onClick={props.showWelcomePage}>Community</Button>
                     <Button decorator="halfwidth" onClick={initNewProjectHandler} type="submit">New Project</Button>
                 </div>}
