@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import classes from './Input.module.css';
 
 const Input = (props) => {
 
@@ -19,11 +20,6 @@ const Input = (props) => {
         });
     };
 
-    const updateButtonSelectorHandler = (event) => {
-        setValue(event.target.id);
-        props.onUpdate(props.attribute, event.target.id);
-    };
-
     useEffect(() => {
         if (props.value || props.dateValue) {
             setValue(props.dateValue ? props.dateValue : props.value);
@@ -33,17 +29,17 @@ const Input = (props) => {
     if (props.type === 'slider') {
         return (
             <>
-                <div style={{width: "150px", display: "inline-block"}}>
+                <div style={{width: "100px", display: "inline-block"}}>
                     <label>Published:</label>
                 </div>
                 <div style={{display: "inline-block"}}>
-                                <span style={{verticalAlign: 'middle', display: 'inline-block', lineHeight: '30px'}}>
-                                <label className="switch">
-                                    <input type="checkbox" defaultChecked={props.value}
-                                           onChange={sliderChangeHandler}/>
-                                    <span className="slider round"></span>
-                                </label>
-                                </span>
+                    <span style={{verticalAlign: 'top', display: 'inline-block'}}>
+                        <label className={classes.switch}>
+                            <input type="checkbox" defaultChecked={props.value}
+                                   onChange={sliderChangeHandler}/>
+                            <span className={`${classes.slider} ${classes.round}`}></span>
+                        </label>
+                    </span>
                 </div>
             </>
         );
