@@ -12,6 +12,7 @@ import {AuthenticatedTemplate, UnauthenticatedTemplate} from "@azure/msal-react"
 import AuthorizingSession from "./Components/Authentication/AuthorizingSession";
 import EndSession from "./Components/Authentication/EndSession";
 import PublicProjectsList from "./Components/Projects/PublicProjectsList";
+import Footer from "./Components/UI/Footer";
 
 function App() {
     const dispatch = useDispatch();
@@ -55,15 +56,7 @@ function App() {
                 </AuthenticatedTemplate>
                 <br/><br/><br/><br/><br/>
                 <Header/>
-                <footer>
-                    <br/>
-                    <center>
-                        <p>
-                            Page State: {pageState}<br/>
-                            Logged In: {loggedIn}
-                        </p>
-                    </center>
-                </footer>
+                <Footer pageState={pageState} loggedIn={loggedIn}/>
 
             </>
         </StylesCard>
