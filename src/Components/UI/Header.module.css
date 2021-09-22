@@ -1,0 +1,41 @@
+.leftitem {
+    display: inline-block;
+    padding-left: 20px;
+    width: 80%;
+    height: 100%;
+    float: left;
+    color: white;
+    position: relative;
+    text-align: left;
+}
+
+.rightitem {
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    float: right;
+    color: white;
+    text-align: right;
+    position: relative;
+}
+
+.logoblock {
+    background-color: #26567b;
+    color: white;
+    border: 2px solid #26567b;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 200px;
+    padding: 7px 0;
+}
+
+.profilepic {
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border-radius: 12px;
+    display: inline-block;
+}

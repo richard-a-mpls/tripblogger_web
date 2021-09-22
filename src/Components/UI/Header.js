@@ -6,6 +6,8 @@ import {SignInButton} from "../Authentication/SignInButton";
 import {useIsAuthenticated} from "@azure/msal-react";
 import ProfileImage from "./ProfileImage";
 
+import classes from './Header.module.css';
+
 const Header = () => {
 
     const isAuthenticated = useIsAuthenticated();
@@ -17,22 +19,22 @@ const Header = () => {
     }
 
     return (
-        <header className="wb-form-control">
-            <div className="left-item">
+        <header>
+            <div className={classes.leftitem}>
                 {isAuthenticated &&
-                <button className="button-profile" onClick={editProfileClickHandler}>
-                    <ProfileImage className="profile-pic"/>
+                <button onClick={editProfileClickHandler}>
+                    <ProfileImage className={classes.profilepic}/>
                     &nbsp;{userProfile.profile_name}
                 </button>
                 }
                 {!isAuthenticated &&
-                <div className="logoblock">
-                    <img alt="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Eo_circle_blue-grey_letter-t.svg/1024px-Eo_circle_blue-grey_letter-t.svg.png" className="profile-pic"/>
+                <div className={classes.logoblock}>
+                    <img alt="logo" src="/tb.png" className={classes.profilepic}/>
                     &nbsp;
                     Trip Blogger</div>
                 }
             </div>
-            <div className="right-item">
+            <div className={classes.rightitem}>
                 {isAuthenticated && <LogoutUser/>}
                 {!isAuthenticated && <SignInButton/>}
             </div>
