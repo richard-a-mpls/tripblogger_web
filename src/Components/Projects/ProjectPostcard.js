@@ -47,7 +47,7 @@ const ProjectPostcard = (props) => {
         </>
     }
 
-    return (<>
+    return (
         <div className={styles.postcard} onClick={clickHandler}>
             {isAuthenticated &&
             <div className={styles.headertitle}>
@@ -83,7 +83,7 @@ const ProjectPostcard = (props) => {
                 }
             </div>
         </div>
-    </>);
+    );
 }
 
 export default ProjectPostcard;
