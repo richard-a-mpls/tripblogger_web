@@ -32,7 +32,7 @@ function App() {
                     {loggedIn === 'complete' &&
                     <EndSession/>
                     }
-                    <div className="center" style={{marginTop: "60px"}}>
+                    <div className="center">
                         <PublicProjectsList/>
                     </div>
                 </UnauthenticatedTemplate>
