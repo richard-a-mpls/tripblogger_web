@@ -13,42 +13,6 @@ main {
     padding-top: 10px;
 }
 
-main header {
-    display: inline-block;
-    background-color: #f5f3f3;
-    width: 100%;
-    padding: 5px;
-    margin-top: 10px;
-    border-style: solid;
-    border-color: #ced2d7;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-width: thin;
-}
-
-main header h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    margin-left: 5px;
-    display: inline-block;
-}
-
-div.center {
-    margin-top: 5px;
-    text-align: center;
-    width: 100%;
-}
-
-h5.title {
-    border-radius: 8px;
-    border: 2px solid #26567b;
-    text-align: center;
-    margin-left: 5px;
-    margin-top: 20px;
-    padding:5px;
-    width: 50%;
-}
-
-
 .content {
     width: 100%;
     padding-bottom: 5px;
