@@ -109,21 +109,22 @@ const Project = (props) => {
                 </div>
             </div>
             <div className='content'>
-                <SingleUpload updateData={updatePhotoId} photoId={props.project.showcase_photo_id}/>
-
-                <div className={classes.projectdetails}>
-                    <Input placeholder="location" editing={allowEdit} attribute="location"
-                           value={props.project.location} onUpdate={updateDataHandler}/>
-                    <Input type="date" editing={allowEdit} attribute="datestmp" value={dateDisplay}
-                           dateValue={dateInput}
-                           onUpdate={updateDataHandler}/>
-                    <Input placeholder="description" editing={allowEdit} attribute="description"
-                           value={props.project.description} onUpdate={updateDataHandler}/><br/>
-                    {!editing && <ShareStatus project={props.project}/>}
-                    {editing &&
-                    <Input type="slider" attribute="published" value={props.project.published}
-                           onUpdate={updateDataHandler} onUpdate2={toggleShowAudienceHandler}/>
-                    }
+                <div style={{minHeight: "150px"}}>
+                    <SingleUpload updateData={updatePhotoId} photoId={props.project.showcase_photo_id}/>
+                    <div className={classes.projectdetails}>
+                        <Input placeholder="location" editing={allowEdit} attribute="location"
+                               value={props.project.location} onUpdate={updateDataHandler}/>
+                        <Input type="date" editing={allowEdit} attribute="datestmp" value={dateDisplay}
+                               dateValue={dateInput}
+                               onUpdate={updateDataHandler}/>
+                        <Input placeholder="description" editing={allowEdit} attribute="description"
+                               value={props.project.description} onUpdate={updateDataHandler}/><br/>
+                        {!editing && <ShareStatus project={props.project}/>}
+                        {editing &&
+                        <Input type="slider" attribute="published" value={props.project.published}
+                               onUpdate={updateDataHandler} onUpdate2={toggleShowAudienceHandler}/>
+                        }
+                    </div>
                 </div>
                 <br/><br/>
                 {!editing && props.project.photo_array &&
