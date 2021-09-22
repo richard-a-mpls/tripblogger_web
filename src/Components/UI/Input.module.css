@@ -1,3 +1,10 @@
+input {
+    display: block;
+    width: 90%;
+    margin-bottom: 8px;
+    font-weight: bolder;
+}
+
 .switch {
     position: relative;
     display: inline-block;
