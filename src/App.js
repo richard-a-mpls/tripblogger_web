@@ -51,9 +51,7 @@ function App() {
                         <EditProfile showWelcomePage={showWelcomePageHandler}/>
                         }
                     </>}
-                    <br/><br/><br/><br/><br/>
                 </AuthenticatedTemplate>
-                <br/><br/><br/><br/><br/>
                 <Header/>
             </>
         </StylesCard>
