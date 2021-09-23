@@ -10,7 +10,7 @@ const WelcomeMessage = (props) => {
     return (
         <main>
             <Button decorator="fullwidth" onClick={props.changePageState}>
-                Manage or create new Projects, {userProfile.profile_name}?
+                More to share, {userProfile.profile_name}?
             </Button>
             <PublicProjectsList/>
         </main>
