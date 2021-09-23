@@ -1,4 +1,4 @@
-import classes from './Footer.module.css';
+// import classes from './Footer.module.css';
 import React from "react";
 
 const Footer = (props) => {
