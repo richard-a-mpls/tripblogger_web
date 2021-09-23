@@ -12,7 +12,6 @@ import {AuthenticatedTemplate, UnauthenticatedTemplate} from "@azure/msal-react"
 import AuthorizingSession from "./Components/Authentication/AuthorizingSession";
 import EndSession from "./Components/Authentication/EndSession";
 import PublicProjectsList from "./Components/Projects/PublicProjectsList";
-import Footer from "./Components/UI/Footer";
 
 function App() {
     const dispatch = useDispatch();
@@ -52,12 +51,8 @@ function App() {
                         <EditProfile showWelcomePage={showWelcomePageHandler}/>
                         }
                     </>}
-                    <br/><br/><br/><br/><br/>
                 </AuthenticatedTemplate>
-                <br/><br/><br/><br/><br/>
                 <Header/>
-                <Footer pageState={pageState} loggedIn={loggedIn}/>
-
             </>
         </StylesCard>
     );
