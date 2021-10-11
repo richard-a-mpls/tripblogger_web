@@ -50,7 +50,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'tripblogger'
+        app-name: 'slackr'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_25d54f0244d64da1a9fee5878c3ba387 }}
         package: .
