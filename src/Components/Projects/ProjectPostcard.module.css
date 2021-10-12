@@ -123,8 +123,7 @@ img.large {
     max-height: 500px;
     border-radius: 12px;
     overflow: scroll;
-    text-align: center;
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .modalnav {
@@ -136,23 +135,6 @@ img.large {
     border-radius: 8px;
     font-size: x-large;
     padding: 5px;
-    position: fixed;
+    width: 10%;
     z-index: 40;
-}
-
-.closemodal {
-    top: -6%;
-    /*left: 2%;*/
-    /*left: 50%;*/
-    right: 2%;
-}
-
-.moveright {
-    top: 50%;
-    right: 2%;
-}
-
-.moveleft {
-    top: 50%;
-    left: 2%;
 }
