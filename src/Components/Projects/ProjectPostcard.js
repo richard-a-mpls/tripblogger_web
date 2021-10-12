@@ -4,23 +4,29 @@ import {useSelector} from "react-redux";
 import DateConverter from "../UI/DateConverter";
 import {useIsAuthenticated} from "@azure/msal-react";
 import ProfileImage from "../UI/ProfileImage";
+import ProjectPostcardModal from './ProjectPostcardModal';
 import axios from "axios";
 import {STORAGE_APITOKEN} from "../../store/auth-slice";
 import {photosEndpoint} from "../../store/upload-slice";
 import {prevProjectsEndpoint} from "../../store/project-slice";
 
 const ProjectPostcard = (props) => {
-    const [imagesExpaneded, setImagesExpanded] = useState(false);
     const [ownerInfo, setOwnerInfo] = useState({});
+    const [showModal, setShowModal] = useState(false);
     const profile = useSelector(state => state.profileSlice.userProfile)
     const isAuthenticated = useIsAuthenticated();
 
     const clickHandler = () => {
         if (isAuthenticated) {
-            setImagesExpanded(state => !state);
+            setShowModal(true);
         } else {
             props.onClick();
         }
+    }
+
+    const closeModalHandler = () => {
+        console.log("Close Handler: " + showModal);
+        setShowModal("asdf");
     }
 
     const isOwner = profile._id === props.project.profile_id;
@@ -48,6 +54,13 @@ const ProjectPostcard = (props) => {
     }
 
     return (
+        <>
+        {showModal === true &&
+        <ProjectPostcardModal
+            photos={props.project.photo_array}
+            showcasePhoto={props.project.showcase_photo_id}
+            showModal={showModal}
+            closeHandler={closeModalHandler}/>}
         <div className={classes.postcard} onClick={clickHandler}>
             {isAuthenticated &&
             <div className={classes.headertitle}>
@@ -66,13 +79,6 @@ const ProjectPostcard = (props) => {
                 </p>
 
             </div>
-            {imagesExpaneded &&
-            <div className={classes.imagegroup}>
-                {props.project.photo_array.map((imageId) =>
-                    <img className={classes.projectimage} alt={imageId} key={imageId}
-                         src={`${photosEndpoint}/${imageId}`}/>
-                )}
-            </div>}
             <div className={classes.expandbar}>
                 {props.project.photo_array.slice(0, 3).map((imageId) =>
                     <img className={classes.smallimg} alt={imageId} key={imageId}
@@ -83,7 +89,7 @@ const ProjectPostcard = (props) => {
                 }
             </div>
         </div>
-    );
+        </>);
 }
 
 export default ProjectPostcard;
