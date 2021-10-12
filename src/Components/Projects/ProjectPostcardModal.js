@@ -42,15 +42,13 @@ const ProjectPostcardModal = (props) => {
     return (
         <Modal onClose={props.closeHandler}>
             <div style={{textAlign: "center"}}>
-
-                <span style={{display: "block"}}>
+                <div>
                     <i onClick={prevPhoto} className={`${classes.modalnav} fas fa-arrow-left`}/>
                     <i onClick={props.closeHandler} className={`${classes.modalnav} fas fa-times`}/>
                     <i onClick={nextPhoto} className={`${classes.modalnav} fas fa-arrow-right`}/>
-                </span>
+                </div>
                 <img onClick={nextPhoto} className={classes.large} alt={photoIndex}
                      src={photoUrl}/>
-
             </div>
         </Modal>
     );
