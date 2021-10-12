@@ -2,4 +2,4 @@
 
 cd build;
 
-az webapp up --os linux --location centralus --name tripblogger --html
+az webapp up --os linux --location centralus --name slackr --html
