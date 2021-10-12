@@ -127,6 +127,7 @@ img.large {
 }
 
 .modalnav {
+    display: inline-block;
     font-weight: bolder;
     color: #26567b;
     border: 2px solid #26567b;
