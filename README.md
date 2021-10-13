@@ -1,3 +1,32 @@
+
+# tripblogger a.k.a slackr REACT application
+I created this app during the summer of 2021 where I decided to take a career break and did a number of hiking trips.  
+
+This is hosted on https://slackr.azurewebsites.net/ using free services in azure (so might take a bit of time to load, also may not be available if i've run out of free grace for the day/month/year...).
+
+Behind this are the following microservices
+
+- python flask api handling profile and images including image reduction on upload, etc.
+- springboot api handles most project gets/posts, etc...
+- springboot api providing centralized location for Azure B2C JWT token verification including caching.
+
+Additionally, this is all backed by a Mongo Atlas instance.
+
+Deployment is done via github actions for most items and deploy into Azure App Services.
+
+Authentication is handled via Azure B2C using the OpenID Connect specification.
+
+The following enivronment variables are required when running locally (I do have plans to setup docker and docker compose to make this easier)
+* HOST - the host you wish the app to be started and accessed as
+* REACT_APP_ENVIRONMENT - PRODUCTION or TEST, use TEST for running locally
+* REACT_APP_OIDC_REDIRECT_URI - OIDC redirect uri, usually https://<HOST>:3000/
+* REACT_APP_PYTHON_API - endpoint where the python based api is hosted
+* REACT_APP_PROJECTS_API - endpoint where the springboot projects api is hosted
+* REACT_APP_WAKEUP_ENDPOINTS - location where the wakeup endpoints are hosted.  set only in a dev environment, these endpoints will wakeup the hosted services and validate they are running before allowing the user to continue.
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
