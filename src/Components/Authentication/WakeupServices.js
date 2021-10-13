@@ -7,7 +7,7 @@ const WakeupServices = (props) => {
 
     let configuredEndpoints = ["https://tripblogger-api-spring.azurewebsites.net/v1/wakeup",
         "https://tripblogger-api.azurewebsites.net/v1/wakeup",
-        "https://b2ctokenvalidator.azurewebsites.net/v1/wakeup"];
+        "https://b2ctokenvalidator.azurewebsites.net/wakeup"];
     if (process.env.REACT_APP_WAKEUP_ENDPOINTS) {
         configuredEndpoints = process.env.REACT_APP_WAKEUP_ENDPOINTS.split(",");
     }
