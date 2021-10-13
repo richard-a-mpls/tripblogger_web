@@ -20,7 +20,7 @@ const IntroModal = (props) => {
         <p>If you choose to post, please be kind in both content and amount posted. I'm leveraging free cloud services
             so please don't abuse it.</p>,
         <p>That said, there is no guarantee on retention of information so.....</p>,
-        <img src="/arch_diagram.drawio.png"/>,
+        <img alt='architecture' src="/arch_diagram.drawio.png"/>,
         <>
             <p>The previous diagram shows current state. Future plans include:</p>
             <ul>
@@ -42,7 +42,7 @@ const IntroModal = (props) => {
         </>,
         <p>I'd also like to add support for video and audio files...</p>,
         <p>All of code is hosted on github at <a
-            target="_blank" href="https://github.com/richard-a-mpls">https://github.com/richard-a-mpls</a></p>,
+            target="_blank" rel="noreferrer" href="https://github.com/richard-a-mpls">https://github.com/richard-a-mpls</a></p>,
         <p>All services are hosted by Azure App Services in the Free Tier.</p>,
         <p>Deployment is facilitated by GitHub Actions for most services.</p>,
         <p>Thanks and hope you enjoy the site.</p>,

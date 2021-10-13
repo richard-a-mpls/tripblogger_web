@@ -5,10 +5,10 @@ import Button from "../UI/Button";
 
 const WakeupServices = (props) => {
 
-    const wakeupEndpoints = process.env.REACT_APP_WAKEUP_ENDPOINTS.split(",") ||
+    const wakeupEndpoints = useState(process.env.REACT_APP_WAKEUP_ENDPOINTS.split(",") ||
         ["https://tripblogger-api-spring.azurewebsites.net/v1/wakeup",
             "https://tripblogger-api.azurewebsites.net/v1/wakeup",
-            "https://b2ctokenvalidator.azurewebsites.net/v1/wakeup"];
+            "https://b2ctokenvalidator.azurewebsites.net/v1/wakeup"])[0];
 
     const [evaluatedCount, setEvaluatedCount] = useState(0);
     const [errors, setErrors] = useState([]);
@@ -37,10 +37,10 @@ const WakeupServices = (props) => {
     }
 
     useEffect(() => {
-        wakeupEndpoints.map((endpoint) => {
-            wakeupEndpoint(endpoint);
-        })
-    }, []);
+        wakeupEndpoints.map(endpoint =>
+            wakeupEndpoint(endpoint)
+        )
+    }, [wakeupEndpoints]);
 
     return (
         <>
