@@ -43,7 +43,7 @@ const IntroModal = (props) => {
         <p>I'd also like to add support for video and audio files...</p>,
         <p>All of code is hosted on github at <a
             target="_blank" rel="noreferrer" href="https://github.com/richard-a-mpls">https://github.com/richard-a-mpls</a></p>,
-        <p>All services are hosted by Azure App Services in the Free Tier.</p>,
+        <p>All services are hosted by Azure App Services in the Free Tier - hence... the wait...</p>,
         <p>Deployment is facilitated by GitHub Actions for most services.</p>,
         <p>Thanks and hope you enjoy the site.</p>,
         <WakeupServices show="yes" closeHandler={props.closeHandler}/>

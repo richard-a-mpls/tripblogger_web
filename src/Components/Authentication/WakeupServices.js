@@ -5,10 +5,15 @@ import Button from "../UI/Button";
 
 const WakeupServices = (props) => {
 
-    const wakeupEndpoints = useState(process.env.REACT_APP_WAKEUP_ENDPOINTS.split(",") ||
-        ["https://tripblogger-api-spring.azurewebsites.net/v1/wakeup",
-            "https://tripblogger-api.azurewebsites.net/v1/wakeup",
-            "https://b2ctokenvalidator.azurewebsites.net/v1/wakeup"])[0];
+    let configuredEndpoints = ["https://tripblogger-api-spring.azurewebsites.net/v1/wakeup",
+        "https://tripblogger-api.azurewebsites.net/v1/wakeup",
+        "https://b2ctokenvalidator.azurewebsites.net/v1/wakeup"];
+    if (process.env.REACT_APP_WAKEUP_ENDPOINTS) {
+        configuredEndpoints = process.env.REACT_APP_WAKEUP_ENDPOINTS.split(",");
+    }
+
+
+    const wakeupEndpoints = useState(configuredEndpoints)[0];
 
     const [evaluatedCount, setEvaluatedCount] = useState(0);
     const [errors, setErrors] = useState([]);
