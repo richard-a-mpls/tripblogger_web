@@ -1,0 +1,12 @@
+
+.displaysection {
+    padding-top: 2%;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    width: 80%;
+}
+
+.displaysection ul {
+    text-align: left;
+}

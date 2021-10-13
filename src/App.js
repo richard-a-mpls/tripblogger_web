@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import WelcomeMessage from "./Components/Authentication/WelcomeMessage";
 import EditProfile from "./Components/Profile/EditProfile";
 import ProjectParent from "./Components/Projects/ProjectParent"
@@ -12,11 +12,13 @@ import {AuthenticatedTemplate, UnauthenticatedTemplate} from "@azure/msal-react"
 import AuthorizingSession from "./Components/Authentication/AuthorizingSession";
 import EndSession from "./Components/Authentication/EndSession";
 import PublicProjectsList from "./Components/Projects/PublicProjectsList";
+import IntroModal from "./Components/Authentication/IntroModal";
 
 function App() {
     const dispatch = useDispatch();
     const loggedIn = useSelector(state => state.authSlice.loggedIn);
     const pageState = useSelector(state => state.uiSlice.pageState);
+    const [showIntroModal, setShowIntroModal] = useState(true);
 
     const showProjectViewHandler = () => {
         dispatch(uiActions.showProjectView());
@@ -25,10 +27,15 @@ function App() {
         dispatch(uiActions.showWelcomePage());
     }
 
+    const closeIntroModal = () => {
+        setShowIntroModal(false);
+    }
+
     return (
         <StylesCard>
             <>
                 <UnauthenticatedTemplate>
+                    {showIntroModal && <IntroModal closeHandler={closeIntroModal}/>}
                     {loggedIn === 'complete' &&
                     <EndSession/>
                     }

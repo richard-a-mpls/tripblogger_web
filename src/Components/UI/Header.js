@@ -32,7 +32,7 @@ const Header = () => {
                 <div className={classes.logoblock}>
                     <img alt="logo" src="/tb.png" className={classes.profilepic}/>
                     &nbsp;
-                    Trip Blogger</div>
+                    Slackr</div>
                 }
             </div>
             <div className={classes.rightitem}>
