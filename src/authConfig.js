@@ -1,20 +1,16 @@
 const b2cPolicies = {
     names: {
         signUpSignIn: "b2c_1_susi",
-        forgotPassword: "b2c_1_reset",
+        forgotPassword: "B2C_1_password_reset",
         editProfile: "b2c_1_edit_profile"
     },
     authorities: {
         signUpSignIn: {
-            //authority: "https://rcaazdemo.b2clogin.com/rcaazdemo.onmicrosoft.com/B2C_1_BLoggerSignin"
             authority: "https://rcaazdemo.b2clogin.com/rcaazdemo.onmicrosoft.com/B2C_1_susi"
-        }//,
-        // forgotPassword: {
-        //     authority: "https://your-tenant-name.b2clogin.com/your-tenant-name.onmicrosoft.com/b2c_1_reset",
-        // },
-        // editProfile: {
-        //     authority: "https://your-tenant-name.b2clogin.com/your-tenant-name.onmicrosoft.com/b2c_1_edit_profile"
-        // }
+        },
+        forgotPassword: {
+            authority: "https://rcaazdemo.b2clogin.com/rcaazdemo.onmicrosoft.com/B2C_1_password_reset",
+        }
     },
     authorityDomain: "rcaazdemo.b2clogin.com"
 }
@@ -38,6 +34,11 @@ export const loginRequest = {
     //scopes: ["User.Read"]
     scopes: ["openid", "profile", "3a5d7d6a-6380-48dc-b027-7fb3a6270409"]
 };
+
+export const resetPasswordRequest = {
+    authority: b2cPolicies.authorities.forgotPassword.authority,
+    scopes: ["openid", "profile", "3a5d7d6a-6380-48dc-b027-7fb3a6270409"]
+}
 
 // Add the endpoints here for Microsoft Graph API services you'd like to use.
 export const graphConfig = {
