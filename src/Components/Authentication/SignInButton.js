@@ -1,6 +1,6 @@
 import React from "react";
 import {useMsal} from "@azure/msal-react";
-import {loginRequest} from "../../authConfig";
+import {loginRequest, resetPasswordRequest} from "../../authConfig";
 import Button from '../UI/Button';
 
 /**
@@ -11,7 +11,11 @@ export const SignInButton = () => {
 
     function handleLogin(instance) {
         instance.loginPopup(loginRequest).catch(e => {
-            console.error(e);
+            if (e.toString().indexOf("AADB2C90118") >= 0) {
+                instance.loginRedirect(resetPasswordRequest).catch(e => {
+                    console.error(e);
+                });
+            }
         });
     }
 
