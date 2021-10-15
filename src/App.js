@@ -28,6 +28,7 @@ function App() {
     }
 
     const closeIntroModal = () => {
+        localStorage.setItem("hideIntroModal", "true");
         setShowIntroModal(false);
     }
 
@@ -35,7 +36,7 @@ function App() {
         <StylesCard>
             <>
                 <UnauthenticatedTemplate>
-                    {showIntroModal && <IntroModal closeHandler={closeIntroModal}/>}
+                    {!localStorage.getItem("hideIntroModal") && showIntroModal && <IntroModal closeHandler={closeIntroModal}/>}
                     {loggedIn === 'complete' &&
                     <EndSession/>
                     }
