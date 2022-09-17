@@ -4,6 +4,7 @@ Resources:
   S3StaticWebSite:
     Type: AWS::S3::Bucket
     Properties:
+      AccessControl: PublicRead
       BucketName: slackr
       Tags:
         - Key: App
