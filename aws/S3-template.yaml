@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+Resources:
+  S3StaticWebSite:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: slackr
+      Tags:
+        - Key: App
+          Value: Slackr
+      WebsiteConfiguration:
+        IndexDocument: index.html
+Outputs:
+  WebSiteURL:
+    Value: !GetAtt
+      - S3StaticWebSite
+      - WebsiteURL
+  S3BucketSecureURL:
+    Value: !Join
+      - ''
+      - - 'https://'
+        - !GetAtt
+          - S3StaticWebSite
+          - DomainName
