@@ -3,7 +3,7 @@ name: Build and deploy React app to AWS S3 - tripblogger
 on:
   push:
     branches:
-      - feature/deploy-aws
+      - master
   workflow_dispatch:
 
 jobs:
