@@ -5,8 +5,12 @@ name: Build and deploy React app to Azure Web App - tripblogger
 
 on:
   push:
-    branches:
-      - master
+#    tags:
+#      - rel*
+#
+##  push:
+##    branches:
+##      - master
   workflow_dispatch:
 
 jobs:
