@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description:
+Description: Deploy S3 Static Website Bucket
 Resources:
   S3StaticWebSite:
     Type: AWS::S3::Bucket
